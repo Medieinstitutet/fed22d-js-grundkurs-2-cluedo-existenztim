@@ -6,9 +6,14 @@ import './style/style.scss';
 import exampleCardDeck from './exampleArray';
 // I denna utils-fil har vi lagrat funktioner som ofta används, t.ex. en "blanda array"-funktion
 import shuffle from './utils';
+import data from './script/storage';
 
 // Blanda kortleken
 const myShuffledCardDeck = shuffle(exampleCardDeck);
+
+console.table(data.suspectsArray);
+console.table(data.weaponsArray);
+console.table(data.roomsArray);
 
 /**
  * Vänder upp/ner på det klickade kortet genom att toggla en CSS-klass.
