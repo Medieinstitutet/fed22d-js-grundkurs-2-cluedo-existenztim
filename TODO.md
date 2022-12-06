@@ -1,11 +1,11 @@
 ### 1
-    - [] Sätt upp datastrukturer för misstänkta, mordvapen och brottsplatser. Referera till Wikipedia.
+    - [x] Sätt upp datastrukturer för misstänkta, mordvapen och brottsplatser. Referera till Wikipedia.
 ### 2
-    - [] "Dra" tre kort ur respektive "kortlekstyp" och spara undan: dessa är den mördade, mordvapnet och brottsplatsen. Dessa ska aldrig visas för spelaren.
+    - [x] "Dra" tre kort ur respektive "kortlekstyp" och spara undan: dessa är den mördade, mordvapnet och brottsplatsen. Dessa ska aldrig visas för spelaren.
 ### 3
-    - [] Skapa spelplanen (rummen) i HTML och namnge respektive rum med ett unikt ID.
+    - [x] Skapa spelplanen (rummen) i HTML och namnge respektive rum med ett unikt ID.
 ### 4
-    - [] Skapa en variabel för antal "drag" som spelaren gör.
+    - [x] Skapa en variabel för antal "drag" som spelaren gör.
 ### 5
     - [] Skapa en knapp som heter "Gissa", som användaren klickar på för att presentera sin gissning. Vi återkommer till logiken för detta.
 ### 6
