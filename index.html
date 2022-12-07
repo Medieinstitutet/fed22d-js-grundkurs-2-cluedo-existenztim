@@ -3,25 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/ico" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Cluedo - Simpsons Version</title>
   </head>
   <body>
     <main>
-      <div class="app" id="app"></div> 
+      <h1>Cluedo - Simpsons Version</h1>
       <button id = "dice">Roll Dice</button>
-      <div id = "counter">0</div>
+      <div id = "counter">Rounds: <span>0</span></div>
+
       <section class="container-room">
-        <!-- <div class="room-cellar">Cellar</div>
-        <div class="room-dining-room">Dining-Room</div>
-        <div class="room-kitchen">Kitchen</div>
-        <div class="room-ballroom">Ballroom</div>
-        <div class="room-conservatory">Conservatory</div>
-        <div class="room-billiard-room">Billilard-Room</div>
-        <div class="room-library">Library</div>
-        <div class="room-study">Study</div>
-        <div class="room-hall">Hall</div>
-        <div class="room-lounge">Lounge</div> -->
+        <div class="room-cellar">
+          <button>Accuse</button>
+          <button>Guess</button>
+        </div>
+        <button class="room-dining-room">Krusty Burger</button>
+        <button class="room-moes-tavern">Moe's Tavern</button>
+        <button class="room-town-hall">Town Hall</button>
+        <button class="room-conservatory">Burns Manor</button>
+        <button class="room-billiard-room">Simpsons House</button>
+        <button class="room-library">Kwik-E-Mart</button>
+        <button class="room-study">Nuclear Power Plant</button>
+        <button class="room-hall">Town Square</button>
+        <button class="room-lounge">Elementary School</button>
+    </section>
+    <section class="player-cards">
+      <div class ="card-wrapper">
+        <h2>Bart's Cards</h2>
+        <div class ="cards">
+          <div class ="card">?</div>
+          <div class ="card">?</div>
+          <div class ="card">?</div>
+        </div>
+      </div>
+      <div class ="card-wrapper">
+        <h2>Your Cards</h2>
+        <div class ="cards">
+          <div class ="card">Card info</div>
+          <div class ="card">Card info</div>
+          <div class ="card">Card info</div>
+        </div>
+      </div>
+      <div class ="card-wrapper">
+        <h2>Lizas's Cards</h2>
+        <div class ="cards">
+          <div class ="card">?</div>
+          <div class ="card">?</div>
+          <div class ="card">?</div>
+        </div>
+      </div>
     </section>
     </main>
 

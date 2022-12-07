@@ -8,19 +8,19 @@ console.log(data.suspectsArray);
 console.log(data.weaponsArray);
 console.log(data.roomsArray);
 
-const containerRoom = document.querySelector('.container-room');
+// const containerRoom = document.querySelector('.container-room');
 const diceButton = document.querySelector('#dice');
-const counts = document.querySelector('#counter');
+const counts = document.querySelector('#counter span');
 // Print out the room layout
 
-const generateRooms = (containerVariable: Element | null, arrayName: string) => {
-  for (const objectIdentifier of arrayName) {
-    containerVariable.innerHTML += /* HTML */`
-      <div class ="room-${objectIdentifier.className}">${objectIdentifier.name}</div>`;
-  }
-};
+// const generateRooms = (containerVariable: Element | null, arrayName: string) => {
+//   for (const objectIdentifier of arrayName) {
+//     containerVariable.innerHTML += /* HTML */`
+//       <div class ="room-${objectIdentifier.className}">${objectIdentifier.name}</div>`;
+//   }
+// };
 
-generateRooms(containerRoom, data.roomsArray);
+// generateRooms(containerRoom, data.roomsArray);
 
 let suspect = null;
 let weapon = null;
@@ -42,7 +42,7 @@ const pickMysteryCards = () => {
   const roomIndex: number = data.weaponsArray.indexOf(room);
   data.roomsArray.splice(roomIndex, 1);
 
-  return { suspect, weapon, room };
+  // return { suspect, weapon, room };
 };
 
 pickMysteryCards();
@@ -71,13 +71,25 @@ const pickPlayerCards = (arrayName: any[]) => {
     arrayName.push(playerCards);
     gameCards.splice(cardIndex, 1);
   }
-  console.log(gameCards);
-  console.log(playerCardsArray);
 };
 
 pickPlayerCards(playerCardsArray);
 pickPlayerCards(computer1CardsArray);
 pickPlayerCards(computer2CardsArray);
+
+/**
+ * Generate a starting location for player
+ */
+
+// const getRoomId = document.querySelectorAll('[class^=room]');
+// console.log(getRoomId);
+// const selectRandomStartingRoom = () => {
+
+// };
+
+/**
+ *Check if move is possible/ increase counter
+ */
 
 let count = 0;
 const checkNumber = (random: number) => {
@@ -86,6 +98,7 @@ const checkNumber = (random: number) => {
   }
   count += 1;
   counts.textContent = count;
+
   console.log(count);
 };
 
