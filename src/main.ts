@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import './style/style.scss';
 
 // Data contains all the arrays needed for the game
@@ -8,7 +9,8 @@ console.log(data.weaponsArray);
 console.log(data.roomsArray);
 
 const containerRoom = document.querySelector('.container-room');
-
+const diceButton = document.querySelector('#dice');
+const counts = document.querySelector('#counter');
 // Print out the room layout
 
 const generateRooms = (containerVariable: Element | null, arrayName: string) => {
@@ -49,22 +51,43 @@ pickMysteryCards();
  *Combine remaining cards into one array.
  */
 
-let gameCards = [];
-gameCards = data.suspectsArray.concat(data.weaponsArray, data.roomsArray);
+let gameCards: any[] = [];
+gameCards = data.suspectsArray.concat(data.weaponsArray, data.roomsArray); // 19 cards left
 console.log(gameCards);
 
+/**
+ *Hand out 3 cards to the players.
+ */
+const playerCardsArray: any[] = [];
+const computer1CardsArray: any[] = [];
+const computer2CardsArray: any[] = [];
+
+let playerCards = null;
+
+const pickPlayerCards = (arrayName: any[]) => {
+  for (let i = 0; i < 3; i += 1) {
+    playerCards = gameCards[Math.floor(Math.random() * gameCards.length)];
+    const cardIndex: number = gameCards.indexOf(playerCards);
+    arrayName.push(playerCards);
+    gameCards.splice(cardIndex, 1);
+  }
+  console.log(gameCards);
+  console.log(playerCardsArray);
+};
+
+pickPlayerCards(playerCardsArray);
+pickPlayerCards(computer1CardsArray);
+pickPlayerCards(computer2CardsArray);
+
 let count = 0;
-const checkNumber = (random) => {
+const checkNumber = (random: number) => {
   if (random >= 3) {
     // make a move
   }
-  count++;
+  count += 1;
   counts.textContent = count;
   console.log(count);
 };
-
-const diceButton = document.querySelector('#dice');
-const counts = document.querySelector('#counter');
 
 /**
  *Generate a random number between 1-6
@@ -73,9 +96,6 @@ const generateRandomNumber = () => {
   const randomDiceNumber = Math.floor(Math.random() * 6) + 1; // +1 so 0 cant be picked, math.floor so 7 cant be picked
   checkNumber(randomDiceNumber);
 };
-diceButton.addEventListener('click', generateRandomNumber);
+diceButton?.addEventListener('click', generateRandomNumber);
 
 console.log('Solutuion ->', suspect.name, weapon.name, room.name);
-console.table(data.suspectsArray);
-console.table(data.weaponsArray);
-console.table(data.roomsArray);
