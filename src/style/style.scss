@@ -3,8 +3,7 @@
 @import "abstracts/colors";
 
 :root {
-  // TODO: Går bra att radera kod även här!
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Press Start 2P", Avenir, Helvetica, Arial, sans-serif;
   font-size: rem(16px);
   line-height: 24px;
   font-weight: 400;
@@ -21,6 +20,7 @@
 
 main {
   padding: 20px;
+  text-align: center;
 
   .container-room {  display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -29,36 +29,41 @@ main {
     grid-auto-flow: row;
     width: 100%;
     height: 50vh;
+    /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
     grid-template-areas:
-      "kitchen ballroom conservatory"
+      "moes-tavern town-hall conservatory"
       "dining-room cellar billiard-room"
       "dining-room cellar library"
       "lounge hall study";
 
-      div[class*='room']{
+      button[class*='room']{
         border: 1px solid black;
-        background-color: rgb(148, 150, 150);
+        background-color: $grey;
         cursor: pointer;
       }
 
-      div[class*='room']:hover{
-        background-color: rgb(255, 196, 0);
+      button[class*='room']:hover{
+        background-color: $yellow;
       }
 
       .room-cellar { 
         grid-area: cellar; 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
       }
       
       .room-dining-room { 
         grid-area: dining-room; 
       }
       
-      .room-kitchen { 
-        grid-area: kitchen; 
+      .room-moes-tavern { 
+        grid-area: moes-tavern; 
       }
       
-      .room-ballroom { 
-        grid-area: ballroom; 
+      .room-town-hall { 
+        grid-area: town-hall; 
       }
       
       .room-conservatory { 
@@ -84,5 +89,35 @@ main {
       .room-lounge { 
         grid-area: lounge; 
       }
+  }
+
+  /* Card section, remove to separete file later */
+
+  .player-cards {
+    display: flex;
+    flex-flow: wrap;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+
+    .card-wrapper {
+      display: flex;
+      flex-direction: column;
+
+      .cards {
+        display: flex;
+        flex-direction: row;
+
+        .card {
+          border: 1px solid black;
+          padding: 1rem;
+          border-radius: 5%;
+          margin: 1rem;
+          width: 140px;
+          height: 200px;
+          background-color: $grey;
+        }
+      }
+    }
   }
 }
