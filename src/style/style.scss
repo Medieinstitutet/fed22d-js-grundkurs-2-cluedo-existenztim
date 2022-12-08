@@ -1,5 +1,6 @@
 @use "utils/a11y"; // Om det inte funkar, byt @use mot @import
 @use "vendor/reset";
+@use "components/cards";
 @import "abstracts/colors";
 
 :root {
@@ -31,10 +32,10 @@ main {
     height: 50vh;
     /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
     grid-template-areas:
-      "moes-tavern town-hall conservatory"
-      "dining-room cellar billiard-room"
-      "dining-room cellar library"
-      "lounge hall study";
+      "moes-tavern town-hall burns-manor"
+      "krusty-burger game-hub billiard-room"
+      "krusty-burger game-hub kwik-e-mart"
+      "elementary-school hall study";
 
       button[class*='room']{
         border: 1px solid black;
@@ -46,78 +47,65 @@ main {
         background-color: $yellow;
       }
 
-      .room-cellar { 
-        grid-area: cellar; 
+      #game-hub { 
+        grid-area: game-hub; 
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
       }
       
-      .room-dining-room { 
-        grid-area: dining-room; 
+      #room-krusty-burger { 
+        grid-area: krusty-burger; 
       }
       
-      .room-moes-tavern { 
+      #room-moes-tavern { 
         grid-area: moes-tavern; 
       }
       
-      .room-town-hall { 
+      #room-town-hall { 
         grid-area: town-hall; 
       }
       
-      .room-conservatory { 
-        grid-area: conservatory; 
+      #room-burns-manor { 
+        grid-area: burns-manor; 
       }
       
-      .room-billiard-room { 
+      #room-billiard-room { 
         grid-area: billiard-room; 
       } 
       
-      .room-library { 
-        grid-area: library; 
+      #room-kwik-e-mart { 
+        grid-area: kwik-e-mart; 
       } 
       
-      .room-study { 
+      #room-study { 
         grid-area: study; 
       }
       
-      .room-hall { 
+      #room-hall { 
         grid-area: hall; 
       }
       
-      .room-lounge { 
-        grid-area: lounge; 
+      #room-elementary-school { 
+        grid-area: elementary-school; 
       }
-  }
 
-  /* Card section, remove to separete file later */
+      .room.active {
+        position: relative;
 
-  .player-cards {
-    display: flex;
-    flex-flow: wrap;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-evenly;
-
-    .card-wrapper {
-      display: flex;
-      flex-direction: column;
-
-      .cards {
-        display: flex;
-        flex-direction: row;
-
-        .card {
-          border: 1px solid black;
-          padding: 1rem;
-          border-radius: 5%;
-          margin: 1rem;
-          width: 140px;
-          height: 200px;
-          background-color: $grey;
+        &::before {
+          content: url("/public/img/icons8-homer-simpson.svg");
+          display: flex;
+          font-size: 2rem;
+          z-index: 1;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
         }
       }
-    }
   }
 }
+
+/* till imorn, fixa id på buttons istället med deras namn, sedan class namn room (samma på alla) sen room.active*/

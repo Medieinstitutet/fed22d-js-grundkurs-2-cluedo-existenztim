@@ -1,0 +1,32 @@
+ /*************************************************************************** 
+ *Card section
+ ***************************************************************************/
+ @import "/src/style/abstracts/colors";
+
+ .player-cards {
+    display: flex;
+    flex-flow: wrap;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+
+    .card-wrapper {
+      display: flex;
+      flex-direction: column;
+
+      .cards {
+        display: flex;
+        flex-direction: row;
+
+        .card {
+          border: 1px solid black;
+          padding: 1rem;
+          border-radius: 5%;
+          margin: 1rem;
+          width: 140px;
+          height: 200px;
+          background-color: $grey;
+        }
+      }
+    }
+  }

@@ -81,12 +81,55 @@ pickPlayerCards(computer2CardsArray);
  * Generate a starting location for player
  */
 
-// const getRoomId = document.querySelectorAll('[class^=room]');
-// console.log(getRoomId);
-// const selectRandomStartingRoom = () => {
-
-// };
-
+const getRoomId = document.querySelectorAll('[class^=room]');
+let startingRoom = null;
+console.log(getRoomId);
+const selectRandomStartingRoom = () => {
+  startingRoom = Math.floor(Math.random() * 9) + 1; // random number between 1-9
+  switch (startingRoom) {
+    case 0:
+      getRoomId[0].classList.add('active');
+      console.log(startingRoom);
+      break;
+    case 1:
+      getRoomId[1].classList.add('active');
+      console.log(startingRoom);
+      break;
+    case 2:
+      getRoomId[2].classList.add('active');
+      console.log(startingRoom);
+      break;
+    case 3:
+      getRoomId[3].classList.add('active');
+      console.log(startingRoom);
+      break;
+    case 4:
+      getRoomId[4].classList.add('active');
+      console.log(startingRoom);
+      break;
+    case 5:
+      getRoomId[5].classList.add('active');
+      console.log(startingRoom);
+      break;
+    case 6:
+      getRoomId[6].classList.add('active');
+      console.log(startingRoom);
+      break;
+    case 7:
+      getRoomId[7].classList.add('active');
+      console.log(startingRoom);
+      break;
+    case 8:
+      getRoomId[8].classList.add('active');
+      console.log(startingRoom);
+      break;
+    default:
+      getRoomId[0].classList.add('active');
+      console.log(startingRoom);
+      break;
+  }
+};
+selectRandomStartingRoom();
 /**
  *Check if move is possible/ increase counter
  */

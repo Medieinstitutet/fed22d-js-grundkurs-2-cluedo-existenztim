@@ -53,33 +53,33 @@ const baseballBat = {
 };
 
 // Rooms
-const cellar = {
-  name: 'Cellar',
-  className: 'cellar',
+const gameHub = {
+  name: 'Game Hub',
+  className: 'game-hub',
 };
-const diningRoom = {
-  name: 'Dining-Room',
-  className: 'dining-room',
+const krustyBurger = {
+  name: 'Krusty Burger',
+  className: 'krusty-burger',
 };
-const kitchen = {
-  name: 'Kitchen',
-  className: 'kitchen',
+const moesTavern = {
+  name: 'Moes Tavern',
+  className: 'moes-tavern',
 };
-const ballroom = {
-  name: 'Ballroom',
-  className: 'ballroom',
+const townHall = {
+  name: 'Town Hall',
+  className: 'town-hall',
 };
-const conservatory = {
-  name: 'Conservatory',
-  className: 'conservatory',
+const burnsManor = {
+  name: 'Burns Manor',
+  className: 'burns-manor',
 };
 const billiardRoom = {
   name: 'Billiard-Room',
   className: 'billiard-room',
 };
-const library = {
-  name: 'Library',
-  className: 'library',
+const kwikEmart = {
+  name: 'Kwik-E-Mart',
+  className: 'kwik-e-mart',
 };
 const study = {
   name: 'Study',
@@ -89,9 +89,9 @@ const hall = {
   name: 'Hall',
   className: 'hall',
 };
-const lounge = {
-  name: 'Lounge',
-  className: 'lounge',
+const elementarySchool = {
+  name: 'Elementary School',
+  className: 'elementary-school',
 };
 
 const suspectsArray = [
@@ -113,15 +113,15 @@ const weaponsArray = [
 ];
 
 const roomsArray = [
-  cellar,
-  diningRoom,
-  kitchen,
-  ballroom,
-  conservatory,
+  gameHub,
+  krustyBurger,
+  moesTavern,
+  townHall,
+  burnsManor,
   billiardRoom,
-  library,
+  kwikEmart,
   study,
   hall,
-  lounge,
+  elementarySchool,
 ];
 export default { suspectsArray, weaponsArray, roomsArray };
