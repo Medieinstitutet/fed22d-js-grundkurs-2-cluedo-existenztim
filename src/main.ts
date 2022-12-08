@@ -11,21 +11,20 @@ console.log(data.roomsArray);
 // const containerRoom = document.querySelector('.container-room');
 const diceButton = document.querySelector('#dice');
 const counts = document.querySelector('#counter span');
-// Print out the room layout
+const rolls = document.querySelector('#rolled span');
 
-// const generateRooms = (containerVariable: Element | null, arrayName: string) => {
-//   for (const objectIdentifier of arrayName) {
-//     containerVariable.innerHTML += /* HTML */`
-//       <div class ="room-${objectIdentifier.className}">${objectIdentifier.name}</div>`;
-//   }
-// };
-
-// generateRooms(containerRoom, data.roomsArray);
-
+const getRoomId = document.querySelectorAll('[class^=room]');
+let startingRoom = null;
 let suspect = null;
 let weapon = null;
 let room = null;
+let playerCards = null;
+let gameCards: any[] = [];
+const playerCardsArray: any[] = [];
+const computer1CardsArray: any[] = [];
+const computer2CardsArray: any[] = [];
 
+let count = 0;
 /**
  *Draws a random card from each array and add to solution.
  */
@@ -51,18 +50,11 @@ pickMysteryCards();
  *Combine remaining cards into one array.
  */
 
-let gameCards: any[] = [];
 gameCards = data.suspectsArray.concat(data.weaponsArray, data.roomsArray); // 19 cards left
-console.log(gameCards);
 
 /**
  *Hand out 3 cards to the players.
  */
-const playerCardsArray: any[] = [];
-const computer1CardsArray: any[] = [];
-const computer2CardsArray: any[] = [];
-
-let playerCards = null;
 
 const pickPlayerCards = (arrayName: any[]) => {
   for (let i = 0; i < 3; i += 1) {
@@ -81,63 +73,53 @@ pickPlayerCards(computer2CardsArray);
  * Generate a starting location for player
  */
 
-const getRoomId = document.querySelectorAll('[class^=room]');
-let startingRoom = null;
-console.log(getRoomId);
 const selectRandomStartingRoom = () => {
   startingRoom = Math.floor(Math.random() * 9) + 1; // random number between 1-9
   switch (startingRoom) {
     case 0:
       getRoomId[0].classList.add('active');
-      console.log(startingRoom);
       break;
     case 1:
       getRoomId[1].classList.add('active');
-      console.log(startingRoom);
       break;
     case 2:
       getRoomId[2].classList.add('active');
-      console.log(startingRoom);
       break;
     case 3:
       getRoomId[3].classList.add('active');
-      console.log(startingRoom);
       break;
     case 4:
       getRoomId[4].classList.add('active');
-      console.log(startingRoom);
       break;
     case 5:
       getRoomId[5].classList.add('active');
-      console.log(startingRoom);
       break;
     case 6:
       getRoomId[6].classList.add('active');
-      console.log(startingRoom);
       break;
     case 7:
       getRoomId[7].classList.add('active');
-      console.log(startingRoom);
       break;
     case 8:
       getRoomId[8].classList.add('active');
-      console.log(startingRoom);
       break;
     default:
       getRoomId[0].classList.add('active');
-      console.log(startingRoom);
       break;
   }
 };
 selectRandomStartingRoom();
+
 /**
  *Check if move is possible/ increase counter
  */
 
-let count = 0;
 const checkNumber = (random: number) => {
-  if (random >= 3) {
-    // make a move
+  if (random > 3) {
+    // const rooms = document.querySelectorAll('button');
+    // rooms.forEach((roomSelected) => {
+    //   roomSelected.addEventListener('click', makeRoomActive);
+    // });
   }
   count += 1;
   counts.textContent = count;
@@ -150,8 +132,15 @@ const checkNumber = (random: number) => {
  */
 const generateRandomNumber = () => {
   const randomDiceNumber = Math.floor(Math.random() * 6) + 1; // +1 so 0 cant be picked, math.floor so 7 cant be picked
+
+  if (randomDiceNumber > 3 && rolls !== null) {
+    rolls.textContent = `You rolled a ${randomDiceNumber} and may move to another location!`;
+  } else if (randomDiceNumber <= 3 && rolls !== null) {
+    rolls.textContent = `You rolled a ${randomDiceNumber} and you are stuck!`;
+  }
+
   checkNumber(randomDiceNumber);
 };
 diceButton?.addEventListener('click', generateRandomNumber);
 
-console.log('Solutuion ->', suspect.name, weapon.name, room.name);
+// console.log('Solutuion ->', suspect.name, weapon.name, room.name);
