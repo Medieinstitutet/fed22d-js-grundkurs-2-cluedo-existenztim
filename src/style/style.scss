@@ -37,10 +37,13 @@ main {
       "krusty-burger game-hub kwik-e-mart"
       "elementary-school hall study";
 
+      button {
+        cursor: pointer;
+      }
+
       button[class*='room']{
         border: 1px solid black;
         background-color: $grey;
-        cursor: pointer;
       }
 
       button[class*='room']:hover{
