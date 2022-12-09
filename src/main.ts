@@ -4,10 +4,6 @@ import './style/style.scss';
 // Data contains all the arrays needed for the game
 import data from './script/storage';
 
-console.log(data.suspectsArray);
-console.log(data.weaponsArray);
-console.log(data.roomsArray);
-
 // const containerRoom = document.querySelector('.container-room');
 const diceButton = document.querySelector('#dice');
 const counts = document.querySelector('#counter span');
@@ -15,6 +11,10 @@ const rolls = document.querySelector('#rolled span');
 
 const getRoomId = document.querySelectorAll('[class^=room]');
 const accuseBtn = document.querySelector('#accuse');
+
+// const computer1Card = document.querySelector('#computer1');
+// const computer2Card = document.querySelector('#computer2');
+
 let accuse = false;
 let startingRoom = null;
 let suspect = null;
@@ -50,11 +50,7 @@ const pickMysteryCards = () => {
 
 pickMysteryCards();
 
-/**
- *Combine remaining cards into one array.
- */
-
-gameCards = data.suspectsArray.concat(data.weaponsArray, data.roomsArray); // 19 cards left
+gameCards = data.suspectsArray.concat(data.weaponsArray, data.roomsArray); // Combine remaining cards into one array
 
 /**
  *Hand out 3 cards to the players.
@@ -114,6 +110,10 @@ const selectRandomStartingRoom = () => {
 };
 selectRandomStartingRoom();
 
+/**
+ *Toggle accusation button depending on roll/player has moved.
+ */
+
 const makeAccusation = () => {
   if (accuse) {
     accuseBtn?.classList.add('active-btn');
@@ -137,6 +137,7 @@ function makeRoomActive(e: any) {
   });
   randomDiceNumber = 0; // So you can only move once per round.
   makeAccusation();
+  // eslint-disable-next-line @typescript-eslint/no-use-before-define
   checkNumber(randomDiceNumber);
 }
 
@@ -167,6 +168,7 @@ const checkNumber = (random: number) => {
 /**
  *Generate a random number between 1-6
  */
+
 const generateRandomNumber = () => {
   randomDiceNumber = Math.floor(Math.random() * 6) + 1; // +1 so 0 cant be picked, math.floor so 7 cant be picked
 
@@ -181,3 +183,22 @@ const generateRandomNumber = () => {
 diceButton?.addEventListener('click', generateRandomNumber);
 
 // console.log('Solutuion ->', suspect.name, weapon.name, room.name);
+
+console.log(playerCardsArray);
+console.log(computer1CardsArray);
+console.log(computer2CardsArray);
+
+/**
+ *Generate HTML for player card.
+ */
+const generateCardMarkup = () => {
+  let cartItemsToRender = '';
+  const cardElement = /* html */ `
+      <div class ="card">${playerCardsArray[0].name}</div>
+      <div class ="card">${playerCardsArray[1].name}</div>
+      <div class ="card">${playerCardsArray[2].name}</div>`;
+  cartItemsToRender += cardElement;
+
+  cartItemsToRender = document.querySelector('#player').innerHTML;
+};
+generateCardMarkup();

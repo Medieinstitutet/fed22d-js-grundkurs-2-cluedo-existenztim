@@ -53,10 +53,10 @@ const baseballBat = {
 };
 
 // Rooms
-const gameHub = {
-  name: 'Game Hub',
-  className: 'game-hub',
-};
+// const gameHub = {
+//   name: 'Game Hub',
+//   className: 'game-hub',
+// };
 const krustyBurger = {
   name: 'Krusty Burger',
   className: 'krusty-burger',
@@ -73,9 +73,9 @@ const burnsManor = {
   name: 'Burns Manor',
   className: 'burns-manor',
 };
-const billiardRoom = {
-  name: 'Billiard-Room',
-  className: 'billiard-room',
+const simpsonsHouse = {
+  name: 'Simpsons House',
+  className: 'simpsons-house',
 };
 const kwikEmart = {
   name: 'Kwik-E-Mart',
@@ -113,12 +113,12 @@ const weaponsArray = [
 ];
 
 const roomsArray = [
-  gameHub,
+  // gameHub,
   krustyBurger,
   moesTavern,
   townHall,
   burnsManor,
-  billiardRoom,
+  simpsonsHouse,
   kwikEmart,
   study,
   hall,
