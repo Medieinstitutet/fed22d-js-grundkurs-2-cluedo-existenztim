@@ -14,6 +14,8 @@ const counts = document.querySelector('#counter span');
 const rolls = document.querySelector('#rolled span');
 
 const getRoomId = document.querySelectorAll('[class^=room]');
+const accuseBtn = document.querySelector('#accuse');
+let accuse = false;
 let startingRoom = null;
 let suspect = null;
 let weapon = null;
@@ -24,7 +26,9 @@ const playerCardsArray: any[] = [];
 const computer1CardsArray: any[] = [];
 const computer2CardsArray: any[] = [];
 
+let randomDiceNumber = 0;
 let count = 0;
+
 /**
  *Draws a random card from each array and add to solution.
  */
@@ -110,19 +114,52 @@ const selectRandomStartingRoom = () => {
 };
 selectRandomStartingRoom();
 
+const makeAccusation = () => {
+  if (accuse) {
+    accuseBtn?.classList.add('active-btn');
+  } else {
+    accuseBtn?.classList.remove('active-btn');
+  }
+};
+
+/**
+ *Move player to new room
+ */
+
+function makeRoomActive(e: any) {
+  getRoomId.forEach((roomSelected) => {
+    if (roomSelected.getAttribute('id') === e.currentTarget.id) {
+      roomSelected.classList.add('active');
+      console.log(e);
+    } else {
+      roomSelected.classList.remove('active');
+    }
+  });
+  randomDiceNumber = 0; // So you can only move once per round.
+  makeAccusation();
+  checkNumber(randomDiceNumber);
+}
+
 /**
  *Check if move is possible/ increase counter
  */
 
 const checkNumber = (random: number) => {
   if (random > 3) {
-    // const rooms = document.querySelectorAll('button');
-    // rooms.forEach((roomSelected) => {
-    //   roomSelected.addEventListener('click', makeRoomActive);
-    // });
+    accuse = true;
+    getRoomId.forEach((roomSelected) => {
+      roomSelected.addEventListener('click', makeRoomActive);
+    });
+  } else {
+    accuse = false;
+    getRoomId.forEach((roomSelected) => {
+      roomSelected.removeEventListener('click', makeRoomActive);
+    });
   }
   count += 1;
-  counts.textContent = count;
+  if (counts != null) {
+    counts.textContent = String(count);
+  }
 
   console.log(count);
 };
@@ -131,14 +168,14 @@ const checkNumber = (random: number) => {
  *Generate a random number between 1-6
  */
 const generateRandomNumber = () => {
-  const randomDiceNumber = Math.floor(Math.random() * 6) + 1; // +1 so 0 cant be picked, math.floor so 7 cant be picked
+  randomDiceNumber = Math.floor(Math.random() * 6) + 1; // +1 so 0 cant be picked, math.floor so 7 cant be picked
 
   if (randomDiceNumber > 3 && rolls !== null) {
     rolls.textContent = `You rolled a ${randomDiceNumber} and may move to another location!`;
   } else if (randomDiceNumber <= 3 && rolls !== null) {
     rolls.textContent = `You rolled a ${randomDiceNumber} and you are stuck!`;
   }
-
+  accuseBtn?.classList.remove('active-btn'); // You can only accuse if you have moved.
   checkNumber(randomDiceNumber);
 };
 diceButton?.addEventListener('click', generateRandomNumber);

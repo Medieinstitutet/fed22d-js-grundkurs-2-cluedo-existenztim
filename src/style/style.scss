@@ -37,6 +37,11 @@ main {
       "krusty-burger game-hub kwik-e-mart"
       "elementary-school hall study";
 
+      button.active-btn {
+        background-color: green;
+
+      }
+
       button {
         cursor: pointer;
       }
@@ -110,5 +115,3 @@ main {
       }
   }
 }
-
-/* till imorn, fixa id på buttons istället med deras namn, sedan class namn room (samma på alla) sen room.active*/
