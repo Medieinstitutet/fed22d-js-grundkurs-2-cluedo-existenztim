@@ -53,10 +53,10 @@ const baseballBat = {
 };
 
 // Rooms
-// const gameHub = {
-//   name: 'Game Hub',
-//   className: 'game-hub',
-// };
+const gameHub = {
+  name: 'Game Hub',
+  className: 'game-hub',
+};
 const krustyBurger = {
   name: 'Krusty Burger',
   className: 'krusty-burger',
@@ -81,13 +81,13 @@ const kwikEmart = {
   name: 'Kwik-E-Mart',
   className: 'kwik-e-mart',
 };
-const study = {
-  name: 'Study',
-  className: 'study',
+const nuclearPowerPlant = {
+  name: 'Nuclear Power Plant',
+  className: 'nuclear-power-plant',
 };
-const hall = {
-  name: 'Hall',
-  className: 'hall',
+const townSquare = {
+  name: 'Town Square',
+  className: 'town-square',
 };
 const elementarySchool = {
   name: 'Elementary School',
@@ -113,15 +113,15 @@ const weaponsArray = [
 ];
 
 const roomsArray = [
-  // gameHub,
+  gameHub,
   krustyBurger,
   moesTavern,
   townHall,
   burnsManor,
   simpsonsHouse,
   kwikEmart,
-  study,
-  hall,
+  nuclearPowerPlant,
+  townSquare,
   elementarySchool,
 ];
 export default { suspectsArray, weaponsArray, roomsArray };

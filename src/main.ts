@@ -189,9 +189,10 @@ console.log(computer1CardsArray);
 console.log(computer2CardsArray);
 
 /**
- *Generate HTML for player card.
+ *Generate HTML for player card. //might change to loop
  */
-const generateCardMarkup = () => {
+
+const renderCardMarkup = () => {
   let cartItemsToRender = '';
   const cardElement = /* html */ `
       <div class ="card">${playerCardsArray[0].name}</div>
@@ -199,6 +200,6 @@ const generateCardMarkup = () => {
       <div class ="card">${playerCardsArray[2].name}</div>`;
   cartItemsToRender += cardElement;
 
-  cartItemsToRender = document.querySelector('#player').innerHTML;
+  document.querySelector('#player').innerHTML = cartItemsToRender;
 };
-generateCardMarkup();
+renderCardMarkup();
