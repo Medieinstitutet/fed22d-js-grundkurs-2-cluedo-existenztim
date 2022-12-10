@@ -1,6 +1,7 @@
 @use "utils/a11y"; // Om det inte funkar, byt @use mot @import
 @use "vendor/reset";
 @use "components/cards";
+@use "components/guess";
 @import "abstracts/colors";
 
 :root {
@@ -23,6 +24,15 @@ main {
   padding: 20px;
   text-align: center;
 
+  button.active-btn {
+    background-color: green;
+
+  }
+
+  button {
+    cursor: pointer;
+  }
+
   .container-room {  display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 0.5fr 0.5fr 1fr;
@@ -30,22 +40,13 @@ main {
     grid-auto-flow: row;
     max-width: 1000px;
     margin: auto;
-    height: 50vh;
+    height: 45vh;
     /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
     grid-template-areas:
       "moes-tavern town-hall burns-manor"
       "krusty-burger game-hub simpsons-house"
       "krusty-burger game-hub kwik-e-mart"
       "elementary-school town-square nuclear-power-plant";
-
-      button.active-btn {
-        background-color: green;
-
-      }
-
-      button {
-        cursor: pointer;
-      }
 
       button[class*='room']{
         border: 1px solid black;

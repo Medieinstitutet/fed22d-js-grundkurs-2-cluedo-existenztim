@@ -1,0 +1,19 @@
+ /*************************************************************************** 
+ *Guess/Accuse section
+ ***************************************************************************/
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  section {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+  }
+
+  h3 {
+    position: relative;
+  }
+}
+

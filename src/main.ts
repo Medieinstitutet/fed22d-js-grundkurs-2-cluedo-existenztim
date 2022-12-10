@@ -8,10 +8,15 @@ import data from './script/storage';
 const diceButton = document.querySelector('#dice');
 const counts = document.querySelector('#counter span');
 const rolls = document.querySelector('#rolled span');
+const info = document.querySelector('#info span');
 
 const getRoomId = document.querySelectorAll('[class^=room]');
 const guessBtn = document.querySelector('#guess');
 
+const accuse = document.querySelector('#accuse');
+const accusedSuspect = <HTMLInputElement>document.querySelector('#suspects');
+const accusedWeapon = <HTMLInputElement>document.querySelector('#locations');
+const accusedRoom = <HTMLInputElement>document.querySelector('#weapon');
 // const computer1Card = document.querySelector('#computer1');
 // const computer2Card = document.querySelector('#computer2');
 
@@ -128,9 +133,10 @@ const makeAccusation = () => {
 
 function makeRoomActive(e: any) {
   getRoomId.forEach((roomSelected) => {
-    if (roomSelected.getAttribute('id') === e.currentTarget.id) {
+    if (roomSelected.getAttribute('id') === e.currentTarget.id && info !== null) {
       roomSelected.classList.add('active');
       console.log(e);
+      info.textContent = 'You may make a guess.';
     } else {
       roomSelected.classList.remove('active');
     }
@@ -172,12 +178,14 @@ const checkNumber = (random: number) => {
 const generateRandomNumber = () => {
   randomDiceNumber = Math.floor(Math.random() * 6) + 1; // +1 so 0 cant be picked, math.floor so 7 cant be picked
 
-  if (randomDiceNumber > 3 && rolls !== null) {
-    rolls.textContent = `You rolled a ${randomDiceNumber} and may move to another location!`;
-  } else if (randomDiceNumber <= 3 && rolls !== null) {
-    rolls.textContent = `You rolled a ${randomDiceNumber} and you are stuck!`;
+  if (randomDiceNumber > 3 && rolls !== null && info !== null) {
+    rolls.textContent = `You rolled a ${randomDiceNumber}!`;
+    info.textContent = 'You may move to another location!';
+  } else if (randomDiceNumber <= 3 && rolls !== null && info !== null) {
+    rolls.textContent = `You rolled a ${randomDiceNumber}!`;
+    info.textContent = ' You are stuck!';
   }
-  guessBtn?.classList.remove('active-btn'); // You can only accuse if you have moved.
+  guessBtn?.classList.remove('active-btn'); // You can only guess if you have moved.
   checkNumber(randomDiceNumber);
 };
 diceButton?.addEventListener('click', generateRandomNumber);
@@ -203,3 +211,18 @@ const renderCardMarkup = () => {
   document.querySelector('#player').innerHTML = cartItemsToRender;
 };
 renderCardMarkup();
+
+// document.querySelector('button').onclick = guess;
+
+/**
+ *Accuse Suspect and compare solution to accusation.
+ */
+
+function accuseCompare() {
+  if (accusedSuspect !== null) {
+    console.log(accusedSuspect.value);
+    console.log(accusedWeapon.value);
+    console.log(accusedRoom.value);
+  }
+}
+accuse?.addEventListener('click', accuseCompare);
