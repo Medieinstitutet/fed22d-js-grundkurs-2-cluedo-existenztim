@@ -10,12 +10,12 @@ const counts = document.querySelector('#counter span');
 const rolls = document.querySelector('#rolled span');
 
 const getRoomId = document.querySelectorAll('[class^=room]');
-const accuseBtn = document.querySelector('#accuse');
+const guessBtn = document.querySelector('#guess');
 
 // const computer1Card = document.querySelector('#computer1');
 // const computer2Card = document.querySelector('#computer2');
 
-let accuse = false;
+let guess = false;
 let startingRoom = null;
 let suspect = null;
 let weapon = null;
@@ -115,10 +115,10 @@ selectRandomStartingRoom();
  */
 
 const makeAccusation = () => {
-  if (accuse) {
-    accuseBtn?.classList.add('active-btn');
+  if (guess) {
+    guessBtn?.classList.add('active-btn');
   } else {
-    accuseBtn?.classList.remove('active-btn');
+    guessBtn?.classList.remove('active-btn');
   }
 };
 
@@ -147,12 +147,12 @@ function makeRoomActive(e: any) {
 
 const checkNumber = (random: number) => {
   if (random > 3) {
-    accuse = true;
+    guess = true;
     getRoomId.forEach((roomSelected) => {
       roomSelected.addEventListener('click', makeRoomActive);
     });
   } else {
-    accuse = false;
+    guess = false;
     getRoomId.forEach((roomSelected) => {
       roomSelected.removeEventListener('click', makeRoomActive);
     });
@@ -177,7 +177,7 @@ const generateRandomNumber = () => {
   } else if (randomDiceNumber <= 3 && rolls !== null) {
     rolls.textContent = `You rolled a ${randomDiceNumber} and you are stuck!`;
   }
-  accuseBtn?.classList.remove('active-btn'); // You can only accuse if you have moved.
+  guessBtn?.classList.remove('active-btn'); // You can only accuse if you have moved.
   checkNumber(randomDiceNumber);
 };
 diceButton?.addEventListener('click', generateRandomNumber);
