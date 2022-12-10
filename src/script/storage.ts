@@ -53,10 +53,10 @@ const baseballBat = {
 };
 
 // Rooms
-const gameHub = {
-  name: 'Game Hub',
-  className: 'game-hub',
-};
+// const gameHub = {
+//   name: 'Game Hub',
+//   className: 'game-hub',
+// };
 const krustyBurger = {
   name: 'Krusty Burger',
   className: 'krusty-burger',
@@ -94,6 +94,16 @@ const elementarySchool = {
   className: 'elementary-school',
 };
 
+// AI Lägg guess accuse vid rull listorna, tärning i mitten
+
+// const computer1 = {
+//   guess: 0, //the likelyhood of AI to accuse goes up by number of guesses.
+// }
+
+// const computer2 = {
+//   guess: 0, //the likelyhood of AI to accuse goes up by number of guesses.
+// }
+
 const suspectsArray = [
   flanders,
   bob,
@@ -113,7 +123,7 @@ const weaponsArray = [
 ];
 
 const roomsArray = [
-  gameHub,
+  // gameHub,
   krustyBurger,
   moesTavern,
   townHall,
