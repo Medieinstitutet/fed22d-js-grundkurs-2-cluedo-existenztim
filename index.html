@@ -3,25 +3,107 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/ico" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Cluedo - Simpsons Version</title>
   </head>
   <body>
     <main>
-      <div class="app" id="app"></div> 
-      <button id = "dice">Roll Dice</button>
-      <div id = "counter">0</div>
+      <h1>Cluedo - Simpsons Version</h1>
+      <header class="guess">
+
+        <!-- <h3>What's your solution?</h3> -->
+        <section class ="suspect-container">
+          <label for="suspects">Suspect:</label>
+          <select name="suspects" id="suspects">
+            <option label=" "></option>
+            <option value="flanders">Ned Flanders</option>
+            <option value="bob">Sideshow Bob</option>
+            <option value="edna">Edna Krabappel</option>
+            <option value="krusty">Krusty The Clown</option>
+            <option value="agnes">Agnes Skinner</option>
+            <option value="lovejoy">Helen Lovejoy</option>
+          </select>
+        </section>
+  
+        <section class ="locations-container">
+          <label for="locations">Locations:</label>
+          <select name="locations" id="locations">
+            <option value="krusty-burger">Krusty Burger</option>
+            <option value="moes-tavern">Moes Tavern</option>
+            <option value="towns-square">Town Hall</option>
+            <option value="burns-manor">Burns Manor</option>
+            <option value="simpsons-house">Simpsons House</option>
+            <option value="kwik-e-mart">Kwik-E-Mart</option>
+            <option value="nuclear-power-plant">Nuclear Power Plant</option>
+            <option value="town-square">Town Square</option>
+            <option value="elementary-school">Elementary School</option>
+          </select>
+        </section>
+  
+        <section class ="weapons-container">
+          <label for="weapon">Weapon:</label>
+          <select name="weapon" id="weapon">
+            <option value="rope">Rope</option>
+            <option value="revolver">Revolver</option>
+            <option value="candlestick">Candlestick</option>
+            <option value="knife">Knife</option>
+            <option value="wrench">Wrench</option>
+            <option value="baseball-bat">Baseball Bat</option>
+          </select>
+        </section>
+  
+      </header>
+      <section class ="button-infobar">
+        <div id = "info"><span>Roll the dice!</span></div>
+        <button id="guess">Guess</button>
+        <button id="accuse" class ="active-btn">Accuse</button>
+      </section>
       <section class="container-room">
-        <!-- <div class="room-cellar">Cellar</div>
-        <div class="room-dining-room">Dining-Room</div>
-        <div class="room-kitchen">Kitchen</div>
-        <div class="room-ballroom">Ballroom</div>
-        <div class="room-conservatory">Conservatory</div>
-        <div class="room-billiard-room">Billilard-Room</div>
-        <div class="room-library">Library</div>
-        <div class="room-study">Study</div>
-        <div class="room-hall">Hall</div>
-        <div class="room-lounge">Lounge</div> -->
+        <div id="game-hub">
+          <button id = "dice" class ="active-btn">Roll Dice</button>
+          <div id = "rolled"><span></span></div>
+          <div id = "counter">Rounds: <span>0</span></div>
+        </div>
+        <button id="room-krusty-burger" class="room">Krusty Burger</button>
+        <button id="room-moes-tavern" class="room">Moe's Tavern</button>
+        <button id="room-town-hall" class="room">Town Hall</button>
+        <button id="room-burns-manor" class="room">Burns Manor</button>
+        <button id="room-simpsons-house" class="room">Simpsons House</button>
+        <button id="room-kwik-e-mart" class="room">Kwik-E-Mart</button>
+        <button id="room-nuclear-power-plant" class="room">Nuclear Power Plant</button>
+        <button id="room-town-square" class="room">Town Square</button>
+        <button id="room-elementary-school" class="room">Elementary School</button>
+    </section>
+
+    <section class="player-cards">
+      <div class ="card-wrapper">
+        <h2>Bart's Cards</h2>
+        <div id ="computer1" class ="cards">
+          <div class ="card">?</div>
+          <div class ="card">?</div>
+          <div class ="card">?</div>
+        </div>
+      </div>
+      <div class ="card-wrapper">
+        <h2>Your Cards</h2>
+        <div id ="player" class ="cards">
+          <div class ="card">Card info</div>
+          <div class ="card">Card info</div>
+          <div class ="card">Card info</div>
+        </div>
+      </div>
+      <div class ="card-wrapper">
+        <h2>Lizas's Cards</h2>
+        <div id ="computer2" class ="cards">
+          <div class ="card">?</div>
+          <div class ="card">?</div>
+          <div class ="card">?</div>
+        </div>
+      </div>
     </section>
     </main>
 

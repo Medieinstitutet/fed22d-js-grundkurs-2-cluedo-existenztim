@@ -53,46 +53,56 @@ const baseballBat = {
 };
 
 // Rooms
-const cellar = {
-  name: 'Cellar',
-  className: 'cellar',
+// const gameHub = {
+//   name: 'Game Hub',
+//   className: 'game-hub',
+// };
+const krustyBurger = {
+  name: 'Krusty Burger',
+  className: 'krusty-burger',
 };
-const diningRoom = {
-  name: 'Dining-Room',
-  className: 'dining-room',
+const moesTavern = {
+  name: 'Moes Tavern',
+  className: 'moes-tavern',
 };
-const kitchen = {
-  name: 'Kitchen',
-  className: 'kitchen',
+const townHall = {
+  name: 'Town Hall',
+  className: 'town-hall',
 };
-const ballroom = {
-  name: 'Ballroom',
-  className: 'ballroom',
+const burnsManor = {
+  name: 'Burns Manor',
+  className: 'burns-manor',
 };
-const conservatory = {
-  name: 'Conservatory',
-  className: 'conservatory',
+const simpsonsHouse = {
+  name: 'Simpsons House',
+  className: 'simpsons-house',
 };
-const billiardRoom = {
-  name: 'Billiard-Room',
-  className: 'billiard-room',
+const kwikEmart = {
+  name: 'Kwik-E-Mart',
+  className: 'kwik-e-mart',
 };
-const library = {
-  name: 'Library',
-  className: 'library',
+const nuclearPowerPlant = {
+  name: 'Nuclear Power Plant',
+  className: 'nuclear-power-plant',
 };
-const study = {
-  name: 'Study',
-  className: 'study',
+const townSquare = {
+  name: 'Town Square',
+  className: 'town-square',
 };
-const hall = {
-  name: 'Hall',
-  className: 'hall',
+const elementarySchool = {
+  name: 'Elementary School',
+  className: 'elementary-school',
 };
-const lounge = {
-  name: 'Lounge',
-  className: 'lounge',
-};
+
+// AI Lägg guess accuse vid rull listorna, tärning i mitten
+
+// const computer1 = {
+//   guess: 0, //the likelyhood of AI to accuse goes up by number of guesses.
+// }
+
+// const computer2 = {
+//   guess: 0, //the likelyhood of AI to accuse goes up by number of guesses.
+// }
 
 const suspectsArray = [
   flanders,
@@ -113,15 +123,15 @@ const weaponsArray = [
 ];
 
 const roomsArray = [
-  cellar,
-  diningRoom,
-  kitchen,
-  ballroom,
-  conservatory,
-  billiardRoom,
-  library,
-  study,
-  hall,
-  lounge,
+  // gameHub,
+  krustyBurger,
+  moesTavern,
+  townHall,
+  burnsManor,
+  simpsonsHouse,
+  kwikEmart,
+  nuclearPowerPlant,
+  townSquare,
+  elementarySchool,
 ];
 export default { suspectsArray, weaponsArray, roomsArray };

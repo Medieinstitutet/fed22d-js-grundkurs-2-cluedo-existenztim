@@ -1,28 +1,38 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import './style/style.scss';
 
 // Data contains all the arrays needed for the game
 import data from './script/storage';
 
-console.log(data.suspectsArray);
-console.log(data.weaponsArray);
-console.log(data.roomsArray);
+// const containerRoom = document.querySelector('.container-room');
+const diceButton = document.querySelector('#dice');
+const counts = document.querySelector('#counter span');
+const rolls = document.querySelector('#rolled span');
+const info = document.querySelector('#info span');
 
-const containerRoom = document.querySelector('.container-room');
+const getRoomId = document.querySelectorAll('[class^=room]');
+const guessBtn = document.querySelector('#guess');
 
-// Print out the room layout
+const accuse = document.querySelector('#accuse');
+const accusedSuspect = <HTMLInputElement>document.querySelector('#suspects');
+const accusedWeapon = <HTMLInputElement>document.querySelector('#locations');
+const accusedRoom = <HTMLInputElement>document.querySelector('#weapon');
+// const computer1Card = document.querySelector('#computer1');
+// const computer2Card = document.querySelector('#computer2');
 
-const generateRooms = (containerVariable: Element | null, arrayName: string) => {
-  for (const objectIdentifier of arrayName) {
-    containerVariable.innerHTML += /* HTML */`
-      <div class ="room-${objectIdentifier.className}">${objectIdentifier.name}</div>`;
-  }
-};
-
-generateRooms(containerRoom, data.roomsArray);
-
+let guess = false;
+let startingRoom = null;
 let suspect = null;
 let weapon = null;
 let room = null;
+let playerCards = null;
+let gameCards: any[] = [];
+const playerCardsArray: any[] = [];
+const computer1CardsArray: any[] = [];
+const computer2CardsArray: any[] = [];
+
+let randomDiceNumber = 0;
+let count = 0;
 
 /**
  *Draws a random card from each array and add to solution.
@@ -40,42 +50,179 @@ const pickMysteryCards = () => {
   const roomIndex: number = data.weaponsArray.indexOf(room);
   data.roomsArray.splice(roomIndex, 1);
 
-  return { suspect, weapon, room };
+  // return { suspect, weapon, room };
 };
 
 pickMysteryCards();
 
+gameCards = data.suspectsArray.concat(data.weaponsArray, data.roomsArray); // Combine remaining cards into one array
+
 /**
- *Combine remaining cards into one array.
+ *Hand out 3 cards to the players.
  */
 
-let gameCards = [];
-gameCards = data.suspectsArray.concat(data.weaponsArray, data.roomsArray);
-console.log(gameCards);
-
-let count = 0;
-const checkNumber = (random) => {
-  if (random >= 3) {
-    // make a move
+const pickPlayerCards = (arrayName: any[]) => {
+  for (let i = 0; i < 3; i += 1) {
+    playerCards = gameCards[Math.floor(Math.random() * gameCards.length)];
+    const cardIndex: number = gameCards.indexOf(playerCards);
+    arrayName.push(playerCards);
+    gameCards.splice(cardIndex, 1);
   }
-  count++;
-  counts.textContent = count;
-  console.log(count);
 };
 
-const diceButton = document.querySelector('#dice');
-const counts = document.querySelector('#counter');
+pickPlayerCards(playerCardsArray);
+pickPlayerCards(computer1CardsArray);
+pickPlayerCards(computer2CardsArray);
+
+/**
+ * Generate a starting location for player
+ */
+
+const selectRandomStartingRoom = () => {
+  startingRoom = Math.floor(Math.random() * 9) + 1; // random number between 1-9
+  switch (startingRoom) {
+    case 0:
+      getRoomId[0].classList.add('active');
+      break;
+    case 1:
+      getRoomId[1].classList.add('active');
+      break;
+    case 2:
+      getRoomId[2].classList.add('active');
+      break;
+    case 3:
+      getRoomId[3].classList.add('active');
+      break;
+    case 4:
+      getRoomId[4].classList.add('active');
+      break;
+    case 5:
+      getRoomId[5].classList.add('active');
+      break;
+    case 6:
+      getRoomId[6].classList.add('active');
+      break;
+    case 7:
+      getRoomId[7].classList.add('active');
+      break;
+    case 8:
+      getRoomId[8].classList.add('active');
+      break;
+    default:
+      getRoomId[0].classList.add('active');
+      break;
+  }
+};
+selectRandomStartingRoom();
+
+/**
+ *Toggle accusation button depending on roll/player has moved.
+ */
+
+const makeAccusation = () => {
+  if (guess) {
+    guessBtn?.classList.add('active-btn');
+  } else {
+    guessBtn?.classList.remove('active-btn');
+  }
+};
+
+/**
+ *Move player to new room
+ */
+
+function makeRoomActive(e: any) {
+  getRoomId.forEach((roomSelected) => {
+    if (roomSelected.getAttribute('id') === e.currentTarget.id && info !== null) {
+      roomSelected.classList.add('active');
+      console.log(e);
+      info.textContent = 'You may make a guess.';
+    } else {
+      roomSelected.classList.remove('active');
+    }
+  });
+  randomDiceNumber = 0; // So you can only move once per round.
+  makeAccusation();
+  // eslint-disable-next-line @typescript-eslint/no-use-before-define
+  checkNumber(randomDiceNumber);
+}
+
+/**
+ *Check if move is possible/ increase counter
+ */
+
+const checkNumber = (random: number) => {
+  if (random > 3) {
+    guess = true;
+    getRoomId.forEach((roomSelected) => {
+      roomSelected.addEventListener('click', makeRoomActive);
+    });
+  } else {
+    guess = false;
+    getRoomId.forEach((roomSelected) => {
+      roomSelected.removeEventListener('click', makeRoomActive);
+    });
+  }
+  count += 1;
+  if (counts != null) {
+    counts.textContent = String(count);
+  }
+
+  console.log(count);
+};
 
 /**
  *Generate a random number between 1-6
  */
+
 const generateRandomNumber = () => {
-  const randomDiceNumber = Math.floor(Math.random() * 6) + 1; // +1 so 0 cant be picked, math.floor so 7 cant be picked
+  randomDiceNumber = Math.floor(Math.random() * 6) + 1; // +1 so 0 cant be picked, math.floor so 7 cant be picked
+
+  if (randomDiceNumber > 3 && rolls !== null && info !== null) {
+    rolls.textContent = `You rolled a ${randomDiceNumber}!`;
+    info.textContent = 'You may move to another location!';
+  } else if (randomDiceNumber <= 3 && rolls !== null && info !== null) {
+    rolls.textContent = `You rolled a ${randomDiceNumber}!`;
+    info.textContent = ' You are stuck!';
+  }
+  guessBtn?.classList.remove('active-btn'); // You can only guess if you have moved.
   checkNumber(randomDiceNumber);
 };
-diceButton.addEventListener('click', generateRandomNumber);
+diceButton?.addEventListener('click', generateRandomNumber);
 
-console.log('Solutuion ->', suspect.name, weapon.name, room.name);
-console.table(data.suspectsArray);
-console.table(data.weaponsArray);
-console.table(data.roomsArray);
+// console.log('Solutuion ->', suspect.name, weapon.name, room.name);
+
+console.log(playerCardsArray);
+console.log(computer1CardsArray);
+console.log(computer2CardsArray);
+
+/**
+ *Generate HTML for player card. //might change to loop
+ */
+
+const renderCardMarkup = () => {
+  let cartItemsToRender = '';
+  const cardElement = /* html */ `
+      <div class ="card">${playerCardsArray[0].name}</div>
+      <div class ="card">${playerCardsArray[1].name}</div>
+      <div class ="card">${playerCardsArray[2].name}</div>`;
+  cartItemsToRender += cardElement;
+
+  document.querySelector('#player').innerHTML = cartItemsToRender;
+};
+renderCardMarkup();
+
+// document.querySelector('button').onclick = guess;
+
+/**
+ *Accuse Suspect and compare solution to accusation.
+ */
+
+function accuseCompare() {
+  if (accusedSuspect !== null) {
+    console.log(accusedSuspect.value);
+    console.log(accusedWeapon.value);
+    console.log(accusedRoom.value);
+  }
+}
+accuse?.addEventListener('click', accuseCompare);
