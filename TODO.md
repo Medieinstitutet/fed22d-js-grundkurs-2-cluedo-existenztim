@@ -23,9 +23,9 @@
 ### 12
     - [] Spelet fortsätter så, tills den riktiga spelaren är redo att klicka på knappen "Anklaga". Då visas en ruta, där användaren får välja sin "anklagelsekombination".
 ### 13
-    - [] Om det är rätt, vinner spelaren!
+    - [x] Om det är rätt, vinner spelaren!
 ### 14   
-    - [] Om det är fel, förlorar spelaren!
+    - [x] Om det är fel, förlorar spelaren!
 ### 15
     - [] Visa hur många drag spelaren har gjort.
 ### 16   
