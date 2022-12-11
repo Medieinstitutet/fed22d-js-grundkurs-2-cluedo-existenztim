@@ -6,37 +6,45 @@ import data from './script/storage';
 
 // const containerRoom = document.querySelector('.container-room');
 const diceButton = document.querySelector('#dice');
-const counts = document.querySelector('#counter span');
+const counts = document.querySelector('.counter span');
 const rolls = document.querySelector('#rolled span');
 const info = document.querySelector('#info span');
-
+const PlayerCardsdisplay = document.querySelector('#player');
 const getRoomId = document.querySelectorAll('[class^=room]');
 const guessBtn = document.querySelector('#guess');
-
+const mainPage = document.querySelector('main');
+const options = document.querySelector('#guess-accuse-options');
+const resultSection = document.querySelector('#result');
+const resultText = document.querySelector('#accuse-reveal');
 const accuse = document.querySelector('#accuse');
+const accuseBtn = document.querySelector('#submit-accuse');
+
+options?.classList.toggle('hidden');
+resultSection?.classList.toggle('hidden');
+
 const accusedSuspect = <HTMLInputElement>document.querySelector('#suspects');
-const accusedWeapon = <HTMLInputElement>document.querySelector('#locations');
-const accusedRoom = <HTMLInputElement>document.querySelector('#weapon');
+const accusedWeapon = <HTMLInputElement>document.querySelector('#weapon');
+const accusedRoom = <HTMLInputElement>document.querySelector('#locations');
 // const computer1Card = document.querySelector('#computer1');
 // const computer2Card = document.querySelector('#computer2');
 
 let guess = false;
 let startingRoom = null;
-let suspect = null;
-let weapon = null;
-let room = null;
+let suspect: { name: string; } | null = null;
+let weapon: { name: string; } | null = null;
+let room: { name: string; className?: string; } | null = null;
 let playerCards = null;
-let gameCards: any[] = [];
-const playerCardsArray: any[] = [];
-const computer1CardsArray: any[] = [];
-const computer2CardsArray: any[] = [];
-
+let gameCards: unknown[] = [];
+const playerCardsArray: string[] = [];
+const computer1CardsArray: string[] = [];
+const computer2CardsArray: string[] = [];
 let randomDiceNumber = 0;
 let count = 0;
 
 /**
  *Draws a random card from each array and add to solution.
  */
+
 const pickMysteryCards = () => {
   suspect = data.suspectsArray[Math.floor(Math.random() * data.suspectsArray.length)];
   const suspectIndex: number = data.suspectsArray.indexOf(suspect);
@@ -50,10 +58,8 @@ const pickMysteryCards = () => {
   const roomIndex: number = data.weaponsArray.indexOf(room);
   data.roomsArray.splice(roomIndex, 1);
 
-  // return { suspect, weapon, room };
+  return { suspect, weapon, room };
 };
-
-pickMysteryCards();
 
 gameCards = data.suspectsArray.concat(data.weaponsArray, data.roomsArray); // Combine remaining cards into one array
 
@@ -69,10 +75,6 @@ const pickPlayerCards = (arrayName: any[]) => {
     gameCards.splice(cardIndex, 1);
   }
 };
-
-pickPlayerCards(playerCardsArray);
-pickPlayerCards(computer1CardsArray);
-pickPlayerCards(computer2CardsArray);
 
 /**
  * Generate a starting location for player
@@ -113,7 +115,6 @@ const selectRandomStartingRoom = () => {
       break;
   }
 };
-selectRandomStartingRoom();
 
 /**
  *Toggle accusation button depending on roll/player has moved.
@@ -190,8 +191,6 @@ const generateRandomNumber = () => {
 };
 diceButton?.addEventListener('click', generateRandomNumber);
 
-// console.log('Solutuion ->', suspect.name, weapon.name, room.name);
-
 console.log(playerCardsArray);
 console.log(computer1CardsArray);
 console.log(computer2CardsArray);
@@ -207,22 +206,57 @@ const renderCardMarkup = () => {
       <div class ="card">${playerCardsArray[1].name}</div>
       <div class ="card">${playerCardsArray[2].name}</div>`;
   cartItemsToRender += cardElement;
-
-  document.querySelector('#player').innerHTML = cartItemsToRender;
+  if (PlayerCardsdisplay !== null) {
+    PlayerCardsdisplay.innerHTML = cartItemsToRender;
+  }
 };
-renderCardMarkup();
-
-// document.querySelector('button').onclick = guess;
-
 /**
  *Accuse Suspect and compare solution to accusation.
  */
+const accuseCompare = () => {
+  if (
+    (suspect !== null && accusedSuspect.value === suspect.name)
+    && (weapon !== null && accusedWeapon.value === weapon.name)
+    && (room !== null && accusedRoom.value === room.name)
+  ) {
+    mainPage?.classList.toggle('tot-hidden');
+    resultSection?.classList.toggle('hidden');
+    if (resultText !== null) {
+      resultText.innerHTML = 'You win!';
 
-function accuseCompare() {
-  if (accusedSuspect !== null) {
-    console.log(accusedSuspect.value);
-    console.log(accusedWeapon.value);
-    console.log(accusedRoom.value);
+      console.log('you win!');
+    }
+  } else {
+    mainPage?.classList.toggle('tot-hidden');
+    resultSection?.classList.toggle('hidden');
+    if (resultText !== null) {
+      resultText.innerHTML = 'You loose!';
+      console.log('you loose!');
+    }
   }
-}
-accuse?.addEventListener('click', accuseCompare);
+};
+
+/**
+ *Initialize Accusation window.
+ */
+
+const accuseInit = () => {
+  if (accusedSuspect !== null && info !== null) {
+    options?.classList.toggle('hidden');
+    info.textContent = 'Press submit to send your accusation.';
+  }
+};
+accuse?.addEventListener('click', accuseInit);
+accuseBtn?.addEventListener('click', accuseCompare);
+// Run initial functions
+pickMysteryCards();
+pickPlayerCards(playerCardsArray);
+pickPlayerCards(computer1CardsArray);
+pickPlayerCards(computer2CardsArray);
+selectRandomStartingRoom();
+renderCardMarkup();
+
+// only for development
+// if (suspect !== null && weapon !== null && room !== null) {
+//   console.log('Solutuion ->', suspect.name, weapon.name, room.name);
+// }

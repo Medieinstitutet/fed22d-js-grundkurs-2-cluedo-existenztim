@@ -2,6 +2,7 @@
 @use "vendor/reset";
 @use "components/cards";
 @use "components/guess";
+@use "components/result";
 @import "abstracts/colors";
 
 :root {
@@ -10,7 +11,7 @@
   line-height: 24px;
   font-weight: 400;
   color-scheme: light dark;
-  color: $white;
+  color: $yellow;
   background-color: $black;
   font-synthesis: none;
   text-rendering: optimizelegibility;
@@ -19,10 +20,22 @@
   text-size-adjust: 100%;
 }
 
+.hidden {
+  visibility: hidden; //for now, we stil want it to take up space.
+}
+
+.tot-hidden {
+  display: none;
+}
 
 main {
   padding: 20px;
   text-align: center;
+  // background-image: url("/public/img/simpsonsbg.png");
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  // background-attachment: fixed;
+  height: 100vh;
 
   button.active-btn {
     background-color: green;
@@ -31,6 +44,8 @@ main {
 
   button {
     cursor: pointer;
+    padding: 0.5rem;
+    margin: 0.5rem;
   }
 
   .container-room {  display: grid;
