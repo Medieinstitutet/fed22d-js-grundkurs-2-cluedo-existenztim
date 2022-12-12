@@ -6,7 +6,7 @@ import './style/style.scss';
 import data from './script/storage';
 
 const diceButton = document.querySelector('#dice');
-const counts = document.querySelector('.counter span');
+const counts = document.querySelectorAll('.counter span');
 const rolls = document.querySelector('#rolled span');
 const info = document.querySelector('#info span');
 const PlayerCardsdisplay = document.querySelector('#player');
@@ -59,7 +59,6 @@ const pickMysteryCards = () => {
 };
 
 gameCards = data.suspectsArray.concat(data.weaponsArray, data.roomsArray); // Combine remaining cards into one array
-console.log(gameCards[1].name);
 
 /**
  *Hand out 3 cards to the players.
@@ -165,7 +164,9 @@ const checkNumber = (random: number) => {
   }
   count += 1;
   if (counts != null) {
-    counts.textContent = String(count);
+    for (let i = 0; i < counts.length; i++) {
+      counts[i].textContent = String(count);
+    }
   }
 
   console.log(count);
@@ -243,6 +244,7 @@ pickPlayerCards(computer1CardsArray);
 pickPlayerCards(computer2CardsArray);
 selectRandomStartingRoom();
 renderCardMarkup();
+
 // only for development
 // if (suspect !== null && weapon !== null && room !== null) {
 //   console.log('Solutuion ->', suspect.name, weapon.name, room.name);
