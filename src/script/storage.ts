@@ -134,4 +134,5 @@ const roomsArray = [
   townSquare,
   elementarySchool,
 ];
+
 export default { suspectsArray, weaponsArray, roomsArray };

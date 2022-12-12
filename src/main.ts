@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import './style/style.scss';
 
@@ -6,37 +7,41 @@ import data from './script/storage';
 
 // const containerRoom = document.querySelector('.container-room');
 const diceButton = document.querySelector('#dice');
-const counts = document.querySelector('#counter span');
+const counts = document.querySelector('.counter span');
 const rolls = document.querySelector('#rolled span');
 const info = document.querySelector('#info span');
-
+const PlayerCardsdisplay = document.querySelector('#player');
 const getRoomId = document.querySelectorAll('[class^=room]');
 const guessBtn = document.querySelector('#guess');
-
+const mainPage = document.querySelector('main');
+const resultSection = document.querySelector('#result');
+const resultText = document.querySelector('#accuse-reveal');
+const solutionDisplay = document.querySelector('#solution');
 const accuse = document.querySelector('#accuse');
+resultSection?.classList.toggle('hidden');
+
 const accusedSuspect = <HTMLInputElement>document.querySelector('#suspects');
-const accusedWeapon = <HTMLInputElement>document.querySelector('#locations');
-const accusedRoom = <HTMLInputElement>document.querySelector('#weapon');
+const accusedWeapon = <HTMLInputElement>document.querySelector('#weapon');
+const accusedRoom = <HTMLInputElement>document.querySelector('#locations');
 // const computer1Card = document.querySelector('#computer1');
 // const computer2Card = document.querySelector('#computer2');
 
 let guess = false;
 let startingRoom = null;
-let suspect = null;
-let weapon = null;
-let room = null;
+let suspect: { name: string; } | null = null;
+let weapon: { name: string; } | null = null;
+let room: { name: string; className?: string; } | null = null;
 let playerCards = null;
 let gameCards: any[] = [];
 const playerCardsArray: any[] = [];
-const computer1CardsArray: any[] = [];
-const computer2CardsArray: any[] = [];
-
+const computer1CardsArray: Array<object>[] = [];
+const computer2CardsArray: Array<object>[] = [];
 let randomDiceNumber = 0;
 let count = 0;
-
 /**
  *Draws a random card from each array and add to solution.
  */
+
 const pickMysteryCards = () => {
   suspect = data.suspectsArray[Math.floor(Math.random() * data.suspectsArray.length)];
   const suspectIndex: number = data.suspectsArray.indexOf(suspect);
@@ -50,18 +55,17 @@ const pickMysteryCards = () => {
   const roomIndex: number = data.weaponsArray.indexOf(room);
   data.roomsArray.splice(roomIndex, 1);
 
-  // return { suspect, weapon, room };
+  return { suspect, weapon, room };
 };
 
-pickMysteryCards();
-
 gameCards = data.suspectsArray.concat(data.weaponsArray, data.roomsArray); // Combine remaining cards into one array
+console.log(gameCards[1].name);
 
 /**
  *Hand out 3 cards to the players.
  */
 
-const pickPlayerCards = (arrayName: any[]) => {
+const pickPlayerCards = (arrayName: unknown[]) => {
   for (let i = 0; i < 3; i += 1) {
     playerCards = gameCards[Math.floor(Math.random() * gameCards.length)];
     const cardIndex: number = gameCards.indexOf(playerCards);
@@ -69,10 +73,6 @@ const pickPlayerCards = (arrayName: any[]) => {
     gameCards.splice(cardIndex, 1);
   }
 };
-
-pickPlayerCards(playerCardsArray);
-pickPlayerCards(computer1CardsArray);
-pickPlayerCards(computer2CardsArray);
 
 /**
  * Generate a starting location for player
@@ -113,15 +113,15 @@ const selectRandomStartingRoom = () => {
       break;
   }
 };
-selectRandomStartingRoom();
 
 /**
  *Toggle accusation button depending on roll/player has moved.
  */
 
-const makeAccusation = () => {
-  if (guess) {
+const makeGuess = () => {
+  if (guess && guessBtn !== null) {
     guessBtn?.classList.add('active-btn');
+    guessBtn.innerHTML = 'Guess function not implemented, work in progress!';
   } else {
     guessBtn?.classList.remove('active-btn');
   }
@@ -142,7 +142,7 @@ function makeRoomActive(e: any) {
     }
   });
   randomDiceNumber = 0; // So you can only move once per round.
-  makeAccusation();
+  makeGuess();
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
   checkNumber(randomDiceNumber);
 }
@@ -190,8 +190,6 @@ const generateRandomNumber = () => {
 };
 diceButton?.addEventListener('click', generateRandomNumber);
 
-// console.log('Solutuion ->', suspect.name, weapon.name, room.name);
-
 console.log(playerCardsArray);
 console.log(computer1CardsArray);
 console.log(computer2CardsArray);
@@ -203,26 +201,49 @@ console.log(computer2CardsArray);
 const renderCardMarkup = () => {
   let cartItemsToRender = '';
   const cardElement = /* html */ `
-      <div class ="card">${playerCardsArray[0].name}</div>
-      <div class ="card">${playerCardsArray[1].name}</div>
-      <div class ="card">${playerCardsArray[2].name}</div>`;
+      <div class ="card">${playerCardsArray[0].name as string}</div>
+      <div class ="card">${playerCardsArray[1].name as string}</div>
+      <div class ="card">${playerCardsArray[2].name as string}</div>`;
   cartItemsToRender += cardElement;
-
-  document.querySelector('#player').innerHTML = cartItemsToRender;
+  if (PlayerCardsdisplay !== null) {
+    PlayerCardsdisplay.innerHTML = cartItemsToRender;
+  }
 };
-renderCardMarkup();
-
-// document.querySelector('button').onclick = guess;
-
 /**
  *Accuse Suspect and compare solution to accusation.
  */
-
-function accuseCompare() {
-  if (accusedSuspect !== null) {
-    console.log(accusedSuspect.value);
-    console.log(accusedWeapon.value);
-    console.log(accusedRoom.value);
+const accuseCompare = () => {
+  if (suspect !== null && weapon !== null && room !== null && resultText !== null && solutionDisplay !== null) {
+    if (
+      (accusedSuspect.value === suspect.name)
+    && (accusedWeapon.value === weapon.name)
+    && (accusedRoom.value === room.name)
+    ) {
+      mainPage?.classList.toggle('tot-hidden');
+      resultSection?.classList.toggle('hidden');
+      resultText.innerHTML = 'You win!';
+      solutionDisplay.innerHTML = `${suspect.name} killed Mr Burns at ${room.name} with a ${weapon.name}!`;
+      console.log('you win!');
+    } else {
+      mainPage?.classList.toggle('tot-hidden');
+      resultSection?.classList.toggle('hidden');
+      resultText.innerHTML = 'You loose!';
+      solutionDisplay.innerHTML = `${suspect.name} killed Mr Burns at ${room.name} with a ${weapon.name}!`;
+      console.log('you loose!');
+    }
   }
-}
+};
+
 accuse?.addEventListener('click', accuseCompare);
+
+// Run initial functions
+pickMysteryCards();
+pickPlayerCards(playerCardsArray);
+pickPlayerCards(computer1CardsArray);
+pickPlayerCards(computer2CardsArray);
+selectRandomStartingRoom();
+renderCardMarkup();
+// only for development
+// if (suspect !== null && weapon !== null && room !== null) {
+//   console.log('Solutuion ->', suspect.name, weapon.name, room.name);
+// }
