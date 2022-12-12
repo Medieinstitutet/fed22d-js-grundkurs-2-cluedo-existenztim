@@ -1,18 +1,122 @@
 <!DOCTYPE html>
-<html lang="en"> <!-- TODO: glöm ej att byta språk här -->
+<html lang="en"> 
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/ico" href="/js-template/favicon.ico" />
+    <link rel="icon" type="image/ico" href="/fed22d-js-grundkurs-2-cluedo-existenztim/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Projekt</title>
-    <script type="module" crossorigin src="/js-template/assets/index.c8953495.js"></script>
-    <link rel="stylesheet" href="/js-template/assets/index.09951560.css">
+
+    <title>Cluedo - Simpsons Version</title>
+    <script type="module" crossorigin src="/fed22d-js-grundkurs-2-cluedo-existenztim/assets/index.7ef0dcd9.js"></script>
+    <link rel="stylesheet" href="/fed22d-js-grundkurs-2-cluedo-existenztim/assets/index.d5f15d7e.css">
   </head>
   <body>
     <main>
-      <div class="app" id="app"></div> <!-- TODO: går bra att radera -->
-      <!-- TODO: skriv din kod här, innan script-taggen -->
+      <h1>Cluedo - Simpsons Version</h1>
+      <header id="guess-accuse-options">
+
+        <!-- <h3>What's your solution?</h3> -->
+        <section class ="suspect-container">
+          <label for="suspects">Suspect:</label>
+          <select name="suspects" id="suspects">
+            <option value="none" selected disabled hidden>Select an Option</option>
+            <option value="Ned Flanders">Ned Flanders</option>
+            <option value="Sideshow Bob">Sideshow Bob</option>
+            <option value="Edna Krabappel">Edna Krabappel</option>
+            <option value="Krusty The Clown">Krusty The Clown</option>
+            <option value="Agnes Skinner">Agnes Skinner</option>
+            <option value="Helen Lovejoy">Helen Lovejoy</option>
+          </select>
+        </section>
+  
+        <section class ="locations-container">
+          <label for="locations">Location:</label>
+          <select name="locations" id="locations">
+            <option value="none" selected disabled hidden>Select an Option</option>
+            <option value="Krusty Burger">Krusty Burger</option>
+            <option value="Moes Tavern">Moes Tavern</option>
+            <option value="Town Hall">Town Hall</option>
+            <option value="Burns Manor">Burns Manor</option>
+            <option value="Simpsons House">Simpsons House</option>
+            <option value="Kwik-E-Mart">Kwik-E-Mart</option>
+            <option value="Nuclear Power Plant">Nuclear Power Plant</option>
+            <option value="Town Square">Town Square</option>
+            <option value="Elementary School">Elementary School</option>
+          </select>
+        </section>
+  
+        <section class ="weapons-container">
+          <label for="weapon">Weapon:</label>
+          <select name="weapon" id="weapon">
+            <option value="none" selected disabled hidden>Select an Option</option>
+            <option value="rope">Rope</option>
+            <option value="revolver">Revolver</option>
+            <option value="candlestick">Candlestick</option>
+            <option value="knife">Knife</option>
+            <option value="wrench">Wrench</option>
+            <option value="baseball bat">Baseball Bat</option>
+          </select>
+        </section>
+        <!-- <button id="submit-accuse">Submit</button> -->
+      </header>
+      <section class ="button-infobar">
+        <div id = "info"><span>Roll the dice!</span></div>
+        <button id="guess">Guess</button>
+        <button id="accuse" class ="active-btn">Accuse</button>
+      </section>
+      <section class="container-room">
+        <div id="game-hub">
+          <button id = "dice" class ="active-btn">Roll Dice</button>
+          <div id ="rolled"><span></span></div>
+          <div class="counter">Rounds: <span>0</span></div>
+        </div>
+        <button id="room-krusty-burger" class="room">Krusty Burger</button>
+        <button id="room-moes-tavern" class="room">Moe's Tavern</button>
+        <button id="room-town-hall" class="room">Town Hall</button>
+        <button id="room-burns-manor" class="room">Burns Manor</button>
+        <button id="room-simpsons-house" class="room">Simpsons House</button>
+        <button id="room-kwik-e-mart" class="room">Kwik-E-Mart</button>
+        <button id="room-nuclear-power-plant" class="room">Nuclear Power Plant</button>
+        <button id="room-town-square" class="room">Town Square</button>
+        <button id="room-elementary-school" class="room">Elementary School</button>
+    </section>
+
+    <section class="player-cards">
+      <div class ="card-wrapper">
+        <h2>Bart's Cards</h2>
+        <div id ="computer1" class ="cards">
+          <div class ="card">?</div>
+          <div class ="card">?</div>
+          <div class ="card">?</div>
+        </div>
+      </div>
+      <div class ="card-wrapper">
+        <h2>Your Cards</h2>
+        <div id ="player" class ="cards">
+          <div class ="card">Card info</div>
+          <div class ="card">Card info</div>
+          <div class ="card">Card info</div>
+        </div>
+      </div>
+      <div class ="card-wrapper">
+        <h2>Lizas's Cards</h2>
+        <div id ="computer2" class ="cards">
+          <div class ="card">?</div>
+          <div class ="card">?</div>
+          <div class ="card">?</div>
+        </div>
+      </div>
+    </section>
     </main>
+    <aside>
+      <section id ="result">
+        <div id="accuse-reveal">win or loose?</div>
+        <div id="solution">Who, where, with what?</div>
+        <div class="counter">You played a total of: <span>0</span> rounds</div>
+      </section>
+    </aside>
 
     <!-- TODO
     - Validera HTML (kopiera den renderade HTML-koden): https://validator.w3.org/#validate_by_input
