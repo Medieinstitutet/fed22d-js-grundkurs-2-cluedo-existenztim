@@ -17,7 +17,7 @@
 
         <!-- <h3>What's your solution?</h3> -->
         <section class ="suspect-container">
-          <label for="suspects">Accuse suspect:</label>
+          <label for="suspects">Suspect:</label>
           <select name="suspects" id="suspects">
             <option value="none" selected disabled hidden>Select an Option</option>
             <option value="Ned Flanders">Ned Flanders</option>
@@ -30,7 +30,7 @@
         </section>
   
         <section class ="locations-container">
-          <label for="locations">Accuse location:</label>
+          <label for="locations">Location:</label>
           <select name="locations" id="locations">
             <option value="none" selected disabled hidden>Select an Option</option>
             <option value="Krusty Burger">Krusty Burger</option>
@@ -46,7 +46,7 @@
         </section>
   
         <section class ="weapons-container">
-          <label for="weapon">Accuse weapon:</label>
+          <label for="weapon">Weapon:</label>
           <select name="weapon" id="weapon">
             <option value="none" selected disabled hidden>Select an Option</option>
             <option value="rope">Rope</option>
@@ -57,7 +57,7 @@
             <option value="baseball bat">Baseball Bat</option>
           </select>
         </section>
-        <button id="submit-accuse">Submit</button>
+        <!-- <button id="submit-accuse">Submit</button> -->
       </header>
       <section class ="button-infobar">
         <div id = "info"><span>Roll the dice!</span></div>
@@ -111,7 +111,8 @@
     <aside>
       <section id ="result">
         <div id="accuse-reveal">win or loose?</div>
-        <div class="counter">Rounds: <span>0</span></div>
+        <div id="solution">Who, where, with what?</div>
+        <div class="counter">You played a total of: <span>0</span> rounds</div>
       </section>
     </aside>
 
