@@ -18,6 +18,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-size-adjust: 100%;
+  text-shadow: 1px 1px 2px black;
 }
 
 .hidden {
@@ -31,10 +32,10 @@
 main {
   padding: 20px;
   text-align: center;
-  // background-image: url("/public/img/simpsonsbg.png");
-  // background-repeat: no-repeat;
-  // background-size: cover;
-  // background-attachment: fixed;
+  background-image: url("/public/img/simpsonsbg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
   height: 100vh;
 
   button.active-btn {
