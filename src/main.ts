@@ -5,7 +5,6 @@ import './style/style.scss';
 // Data contains all the arrays needed for the game
 import data from './script/storage';
 
-// const containerRoom = document.querySelector('.container-room');
 const diceButton = document.querySelector('#dice');
 const counts = document.querySelector('.counter span');
 const rolls = document.querySelector('#rolled span');
@@ -38,6 +37,7 @@ const computer1CardsArray: Array<object>[] = [];
 const computer2CardsArray: Array<object>[] = [];
 let randomDiceNumber = 0;
 let count = 0;
+
 /**
  *Draws a random card from each array and add to solution.
  */
