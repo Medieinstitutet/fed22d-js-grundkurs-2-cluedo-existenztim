@@ -6,7 +6,7 @@ import './style/style.scss';
 import data from './script/storage';
 
 const diceButton = document.querySelector('#dice');
-const counts = document.querySelector('.counter span');
+const counts = document.querySelectorAll('.counter span');
 const rolls = document.querySelector('#rolled span');
 const info = document.querySelector('#info span');
 const PlayerCardsdisplay = document.querySelector('#player');
@@ -16,7 +16,7 @@ const mainPage = document.querySelector('main');
 const resultSection = document.querySelector('#result');
 const resultText = document.querySelector('#accuse-reveal');
 const solutionDisplay = document.querySelector('#solution');
-const accuse = document.querySelector('#accuse');
+const accuseBtn = document.querySelector('#accuse');
 resultSection?.classList.toggle('hidden');
 
 const accusedSuspect = <HTMLInputElement>document.querySelector('#suspects');
@@ -33,8 +33,8 @@ let room: { name: string; className?: string; } | null = null;
 let playerCards = null;
 let gameCards: any[] = [];
 const playerCardsArray: any[] = [];
-const computer1CardsArray: Array<object>[] = [];
-const computer2CardsArray: Array<object>[] = [];
+const computer1CardsArray: any[] = [];
+const computer2CardsArray: any[] = [];
 let randomDiceNumber = 0;
 let count = 0;
 
@@ -115,15 +115,38 @@ const selectRandomStartingRoom = () => {
 };
 
 /**
+ *Guess Suspect and reveal oponents cards if it's a match.
+ */
+
+const guessCompare = () => {
+  let matchString = 0;
+  if (info !== null) {
+    for (let i = 0; i < computer1CardsArray.length; i++) {
+      console.log(computer1CardsArray[i].name);
+      if (accusedSuspect.value === computer1CardsArray[i].name
+      || accusedWeapon.value === computer1CardsArray[i].name
+      || accusedRoom.value === computer1CardsArray[i].name) {
+        console.log('we found a match!');
+        matchString += 1;
+      }
+    }
+    info.textContent = `Your guess resulted in ${matchString}/3 matches!`;
+  }
+  console.log(accusedSuspect.value);
+  guessBtn?.removeEventListener('click', guessCompare);
+  guessBtn?.classList.remove('active-btn');
+};
+
+/**
  *Toggle accusation button depending on roll/player has moved.
  */
 
 const makeGuess = () => {
   if (guess && guessBtn !== null) {
     guessBtn?.classList.add('active-btn');
-    guessBtn.innerHTML = 'Guess function not implemented, work in progress!';
   } else {
     guessBtn?.classList.remove('active-btn');
+    guessBtn?.removeEventListener('click', guessCompare);
   }
 };
 
@@ -132,6 +155,7 @@ const makeGuess = () => {
  */
 
 function makeRoomActive(e: any) {
+  guessBtn?.addEventListener('click', guessCompare);
   getRoomId.forEach((roomSelected) => {
     if (roomSelected.getAttribute('id') === e.currentTarget.id && info !== null) {
       roomSelected.classList.add('active');
@@ -165,7 +189,9 @@ const checkNumber = (random: number) => {
   }
   count += 1;
   if (counts != null) {
-    counts.textContent = String(count);
+    for (let i = 0; i < counts.length; i++) {
+      counts[i].textContent = String(count);
+    }
   }
 
   console.log(count);
@@ -195,7 +221,7 @@ console.log(computer1CardsArray);
 console.log(computer2CardsArray);
 
 /**
- *Generate HTML for player card. //might change to loop
+ *Generate HTML for player card. //might change to loop and pass arguments so any array can apply to this
  */
 
 const renderCardMarkup = () => {
@@ -209,9 +235,11 @@ const renderCardMarkup = () => {
     PlayerCardsdisplay.innerHTML = cartItemsToRender;
   }
 };
+
 /**
  *Accuse Suspect and compare solution to accusation.
  */
+
 const accuseCompare = () => {
   if (suspect !== null && weapon !== null && room !== null && resultText !== null && solutionDisplay !== null) {
     if (
@@ -234,7 +262,7 @@ const accuseCompare = () => {
   }
 };
 
-accuse?.addEventListener('click', accuseCompare);
+accuseBtn?.addEventListener('click', accuseCompare);
 
 // Run initial functions
 pickMysteryCards();
