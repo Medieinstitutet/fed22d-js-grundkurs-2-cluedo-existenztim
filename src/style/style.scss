@@ -5,6 +5,7 @@
 @use "components/result";
 @import "abstracts/colors";
 
+
 :root {
   font-family: "Press Start 2P", Avenir, Helvetica, Arial, sans-serif;
   font-size: rem(16px);
@@ -12,7 +13,7 @@
   font-weight: 400;
   color-scheme: light dark;
   color: $yellow;
-  background-color: $black;
+  background-color: #{$black};
   font-synthesis: none;
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
