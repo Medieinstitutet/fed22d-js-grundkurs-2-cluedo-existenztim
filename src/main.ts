@@ -66,7 +66,7 @@ console.log(gameCards[1].name);
  */
 
 const pickPlayerCards = (arrayName: unknown[]) => {
-  for (let i = 0; i < 3; i += 1) {
+  for (let i = 0; i < 6; i += 1) {
     playerCards = gameCards[Math.floor(Math.random() * gameCards.length)];
     const cardIndex: number = gameCards.indexOf(playerCards);
     arrayName.push(playerCards);
@@ -129,7 +129,7 @@ const guessCompare = () => {
         console.log('we found a match!');
         matchString += 1;
       }
-    }
+    } // add new loop for player 2 here
     info.textContent = `Your guess resulted in ${matchString}/3 matches!`;
   }
   console.log(accusedSuspect.value);
@@ -221,18 +221,19 @@ console.log(computer1CardsArray);
 console.log(computer2CardsArray);
 
 /**
- *Generate HTML for player card. //might change to loop and pass arguments so any array can apply to this
+ *Generate HTML for player card.
  */
 
 const renderCardMarkup = () => {
   let cartItemsToRender = '';
-  const cardElement = /* html */ `
-      <div class ="card">${playerCardsArray[0].name as string}</div>
-      <div class ="card">${playerCardsArray[1].name as string}</div>
-      <div class ="card">${playerCardsArray[2].name as string}</div>`;
-  cartItemsToRender += cardElement;
-  if (PlayerCardsdisplay !== null) {
-    PlayerCardsdisplay.innerHTML = cartItemsToRender;
+  // eslint-disable-next-line no-restricted-syntax
+  for (const card of playerCardsArray) {
+    const cardElement = /* html */ `
+      <li class ="card">${card.name as string}</div>`;
+    cartItemsToRender += cardElement;
+    if (PlayerCardsdisplay !== null) {
+      PlayerCardsdisplay.innerHTML = cartItemsToRender;
+    }
   }
 };
 
@@ -264,6 +265,16 @@ const accuseCompare = () => {
 
 accuseBtn?.addEventListener('click', accuseCompare);
 
+/**
+ *Hide computer cards display on default.
+ */
+// const hideComputerCards = () => {
+//   for (let i = 1; i < cardDeckDisplay.length; i++) {
+//     cardDeckDisplay[i].classList.toggle('tot-hidden');
+//     cardDeckDisplay[i].classList.toggle('card-wrapper');
+//   }
+// };
+
 // Run initial functions
 pickMysteryCards();
 pickPlayerCards(playerCardsArray);
@@ -271,6 +282,7 @@ pickPlayerCards(computer1CardsArray);
 pickPlayerCards(computer2CardsArray);
 selectRandomStartingRoom();
 renderCardMarkup();
+// hideComputerCards();
 // only for development
 // if (suspect !== null && weapon !== null && room !== null) {
 //   console.log('Solutuion ->', suspect.name, weapon.name, room.name);
