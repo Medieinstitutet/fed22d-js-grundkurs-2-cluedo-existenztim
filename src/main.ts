@@ -10,6 +10,7 @@ const counts = document.querySelectorAll('.counter span');
 const rolls = document.querySelector('#rolled span');
 const info = document.querySelector('#info span');
 const PlayerCardsdisplay = document.querySelector('#player');
+const ComputerCardsdisplay = document.querySelector('#computer1');
 const getRoomId = document.querySelectorAll('[class^=room]');
 const guessBtn = document.querySelector('#guess');
 const mainPage = document.querySelector('main');
@@ -25,6 +26,7 @@ const accusedRoom = <HTMLInputElement>document.querySelector('#locations');
 // const computer1Card = document.querySelector('#computer1');
 // const computer2Card = document.querySelector('#computer2');
 
+let cartItemsToRenderAi = '';
 let guess = false;
 let startingRoom = null;
 let suspect: { name: string; } | null = null;
@@ -115,7 +117,24 @@ const selectRandomStartingRoom = () => {
 };
 
 /**
- *Guess Suspect and reveal oponents cards if it's a match.
+ *Generate HTML for player card.
+ */
+
+const renderCardMarkup = () => {
+  let cartItemsToRender = '';
+  // eslint-disable-next-line no-restricted-syntax
+  for (const card of playerCardsArray) {
+    const cardElement = /* html */ `
+      <li class ="card">${card.name as string}</div>`;
+    cartItemsToRender += cardElement;
+    if (PlayerCardsdisplay !== null) {
+      PlayerCardsdisplay.innerHTML = cartItemsToRender;
+    }
+  }
+};
+
+/**
+ *Compare guess with AI cards and reveal if it's a match.
  */
 
 const guessCompare = () => {
@@ -126,8 +145,17 @@ const guessCompare = () => {
       if (accusedSuspect.value === computer1CardsArray[i].name
       || accusedWeapon.value === computer1CardsArray[i].name
       || accusedRoom.value === computer1CardsArray[i].name) {
+        const cardElement =/* html */ `
+        <li class ="card">${computer1CardsArray[i].name as string}</div>`;
+        cartItemsToRenderAi += cardElement;
         console.log('we found a match!');
         matchString += 1;
+        const matchIndex = i;
+        computer1CardsArray.splice(matchIndex, 1);
+        if (ComputerCardsdisplay !== null) {
+          ComputerCardsdisplay.innerHTML = cartItemsToRenderAi;
+        }
+        console.log(computer1CardsArray);
       }
     } // add new loop for player 2 here
     info.textContent = `Your guess resulted in ${matchString}/3 matches!`;
@@ -221,23 +249,6 @@ console.log(computer1CardsArray);
 console.log(computer2CardsArray);
 
 /**
- *Generate HTML for player card.
- */
-
-const renderCardMarkup = () => {
-  let cartItemsToRender = '';
-  // eslint-disable-next-line no-restricted-syntax
-  for (const card of playerCardsArray) {
-    const cardElement = /* html */ `
-      <li class ="card">${card.name as string}</div>`;
-    cartItemsToRender += cardElement;
-    if (PlayerCardsdisplay !== null) {
-      PlayerCardsdisplay.innerHTML = cartItemsToRender;
-    }
-  }
-};
-
-/**
  *Accuse Suspect and compare solution to accusation.
  */
 
@@ -265,16 +276,6 @@ const accuseCompare = () => {
 
 accuseBtn?.addEventListener('click', accuseCompare);
 
-/**
- *Hide computer cards display on default.
- */
-// const hideComputerCards = () => {
-//   for (let i = 1; i < cardDeckDisplay.length; i++) {
-//     cardDeckDisplay[i].classList.toggle('tot-hidden');
-//     cardDeckDisplay[i].classList.toggle('card-wrapper');
-//   }
-// };
-
 // Run initial functions
 pickMysteryCards();
 pickPlayerCards(playerCardsArray);
@@ -282,7 +283,7 @@ pickPlayerCards(computer1CardsArray);
 pickPlayerCards(computer2CardsArray);
 selectRandomStartingRoom();
 renderCardMarkup();
-// hideComputerCards();
+
 // only for development
 // if (suspect !== null && weapon !== null && room !== null) {
 //   console.log('Solutuion ->', suspect.name, weapon.name, room.name);
