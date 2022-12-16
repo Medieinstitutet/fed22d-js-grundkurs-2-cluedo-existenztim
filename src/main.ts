@@ -63,7 +63,6 @@ const pickMysteryCards = () => {
 };
 
 gameCards = data.suspectsArray.concat(data.weaponsArray, data.roomsArray); // Combine remaining cards into one array
-console.log(gameCards[1].name);
 
 /**
  *Hand out 3 cards to the players.
