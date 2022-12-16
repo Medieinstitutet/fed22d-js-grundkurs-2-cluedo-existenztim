@@ -10,7 +10,7 @@ const counts = document.querySelectorAll('.counter span');
 const rolls = document.querySelector('#rolled span');
 const info = document.querySelector('#info span');
 const PlayerCardsdisplay = document.querySelector('#player');
-const ComputerCardsdisplay = document.querySelector('#computer1');
+const ComputerCardsdisplay = document.querySelectorAll('.computer');
 const getRoomId = document.querySelectorAll('[class^=room]');
 const guessBtn = document.querySelector('#guess');
 const mainPage = document.querySelector('main');
@@ -26,7 +26,6 @@ const accusedRoom = <HTMLInputElement>document.querySelector('#locations');
 // const computer1Card = document.querySelector('#computer1');
 // const computer2Card = document.querySelector('#computer2');
 
-let cartItemsToRenderAi = '';
 let guess = false;
 let startingRoom = null;
 let suspect: { name: string; } | null = null;
@@ -37,8 +36,11 @@ let gameCards: any[] = [];
 const playerCardsArray: any[] = [];
 const computer1CardsArray: any[] = [];
 const computer2CardsArray: any[] = [];
+const computer1RevealArray: any[] = [];
+const computer2RevealArray: any[] = [];
 let randomDiceNumber = 0;
 let count = 0;
+let matchString = 0;
 
 /**
  *Draws a random card from each array and add to solution.
@@ -120,15 +122,16 @@ const selectRandomStartingRoom = () => {
  *Generate HTML for player card.
  */
 
-const renderCardMarkup = () => {
+const renderCardMarkup = (arrayToRender: any[], elementToDisplay: Element | null | undefined) => {
   let cartItemsToRender = '';
+  const element = elementToDisplay;
   // eslint-disable-next-line no-restricted-syntax
-  for (const card of playerCardsArray) {
+  for (const card of arrayToRender) {
     const cardElement = /* html */ `
       <li class ="card">${card.name as string}</div>`;
     cartItemsToRender += cardElement;
-    if (PlayerCardsdisplay !== null) {
-      PlayerCardsdisplay.innerHTML = cartItemsToRender;
+    if (element !== null && element !== undefined) {
+      element.innerHTML = cartItemsToRender;
     }
   }
 };
@@ -137,36 +140,62 @@ const renderCardMarkup = () => {
  *Compare guess with AI cards and reveal if it's a match.
  */
 
-const guessCompare = () => {
-  let matchString = 0;
+const guessCompare = (arrayName: any[]) => {
   if (info !== null) {
-    for (let i = 0; i < computer1CardsArray.length; i++) {
-      console.log(computer1CardsArray[i].name);
-      if (accusedSuspect.value === computer1CardsArray[i].name
-      || accusedWeapon.value === computer1CardsArray[i].name
-      || accusedRoom.value === computer1CardsArray[i].name) {
-        const cardElement =/* html */ `
-        <li class ="card">${computer1CardsArray[i].name as string}</div>`;
-        cartItemsToRenderAi += cardElement;
-        console.log('we found a match!');
+    for (let i = 0; i < arrayName.length; i++) {
+      if (accusedSuspect.value === arrayName[i].name
+      || accusedWeapon.value === arrayName[i].name
+      || accusedRoom.value === arrayName[i].name) {
         matchString += 1;
         const matchIndex = i;
-        computer1CardsArray.splice(matchIndex, 1);
-        if (ComputerCardsdisplay !== null) {
-          ComputerCardsdisplay.innerHTML = cartItemsToRenderAi;
+        const matchIndexTest = arrayName[i];
+
+        if (computer1RevealArray.length < 6) {
+          computer1RevealArray.push(matchIndexTest);
+        } else {
+          computer2RevealArray.push(matchIndexTest);
         }
-        console.log(computer1CardsArray);
+
+        arrayName.splice(matchIndex, 1);
+        i = 0; // fixes re-index after splice
+        // console.log(`array length! ${arrayName.length}`);
+        // console.log('array 1');
+        // console.log(computer1RevealArray);
+        // console.log(computer1CardsArray);
+        // console.log('array 2');
+        // console.log(computer2RevealArray);
+        // console.log(computer2CardsArray);
+        if (computer1RevealArray.length < 6) {
+          renderCardMarkup(computer1RevealArray, ComputerCardsdisplay[0]);
+        } else {
+          renderCardMarkup(computer2RevealArray, ComputerCardsdisplay[1]);
+        }
       }
-    } // add new loop for player 2 here
+    }
     info.textContent = `Your guess resulted in ${matchString}/3 matches!`;
   }
-  console.log(accusedSuspect.value);
-  guessBtn?.removeEventListener('click', guessCompare);
+};
+console.log(ComputerCardsdisplay.item(1));
+/**
+ *Setup for guessCompare().
+ */
+
+const guessCompareInit = () => {
+  matchString = 0;
+  // must guess right in barts cards first
+  if (computer1CardsArray.length !== 0) {
+    console.log('array 1 running');
+    guessCompare(computer1CardsArray);
+  } else {
+    console.log('array 2 running');
+    guessCompare(computer2CardsArray);
+  }
+  guessBtn?.removeEventListener('click', guessCompareInit);
   guessBtn?.classList.remove('active-btn');
 };
 
 /**
- *Toggle accusation button depending on roll/player has moved.
+ *Toggle accusation button depending on diceroll/player has moved.
  */
 
 const makeGuess = () => {
@@ -174,7 +203,7 @@ const makeGuess = () => {
     guessBtn?.classList.add('active-btn');
   } else {
     guessBtn?.classList.remove('active-btn');
-    guessBtn?.removeEventListener('click', guessCompare);
+    guessBtn?.removeEventListener('click', guessCompareInit);
   }
 };
 
@@ -183,7 +212,7 @@ const makeGuess = () => {
  */
 
 function makeRoomActive(e: any) {
-  guessBtn?.addEventListener('click', guessCompare);
+  guessBtn?.addEventListener('click', guessCompareInit);
   getRoomId.forEach((roomSelected) => {
     if (roomSelected.getAttribute('id') === e.currentTarget.id && info !== null) {
       roomSelected.classList.add('active');
@@ -282,7 +311,7 @@ pickPlayerCards(playerCardsArray);
 pickPlayerCards(computer1CardsArray);
 pickPlayerCards(computer2CardsArray);
 selectRandomStartingRoom();
-renderCardMarkup();
+renderCardMarkup(playerCardsArray, PlayerCardsdisplay);
 
 // only for development
 // if (suspect !== null && weapon !== null && room !== null) {
