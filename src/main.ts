@@ -16,15 +16,16 @@ const guessBtn = document.querySelector('#guess');
 const mainPage = document.querySelector('main');
 const resultSection = document.querySelector('#result');
 const resultText = document.querySelector('#accuse-reveal');
+const smallScreen = document.querySelector('#mobile');
 const solutionDisplay = document.querySelector('#solution');
 const accuseBtn = document.querySelector('#accuse');
+
 resultSection?.classList.toggle('hidden');
+smallScreen?.classList.toggle('tot-hidden');
 
 const accusedSuspect = <HTMLInputElement>document.querySelector('#suspects');
 const accusedWeapon = <HTMLInputElement>document.querySelector('#weapon');
 const accusedRoom = <HTMLInputElement>document.querySelector('#locations');
-// const computer1Card = document.querySelector('#computer1');
-// const computer2Card = document.querySelector('#computer2');
 
 let guess = false;
 let startingRoom = null;
@@ -65,7 +66,7 @@ const pickMysteryCards = () => {
 gameCards = data.suspectsArray.concat(data.weaponsArray, data.roomsArray); // Combine remaining cards into one array
 
 /**
- *Hand out 3 cards to the players.
+ *Hand out 6 cards to the players.
  */
 
 const pickPlayerCards = (arrayName: unknown[]) => {

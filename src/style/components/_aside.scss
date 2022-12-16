@@ -1,0 +1,16 @@
+ /*************************************************************************** 
+ *Result Screen, Mobilepopup and how to play.
+ ***************************************************************************/
+ aside {
+  display: flex;
+  justify-content: center;
+
+  #result, #mobile {
+    position: fixed;
+    top: 50%;
+    text-align: center;
+    z-index: 3;
+    background-color: #242424;
+  }  
+ }
+
