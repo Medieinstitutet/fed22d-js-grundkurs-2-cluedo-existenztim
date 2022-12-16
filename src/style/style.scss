@@ -3,7 +3,10 @@
 @use "components/cards";
 @use "components/guess";
 @use "components/result";
-@import "abstracts/colors";
+$black: #242424;
+$grey: #747481;
+$white: #f7f4f2;
+$yellow: #FFD90F;
 
 :root {
   font-family: "Press Start 2P", Avenir, Helvetica, Arial, sans-serif;
@@ -56,7 +59,7 @@ main {
     grid-auto-flow: row;
     max-width: 1000px;
     margin: auto;
-    height: 45vh;
+    height: 40vh;
     /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
     grid-template-areas:
       "moes-tavern town-hall burns-manor"
