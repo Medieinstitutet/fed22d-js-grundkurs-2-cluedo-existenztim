@@ -6,6 +6,7 @@
 $black: #242424;
 $grey: #747481;
 $white: #f7f4f2;
+$blue: #2f64d6;
 $yellow: #FFD90F;
 
 :root {
@@ -63,6 +64,7 @@ body {
       max-width: 1000px;
       margin: auto;
       height: 40vh;
+      max-height: 400px;
       /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
       grid-template-areas:
         "moes-tavern town-hall burns-manor"
@@ -146,7 +148,7 @@ body {
     display: block;
   }
   
-  main {
+  main, #result, #help-toggle, #help {
     display: none;
   }
 }
