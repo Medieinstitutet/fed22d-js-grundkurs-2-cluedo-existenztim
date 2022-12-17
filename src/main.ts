@@ -22,6 +22,7 @@ const solutionDisplay = document.querySelector('#solution');
 const guessBtn = <HTMLButtonElement>document.querySelector('#guess');
 const accuseBtn = <HTMLButtonElement>document.querySelector('#accuse');
 const helpBtn = <HTMLButtonElement>document.querySelector('#help-toggle');
+const playAgainBtn = <HTMLButtonElement>document.querySelector('#play-again');
 
 resultSection?.classList.toggle('hidden');
 helpSection?.classList.toggle('tot-hidden');
@@ -133,7 +134,7 @@ const renderCardMarkup = (arrayToRender: any[], elementToDisplay: Element | null
   for (const card of arrayToRender) {
     const cardElement = /* html */ `
       <li class ="card">${card.name as string}
-      <img src = ${card.imgPath as string}></div>`;
+      <img src = ${card.imgPath as string} alt ="An icon explaining what category the card belong to"></div>`;
     cartItemsToRender += cardElement;
     if (element !== null && element !== undefined) {
       element.innerHTML = cartItemsToRender;
@@ -317,6 +318,11 @@ const accuseCompare = () => {
   }
 };
 
+const refreshPage = () => {
+  window.location.reload();
+};
+
+playAgainBtn?.addEventListener('click', refreshPage);
 diceButton?.addEventListener('click', generateRandomNumber);
 helpBtn?.addEventListener('click', helpToggle);
 accuseBtn?.addEventListener('click', accuseCompare);
