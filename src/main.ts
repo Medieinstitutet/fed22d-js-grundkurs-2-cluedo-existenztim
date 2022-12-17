@@ -21,6 +21,7 @@ const smallScreen = document.querySelector('#mobile');
 const solutionDisplay = document.querySelector('#solution');
 
 const guessBtn = <HTMLButtonElement>document.querySelector('#guess');
+const highScoreBtn = <HTMLButtonElement>document.querySelector('#high-score-toggle');
 const accuseBtn = <HTMLButtonElement>document.querySelector('#accuse');
 const helpBtn = <HTMLButtonElement>document.querySelector('#help-toggle');
 const playAgainBtn = <HTMLButtonElement>document.querySelector('#play-again');
@@ -136,7 +137,7 @@ const renderCardMarkup = (arrayToRender: any[], elementToDisplay: Element | null
   for (const card of arrayToRender) {
     const cardElement = /* html */ `
       <li class ="card">${card.name as string}
-      <img src = ${card.imgPath as string} alt ="An icon explaining what category the card belong to"></div>`;
+      <img src = ${card.imgPath as string}><li>`;
     cartItemsToRender += cardElement;
     if (element !== null && element !== undefined) {
       element.innerHTML = cartItemsToRender;
@@ -221,11 +222,32 @@ const makeGuess = () => {
 const helpToggle = () => {
   if (helpBtn !== null && helpSection !== null && mainPage !== null) {
     helpSection.classList.toggle('tot-hidden');
+    highScoreBtn.classList.toggle('tot-hidden');
     mainPage.classList.toggle('tot-hidden');
     if (helpBtn.innerHTML === 'Return') {
       helpBtn.innerHTML = 'HELP!';
     } else {
       helpBtn.innerHTML = 'Return';
+    }
+  }
+};
+
+/**
+ *Toggle visibility for highscore.
+ */
+
+const highScoreToggle = () => {
+  console.log('test');
+  if (highScoreBtn !== null && highScoreSection !== null && mainPage !== null) {
+    highScoreSection.classList.toggle('tot-hidden');
+    helpBtn.classList.toggle('tot-hidden');
+    mainPage.classList.toggle('tot-hidden');
+    if (highScoreBtn.innerHTML === 'Return') {
+      highScoreBtn.style.right = '120px';
+      highScoreBtn.innerHTML = 'Highscore';
+    } else {
+      highScoreBtn.style.right = '10px';
+      highScoreBtn.innerHTML = 'Return';
     }
   }
 };
@@ -329,9 +351,11 @@ const refreshPage = () => {
   window.location.reload();
 };
 
+// Add event listeners to buttons
 playAgainBtn?.addEventListener('click', refreshPage);
 diceButton?.addEventListener('click', generateRandomNumber);
 helpBtn?.addEventListener('click', helpToggle);
+highScoreBtn?.addEventListener('click', highScoreToggle);
 accuseBtn?.addEventListener('click', accuseCompare);
 
 // Run initial functions
