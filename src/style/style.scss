@@ -2,10 +2,12 @@
 @use "vendor/reset";
 @use "components/cards";
 @use "components/guess";
-@use "components/result";
+@use "components/aside";
+
 $black: #242424;
 $grey: #747481;
 $white: #f7f4f2;
+$blue: #2f64d6;
 $yellow: #FFD90F;
 
 :root {
@@ -21,7 +23,7 @@ $yellow: #FFD90F;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-size-adjust: 100%;
-  text-shadow: 1px 1px 2px black;
+  text-shadow: 1px 1px 2px $black;
   background-image: url("/public/img/simpsonsbg.png");
   background-repeat: no-repeat;
   background-size: cover;
@@ -29,111 +31,132 @@ $yellow: #FFD90F;
 }
 
 .hidden {
-  visibility: hidden; //for now, we stil want it to take up space.
+  visibility: hidden;
 }
 
 .tot-hidden {
   display: none;
 }
 
-main {
-  padding: 20px;
-  text-align: center;
-  height: 100vh;
+body {
+  // cursor: url('/public/img/icons8-homer-simpson.svg'),auto;
 
-  button.active-btn {
-    background-color: green;
+  main {
+    padding: 20px;
+    text-align: center;
+    height: 100vh;
 
-  }
+    button.active-btn {
+      background-color: green;
 
-  button {
-    cursor: pointer;
-    padding: 0.5rem;
-    margin: 0.5rem;
-  }
+    }
 
-  .container-room {  display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 0.5fr 0.5fr 1fr;
-    gap: 0 0;
-    grid-auto-flow: row;
-    max-width: 1000px;
-    margin: auto;
-    height: 40vh;
-    /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
-    grid-template-areas:
-      "moes-tavern town-hall burns-manor"
-      "krusty-burger game-hub simpsons-house"
-      "krusty-burger game-hub kwik-e-mart"
-      "elementary-school town-square nuclear-power-plant";
+    select {
+      background-color: $blue;
+      box-shadow: rgba(0 0 10%) 0 2px 4px, rgba(0 0 30%) 0 7px 13px -3px, rgb(43 43 44) 0 -3px 0 inset;
+    }
 
-      button[class*='room']{
-        border: 1px solid black;
-        background-color: $grey;
-        box-shadow: rgba(0 0 10%) 0 2px 4px, rgba(0 0 30%) 0 7px 13px -3px, rgb(43 43 44) 0 -3px 0 inset;
-      }
+    button {
+      cursor: pointer;
+      padding: 0.5rem;
+      margin: 0.5rem;
+      border-radius: 5%;
+    }
 
-      button[class*='room']:hover{
-        background-color: $yellow;
-      }
+    .container-room {  display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 0.5fr 0.5fr 1fr;
+      gap: 0 0;
+      grid-auto-flow: row;
+      max-width: 1000px;
+      margin: auto;
+      height: 40vh;
+      max-height: 400px;
+      /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
+      grid-template-areas:
+        "moes-tavern town-hall burns-manor"
+        "krusty-burger game-hub simpsons-house"
+        "krusty-burger game-hub kwik-e-mart"
+        "elementary-school town-square nuclear-power-plant";
 
-      #game-hub { 
-        grid-area: game-hub; 
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-      
-      #room-krusty-burger { 
-        grid-area: krusty-burger; 
-      }
-      
-      #room-moes-tavern { 
-        grid-area: moes-tavern; 
-      }
-      
-      #room-town-square { 
-        grid-area: town-square; 
-      }
-      
-      #room-burns-manor { 
-        grid-area: burns-manor; 
-      }
-      
-      #room-simpsons-house { 
-        grid-area: simpsons-house; 
-      } 
-      
-      #room-kwik-e-mart { 
-        grid-area: kwik-e-mart; 
-      } 
-      
-      #room-nuclear-power-plant { 
-        grid-area: nuclear-power-plant; 
-      }
-      
-      #room-hall { 
-        grid-area: hall; 
-      }
-      
-      #room-elementary-school { 
-        grid-area: elementary-school; 
-      }
-
-      .room.active {
-        position: relative;
-
-        &::before {
-          content: url("/public/img/icons8-homer-simpson.svg");
-          display: flex;
-          font-size: 2rem;
-          z-index: 1;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
+        button[class*='room']{
+          border: 1px solid black;
+          background-color: $blue;
+          color: $white;
+          box-shadow: rgba(0 0 10%) 0 2px 4px, rgba(0 0 30%) 0 7px 13px -3px, rgb(43 43 44) 0 -3px 0 inset;
         }
-      }
+
+        button[class*='room']:hover{
+          background-color: $yellow;
+        }
+
+        #game-hub { 
+          grid-area: game-hub; 
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+        
+        #room-krusty-burger { 
+          grid-area: krusty-burger; 
+        }
+        
+        #room-moes-tavern { 
+          grid-area: moes-tavern; 
+        }
+        
+        #room-town-square { 
+          grid-area: town-square; 
+        }
+        
+        #room-burns-manor { 
+          grid-area: burns-manor; 
+        }
+        
+        #room-simpsons-house { 
+          grid-area: simpsons-house; 
+        } 
+        
+        #room-kwik-e-mart { 
+          grid-area: kwik-e-mart; 
+        } 
+        
+        #room-nuclear-power-plant { 
+          grid-area: nuclear-power-plant; 
+        }
+        
+        #room-hall { 
+          grid-area: hall; 
+        }
+        
+        #room-elementary-school { 
+          grid-area: elementary-school; 
+        }
+
+        .room.active {
+          position: relative;
+
+          &::before {
+            content: url("/public/img/icons8-homer-simpson.svg");
+            display: flex;
+            font-size: 2rem;
+            z-index: 1;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
+        }
+    }
+  }
+}
+@media screen and (max-width: 850px) {
+  #mobile {
+    display: block;
+  }
+  
+  main, #result, #help-toggle, #help {
+    display: none;
   }
 }

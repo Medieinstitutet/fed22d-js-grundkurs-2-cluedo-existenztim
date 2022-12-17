@@ -12,25 +12,31 @@ const info = document.querySelector('#info span');
 const PlayerCardsdisplay = document.querySelector('#player');
 const ComputerCardsdisplay = document.querySelectorAll('.computer');
 const getRoomId = document.querySelectorAll('[class^=room]');
-const guessBtn = document.querySelector('#guess');
 const mainPage = document.querySelector('main');
 const resultSection = document.querySelector('#result');
+const helpSection = document.querySelector('#help');
 const resultText = document.querySelector('#accuse-reveal');
+const smallScreen = document.querySelector('#mobile');
 const solutionDisplay = document.querySelector('#solution');
-const accuseBtn = document.querySelector('#accuse');
+
+const guessBtn = <HTMLButtonElement>document.querySelector('#guess');
+const accuseBtn = <HTMLButtonElement>document.querySelector('#accuse');
+const helpBtn = <HTMLButtonElement>document.querySelector('#help-toggle');
+const playAgainBtn = <HTMLButtonElement>document.querySelector('#play-again');
+
 resultSection?.classList.toggle('hidden');
+helpSection?.classList.toggle('tot-hidden');
+smallScreen?.classList.toggle('tot-hidden');
 
 const accusedSuspect = <HTMLInputElement>document.querySelector('#suspects');
 const accusedWeapon = <HTMLInputElement>document.querySelector('#weapon');
 const accusedRoom = <HTMLInputElement>document.querySelector('#locations');
-// const computer1Card = document.querySelector('#computer1');
-// const computer2Card = document.querySelector('#computer2');
 
 let guess = false;
 let startingRoom = null;
-let suspect: { name: string; } | null = null;
-let weapon: { name: string; } | null = null;
-let room: { name: string; className?: string; } | null = null;
+let suspect: { name: string; imgPath: string; } | null = null;
+let weapon: { name: string; imgPath: string; } | null = null;
+let room: { name: string; className?: string; imgPath: string; } | null = null;
 let playerCards = null;
 let gameCards: any[] = [];
 const playerCardsArray: any[] = [];
@@ -65,7 +71,7 @@ const pickMysteryCards = () => {
 gameCards = data.suspectsArray.concat(data.weaponsArray, data.roomsArray); // Combine remaining cards into one array
 
 /**
- *Hand out 3 cards to the players.
+ *Hand out 6 cards to the players.
  */
 
 const pickPlayerCards = (arrayName: unknown[]) => {
@@ -127,7 +133,8 @@ const renderCardMarkup = (arrayToRender: any[], elementToDisplay: Element | null
   // eslint-disable-next-line no-restricted-syntax
   for (const card of arrayToRender) {
     const cardElement = /* html */ `
-      <li class ="card">${card.name as string}</div>`;
+      <li class ="card">${card.name as string}
+      <img src = ${card.imgPath as string} alt ="An icon explaining what category the card belong to"></div>`;
     cartItemsToRender += cardElement;
     if (element !== null && element !== undefined) {
       element.innerHTML = cartItemsToRender;
@@ -174,15 +181,14 @@ const guessCompare = (arrayName: any[]) => {
     info.textContent = `Your guess resulted in ${matchString}/3 matches!`;
   }
 };
-console.log(ComputerCardsdisplay.item(1));
+
 /**
  *Setup for guessCompare().
  */
 
 const guessCompareInit = () => {
   matchString = 0;
-  // must guess right in barts cards first
-  if (computer1CardsArray.length !== 0) {
+  if (computer1CardsArray.length !== 0) { // must guess right on barts cards first
     console.log('array 1 running');
     guessCompare(computer1CardsArray);
   } else {
@@ -194,7 +200,7 @@ const guessCompareInit = () => {
 };
 
 /**
- *Toggle accusation button depending on diceroll/player has moved.
+ *Toggle guess button depending on diceroll/player has moved.
  */
 
 const makeGuess = () => {
@@ -203,6 +209,22 @@ const makeGuess = () => {
   } else {
     guessBtn?.classList.remove('active-btn');
     guessBtn?.removeEventListener('click', guessCompareInit);
+  }
+};
+
+/**
+ *Toggle visibility for help window.
+ */
+
+const helpToggle = () => {
+  if (helpBtn !== null && helpSection !== null && mainPage !== null) {
+    helpSection.classList.toggle('tot-hidden');
+    mainPage.classList.toggle('tot-hidden');
+    if (helpBtn.innerHTML === 'Return') {
+      helpBtn.innerHTML = 'HELP!';
+    } else {
+      helpBtn.innerHTML = 'Return';
+    }
   }
 };
 
@@ -270,7 +292,6 @@ const generateRandomNumber = () => {
   guessBtn?.classList.remove('active-btn'); // You can only guess if you have moved.
   checkNumber(randomDiceNumber);
 };
-diceButton?.addEventListener('click', generateRandomNumber);
 
 console.log(playerCardsArray);
 console.log(computer1CardsArray);
@@ -281,27 +302,34 @@ console.log(computer2CardsArray);
  */
 
 const accuseCompare = () => {
-  if (suspect !== null && weapon !== null && room !== null && resultText !== null && solutionDisplay !== null) {
+  if (suspect !== null && weapon !== null && room !== null
+    && resultText !== null && solutionDisplay !== null
+    && helpSection !== null) {
     if (
       (accusedSuspect.value === suspect.name)
     && (accusedWeapon.value === weapon.name)
     && (accusedRoom.value === room.name)
     ) {
-      mainPage?.classList.toggle('tot-hidden');
-      resultSection?.classList.toggle('hidden');
       resultText.innerHTML = 'You win!';
-      solutionDisplay.innerHTML = `${suspect.name} killed Mr Burns at ${room.name} with a ${weapon.name}!`;
-      console.log('you win!');
     } else {
-      mainPage?.classList.toggle('tot-hidden');
-      resultSection?.classList.toggle('hidden');
       resultText.innerHTML = 'You loose!';
-      solutionDisplay.innerHTML = `${suspect.name} killed Mr Burns at ${room.name} with a ${weapon.name}!`;
-      console.log('you loose!');
     }
+
+    helpBtn.classList.add('tot-hidden');
+    helpSection.classList.add('tot-hidden');
+    mainPage?.classList.toggle('tot-hidden');
+    resultSection?.classList.toggle('hidden');
+    solutionDisplay.innerHTML = `${suspect.name} killed Mr Burns at ${room.name} with a ${weapon.name}!`;
   }
 };
 
+const refreshPage = () => {
+  window.location.reload();
+};
+
+playAgainBtn?.addEventListener('click', refreshPage);
+diceButton?.addEventListener('click', generateRandomNumber);
+helpBtn?.addEventListener('click', helpToggle);
 accuseBtn?.addEventListener('click', accuseCompare);
 
 // Run initial functions

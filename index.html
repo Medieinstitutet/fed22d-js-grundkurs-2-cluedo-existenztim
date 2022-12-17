@@ -28,7 +28,6 @@
             <option value="Helen Lovejoy">Helen Lovejoy</option>
           </select>
         </section>
-  
         <section class ="locations-container">
           <label for="locations">Location:</label>
           <select name="locations" id="locations">
@@ -59,69 +58,101 @@
         </section>
         <!-- <button id="submit-accuse">Submit</button> -->
       </header>
-      <section class ="button-infobar">
-        <div id = "info"><span>Roll the dice!</span></div>
-        <button id="guess">Guess</button>
-        <button id="accuse" class ="active-btn">Accuse</button>
+        <section class ="button-infobar">
+          <div id = "info"><span>Roll the dice!</span></div>
+          <button id="guess">Guess</button>
+          <button id="accuse" class ="active-btn">Accuse</button>
+        </section>
+        <section class="container-room">
+          <div id="game-hub">
+            <button id = "dice" class ="active-btn">Roll Dice</button>
+            <div id ="rolled"><span></span></div>
+            <div class="counter">Rounds: <span>0</span></div>
+          </div>
+          <button id="room-krusty-burger" class="room">Krusty Burger</button>
+          <button id="room-moes-tavern" class="room">Moe's Tavern</button>
+          <button id="room-town-hall" class="room">Town Hall</button>
+          <button id="room-burns-manor" class="room">Burns Manor</button>
+          <button id="room-simpsons-house" class="room">Simpsons House</button>
+          <button id="room-kwik-e-mart" class="room">Kwik-E-Mart</button>
+          <button id="room-nuclear-power-plant" class="room">Nuclear Power Plant</button>
+          <button id="room-town-square" class="room">Town Square</button>
+          <button id="room-elementary-school" class="room">Elementary School</button>
       </section>
-      <section class="container-room">
-        <div id="game-hub">
-          <button id = "dice" class ="active-btn">Roll Dice</button>
-          <div id ="rolled"><span></span></div>
-          <div class="counter">Rounds: <span>0</span></div>
-        </div>
-        <button id="room-krusty-burger" class="room">Krusty Burger</button>
-        <button id="room-moes-tavern" class="room">Moe's Tavern</button>
-        <button id="room-town-hall" class="room">Town Hall</button>
-        <button id="room-burns-manor" class="room">Burns Manor</button>
-        <button id="room-simpsons-house" class="room">Simpsons House</button>
-        <button id="room-kwik-e-mart" class="room">Kwik-E-Mart</button>
-        <button id="room-nuclear-power-plant" class="room">Nuclear Power Plant</button>
-        <button id="room-town-square" class="room">Town Square</button>
-        <button id="room-elementary-school" class="room">Elementary School</button>
-    </section>
 
-    <section class="player-cards">
-      <div class ="card-wrapper">
-        <h3>Barts Card</h3>
-        <ul id ="computer1" class ="cards computer">
-          <li class ="card">???</li>
-        </ul>
-      </div>
-      <div class ="card-wrapper">
-        <h3>Your Cards</h3>
-        <ul id ="player" class ="cards">
-          <li class ="card">Card info</li>
-        </ul>
-      </div>
-      <div class ="card-wrapper">
-        <h3>Lizas Cards</h3>
-        <ul id ="computer2" class ="cards computer">
-          <li class ="card">???</li>
-        </ul>
-      </div>
-      
- 
-      
-      <!-- <div class ="card-wrapper">
-        <h3>Bart's Cards</h3>
-        <div id ="computer1" class ="cards">
-          <div class ="card">?</div>
+      <section class="player-cards">
+        <div class ="card-wrapper">
+          <h3>Barts Card</h3>
+          <ul id ="computer1" class ="cards computer">
+            <li class ="card">???</li>
+          </ul>
         </div>
-      </div>
-      <div class ="card-wrapper">
-        <h3>Lizas's Cards</h3>
-        <div id ="computer2" class ="cards">
-          <div class ="card">?</div>
+        <div class ="card-wrapper">
+          <h3>Your Cards</h3>
+          <ul id ="player" class ="cards">
+            <li class ="card">Card info</li>
+          </ul>
         </div>
-      </div> -->
-    </section>
+        <div class ="card-wrapper">
+          <h3>Lizas Cards</h3>
+          <ul id ="computer2" class ="cards computer">
+            <li class ="card">???</li>
+          </ul>
+        </div>
+      </section>
     </main>
+
     <aside>
       <section id ="result">
         <div id="accuse-reveal">win or loose?</div>
         <div id="solution">Who, where, with what?</div>
         <div class="counter">You played a total of: <span>0</span> rounds</div>
+        <button id ="play-again">Play again?</button>
+      </section>
+
+      <section id ="mobile">
+        <div>I'm sorry, this game is meant to be played on a computer screen.</div>
+      </section>
+      <button id ="help-toggle">HELP!</button>
+      <section id ="help">
+        <h3>Mr Burns has been killed!</h3>
+        <div>Can you figure out the solution?</div>
+        <div>How to play :</div>
+        <ul>
+          <li>Cards
+            <ul>
+              <li>There is a total of 21 cards.</li>
+              <li>3 of these cards are part of the solution to this crime.</li>
+              <li>One <strong>suspect</strong>, one <strong>location</strong>, one <strong>weapon</strong>.</li>
+              <li>The remaining 18 cards are evenly distributed among the players.</li>
+              <li>In this game you play with the AI Bart and Liza</li>
+           </ul>
+         </li>
+          <li>Roll Dice
+            <ul>
+              <li>Rolls over 3 -> Move to another room.</li>
+              <li>You may now guess your oponents cards based on what you filled in<br> 
+                in the drop down fields.</li>
+              <li>Rolls below 3 -> You are stuck.</li>
+              <li>Simply end the turn by rolling the dice again.</li>
+            </ul>
+          </li>
+          <li>Guess
+            <ul>
+              <li>You always have to guess the cards of your opponent to your left.</li>
+              <li>Once all their cards are revealed you can continue to guess your next<br> 
+                opponents cards (clockwise).</li>
+              <li>You can only guess once per turn.</li>
+            </ul>
+          </li>
+          <li>Accuse
+            <ul>
+              <li>Accuse is your final solution, and uses the same drop down field as Guess.</li>
+              <li>An accusation will end the game and reveal the truth.</li>
+              <li>You can always make an accusation, no matter what you roll.</li>
+            </ul>
+          </li>
+        </ul>
       </section>
     </aside>
 
