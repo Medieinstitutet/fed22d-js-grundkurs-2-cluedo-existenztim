@@ -3,6 +3,7 @@
 @use "components/cards";
 @use "components/guess";
 @use "components/aside";
+
 $black: #242424;
 $grey: #747481;
 $white: #f7f4f2;
@@ -50,6 +51,11 @@ body {
 
     }
 
+    select {
+      background-color: $blue;
+      box-shadow: rgba(0 0 10%) 0 2px 4px, rgba(0 0 30%) 0 7px 13px -3px, rgb(43 43 44) 0 -3px 0 inset;
+    }
+
     button {
       cursor: pointer;
       padding: 0.5rem;
@@ -74,7 +80,8 @@ body {
 
         button[class*='room']{
           border: 1px solid black;
-          background-color: $grey;
+          background-color: $blue;
+          color: $white;
           box-shadow: rgba(0 0 10%) 0 2px 4px, rgba(0 0 30%) 0 7px 13px -3px, rgb(43 43 44) 0 -3px 0 inset;
         }
 

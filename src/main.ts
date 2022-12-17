@@ -33,9 +33,9 @@ const accusedRoom = <HTMLInputElement>document.querySelector('#locations');
 
 let guess = false;
 let startingRoom = null;
-let suspect: { name: string; } | null = null;
-let weapon: { name: string; } | null = null;
-let room: { name: string; className?: string; } | null = null;
+let suspect: { name: string; imgPath: string; } | null = null;
+let weapon: { name: string; imgPath: string; } | null = null;
+let room: { name: string; className?: string; imgPath: string; } | null = null;
 let playerCards = null;
 let gameCards: any[] = [];
 const playerCardsArray: any[] = [];
@@ -132,7 +132,8 @@ const renderCardMarkup = (arrayToRender: any[], elementToDisplay: Element | null
   // eslint-disable-next-line no-restricted-syntax
   for (const card of arrayToRender) {
     const cardElement = /* html */ `
-      <li class ="card">${card.name as string}</div>`;
+      <li class ="card">${card.name as string}
+      <img src = ${card.imgPath as string}></div>`;
     cartItemsToRender += cardElement;
     if (element !== null && element !== undefined) {
       element.innerHTML = cartItemsToRender;
