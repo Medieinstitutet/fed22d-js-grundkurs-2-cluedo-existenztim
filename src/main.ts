@@ -15,6 +15,7 @@ const getRoomId = document.querySelectorAll('[class^=room]');
 const mainPage = document.querySelector('main');
 const resultSection = document.querySelector('#result');
 const helpSection = document.querySelector('#help');
+const highScoreSection = document.querySelector('#high-score');
 const resultText = document.querySelector('#accuse-reveal');
 const smallScreen = document.querySelector('#mobile');
 const solutionDisplay = document.querySelector('#solution');
@@ -26,6 +27,7 @@ const playAgainBtn = <HTMLButtonElement>document.querySelector('#play-again');
 
 resultSection?.classList.toggle('hidden');
 helpSection?.classList.toggle('tot-hidden');
+highScoreSection?.classList.toggle('tot-hidden');
 smallScreen?.classList.toggle('tot-hidden');
 
 const accusedSuspect = <HTMLInputElement>document.querySelector('#suspects');
