@@ -220,6 +220,11 @@ const helpToggle = () => {
   if (helpBtn !== null && helpSection !== null && mainPage !== null) {
     helpSection.classList.toggle('tot-hidden');
     mainPage.classList.toggle('tot-hidden');
+    if (helpBtn.innerHTML === 'Return') {
+      helpBtn.innerHTML = 'HELP!';
+    } else {
+      helpBtn.innerHTML = 'Return';
+    }
   }
 };
 
