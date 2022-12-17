@@ -5,11 +5,15 @@
   display: flex;
   justify-content: center;
 
-  #help-toggle {
+  #help-toggle, #high-score-toggle {
     position: fixed;
     top: 10px;
     right: 10px;
     cursor: pointer;
+  }
+
+  #high-score-toggle {
+    right: 120px;
   }
 
   #result, #mobile {

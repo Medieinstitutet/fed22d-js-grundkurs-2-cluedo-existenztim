@@ -10,6 +10,16 @@ header {
     display: flex;
     flex-direction: column;
     margin: 1rem;
+    
+    label {
+      position: relative;
+
+      span {
+        position: absolute;
+        right: 65px;
+        bottom: 5px;
+      }
+    }
   }
 
   h3 {
