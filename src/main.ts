@@ -325,23 +325,23 @@ console.log(computer2CardsArray);
  *Initial highscore.
  */
 
-const checkHighscores = () => {
-  const userName = 'tim';
-  localStorage.setItem('myName', `${userName}`);
-  localStorage.setItem('rounds', `${count}`);
-  const currentRounds = localStorage.getItem('rounds');
-  if (currentRounds !== null) {
-    const currentRoundsConverted = parseInt(currentRounds, 10);
-    const newItem = {
-      name: localStorage.getItem('myName'),
-      rounds: `${currentRoundsConverted}`,
-    };
-    // if (newItem.name !== null) {
-    //   data.highScoresArray.push(newItem);
-    //   console.log(data.highScoresArray);
-    // }
-  }
-};
+// const checkHighscores = () => {
+//   const userName = 'tim';
+//   localStorage.setItem('myName', `${userName}`);
+//   localStorage.setItem('rounds', `${count}`);
+//   const currentRounds = localStorage.getItem('rounds');
+//   if (currentRounds !== null) {
+//     const currentRoundsConverted = parseInt(currentRounds, 10);
+//     const newItem = {
+//       name: localStorage.getItem('myName'),
+//       rounds: `${currentRoundsConverted}`,
+//     };
+// if (newItem.name !== null) {
+//   data.highScoresArray.push(newItem);
+//   console.log(data.highScoresArray);
+// }
+//   }
+// };
 
 /**
  *Accuse Suspect and compare solution to accusation.
@@ -377,7 +377,7 @@ const accuseCompare = () => {
     mainPage?.classList.toggle('tot-hidden');
     resultSection?.classList.toggle('hidden');
   }
-  checkHighscores();
+  // checkHighscores();
 };
 
 const refreshPage = () => {
