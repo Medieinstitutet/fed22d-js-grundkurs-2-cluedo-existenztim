@@ -100,39 +100,39 @@ body {
           align-items: center;
         }
         
-        #room-krusty-burger { 
+        button:nth-child(2) { 
           grid-area: krusty-burger; 
         }
         
-        #room-moes-tavern { 
+        button:nth-child(3) { 
           grid-area: moes-tavern; 
         }
-        
-        #room-town-square { 
-          grid-area: town-square; 
+
+        button:nth-child(4) { 
+          grid-area: town-hall; 
         }
         
-        #room-burns-manor { 
+        button:nth-child(5) { 
           grid-area: burns-manor; 
         }
         
-        #room-simpsons-house { 
+        button:nth-child(6) { 
           grid-area: simpsons-house; 
         } 
         
-        #room-kwik-e-mart { 
+        button:nth-child(7) { 
           grid-area: kwik-e-mart; 
         } 
         
-        #room-nuclear-power-plant { 
+        button:nth-child(8) { 
           grid-area: nuclear-power-plant; 
         }
-        
-        #room-hall { 
-          grid-area: hall; 
+
+        button:nth-child(9) { 
+          grid-area: town-square; 
         }
         
-        #room-elementary-school { 
+        button:nth-child(10) { 
           grid-area: elementary-school; 
         }
 
@@ -154,12 +154,12 @@ body {
   }
 }
 
-@media screen and (max-width: 850px) {
-  #mobile {
+@media screen and (max-width: 950px) {
+  .mobile {
     display: block;
   }
   
-  main, #result, #help-toggle, #help {
+  main, .result, .corner-buttons, .corner-buttons-contents {
     display: none;
   }
 }

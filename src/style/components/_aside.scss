@@ -5,18 +5,18 @@
   display: flex;
   justify-content: center;
 
-  #help-toggle, #high-score-toggle {
+  .corner-buttons button {
     position: fixed;
     top: 10px;
     right: 10px;
     cursor: pointer;
   }
 
-  #high-score-toggle {
+  .corner-buttons button:nth-child(1) {
     right: 120px;
   }
 
-  #result, #mobile {
+  .result, .mobile {
     position: fixed;
     padding: 0.5rem;
     top: 50%;
@@ -26,7 +26,7 @@
     box-shadow: rgba(0 0 10%) 0 2px 4px, rgba(0 0 30%) 0 7px 13px -3px, rgb(43 43 44) 0 -3px 0 inset;
   }  
 
-  #help, #high-score {
+  .corner-buttons-contents {
     position: fixed;
     padding: 0.5rem;
     top: 50%;

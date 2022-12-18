@@ -37,9 +37,9 @@ const accusedRoom = <HTMLInputElement>document.querySelector('#locations');
 
 let guess = false;
 let startingRoom = null;
-let suspect: { name: string; imgPath: string; } | null = null;
-let weapon: { name: string; imgPath: string; } | null = null;
-let room: { name: string; className?: string; imgPath: string; } | null = null;
+let suspect: { name: string; className: string; imgPath: string; } | null = null;
+let weapon: { name: string; className: string; imgPath: string; } | null = null;
+let room: { name: string; className: string; imgPath: string; } | null = null;
 let playerCards = null;
 let gameCards: any[] = [];
 const playerCardsArray: any[] = [];
@@ -152,9 +152,9 @@ const renderCardMarkup = (arrayToRender: any[], elementToDisplay: Element | null
 const guessCompare = (arrayName: any[]) => {
   if (info !== null) {
     for (let i = 0; i < arrayName.length; i++) {
-      if (accusedSuspect.value === arrayName[i].name
-      || accusedWeapon.value === arrayName[i].name
-      || accusedRoom.value === arrayName[i].name) {
+      if (accusedSuspect.value === arrayName[i].className
+      || accusedWeapon.value === arrayName[i].className
+      || accusedRoom.value === arrayName[i].className) {
         matchString += 1;
         const matchIndex = i;
         const matchIndexTest = arrayName[i];
@@ -308,10 +308,10 @@ const generateRandomNumber = () => {
 
   if (randomDiceNumber > 3 && rolls !== null && info !== null) {
     rolls.textContent = `You rolled a ${randomDiceNumber}!`;
-    info.textContent = 'You may move to another location!';
+    info.textContent = 'Woho! You may move to another location!';
   } else if (randomDiceNumber <= 3 && rolls !== null && info !== null) {
     rolls.textContent = `You rolled a ${randomDiceNumber}!`;
-    info.textContent = ' You are stuck!';
+    info.textContent = ' D"oh! You are stuck!';
   }
   guessBtn?.classList.remove('active-btn'); // You can only guess if you have moved.
   checkNumber(randomDiceNumber);
@@ -322,6 +322,28 @@ console.log(computer1CardsArray);
 console.log(computer2CardsArray);
 
 /**
+ *Initial highscore.
+ */
+
+const checkHighscores = () => {
+  const userName = 'tim';
+  localStorage.setItem('myName', `${userName}`);
+  localStorage.setItem('rounds', `${count}`);
+  const currentRounds = localStorage.getItem('rounds');
+  if (currentRounds !== null) {
+    const currentRoundsConverted = parseInt(currentRounds, 10);
+    const newItem = {
+      name: localStorage.getItem('myName'),
+      rounds: `${currentRoundsConverted}`,
+    };
+    // if (newItem.name !== null) {
+    //   data.highScoresArray.push(newItem);
+    //   console.log(data.highScoresArray);
+    // }
+  }
+};
+
+/**
  *Accuse Suspect and compare solution to accusation.
  */
 
@@ -329,22 +351,33 @@ const accuseCompare = () => {
   if (suspect !== null && weapon !== null && room !== null
     && resultText !== null && solutionDisplay !== null
     && helpSection !== null) {
+    const suspectValueString = accusedSuspect.value.replaceAll('-', ' ');
+    const roomValueString = accusedRoom.value.replaceAll('-', ' ');
+    const weaponValueString = accusedWeapon.value.replaceAll('-', ' ');
+
+    solutionDisplay.innerHTML = `Your accused ${suspectValueString} for killing Mr Burns at 
+      ${roomValueString} with a ${weaponValueString}.<br><br>`;
     if (
-      (accusedSuspect.value === suspect.name)
-    && (accusedWeapon.value === weapon.name)
-    && (accusedRoom.value === room.name)
+      (accusedSuspect.value === suspect.className)
+    && (accusedWeapon.value === weapon.className)
+    && (accusedRoom.value === room.className)
     ) {
       resultText.innerHTML = 'You win!';
+      solutionDisplay.innerHTML += `Chief Wiggum will take over from here, ${suspect.name} will
+      be taken into custody.`;
     } else {
       resultText.innerHTML = 'You loose!';
+      solutionDisplay.innerHTML += ` The truth is that ${suspect.name} killed Mr Burns at ${room.name} 
+      with a ${weapon.name}!`;
     }
 
+    highScoreBtn.classList.add('tot-hidden');
     helpBtn.classList.add('tot-hidden');
     helpSection.classList.add('tot-hidden');
     mainPage?.classList.toggle('tot-hidden');
     resultSection?.classList.toggle('hidden');
-    solutionDisplay.innerHTML = `${suspect.name} killed Mr Burns at ${room.name} with a ${weapon.name}!`;
   }
+  checkHighscores();
 };
 
 const refreshPage = () => {

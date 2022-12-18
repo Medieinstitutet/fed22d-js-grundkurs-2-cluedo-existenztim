@@ -16,57 +16,57 @@
       <header id="guess-accuse-options">
 
         <!-- <h3>What's your solution?</h3> -->
-        <section class ="suspect-container">
-          <label for="suspects">Suspect:<span><img src="/img/person.png"></span></label>
+        <section class="suspect-container">
+          <label for="suspects">Suspect:<span><img src="/img/person.png" alt="A burgler representing the suspect category"></span></label>
           <select name="suspects" id="suspects">
             <option value="none" selected disabled hidden>Select an Option</option>
-            <option value="Ned Flanders">Ned Flanders</option>
-            <option value="Sideshow Bob">Sideshow Bob</option>
-            <option value="Edna Krabappel">Edna Krabappel</option>
-            <option value="Krusty The Clown">Krusty The Clown</option>
-            <option value="Agnes Skinner">Agnes Skinner</option>
-            <option value="Helen Lovejoy">Helen Lovejoy</option>
+            <option value="ned-flanders">Ned Flanders</option>
+            <option value="sideshow-bob">Sideshow Bob</option>
+            <option value="edna-krabappel">Edna Krabappel</option>
+            <option value="krusty-the-clown">Krusty The Clown</option>
+            <option value="agnes-skinner">Agnes Skinner</option>
+            <option value="helen-lovejoy">Helen Lovejoy</option>
           </select>
         </section>
-        <section class ="locations-container">
-          <label for="locations">Location:<span><img src="/img/map.png"></span></label>
+        <section class="locations-container">
+          <label for="locations">Location:<span><img src="/img/map.png" alt="A map representing the location category"></span></label>
           <select name="locations" id="locations">
-            <option value="none" selected disabled hidden>Select an Option</option>
-            <option value="Krusty Burger">Krusty Burger</option>
-            <option value="Moes Tavern">Moes Tavern</option>
-            <option value="Town Hall">Town Hall</option>
-            <option value="Burns Manor">Burns Manor</option>
-            <option value="Simpsons House">Simpsons House</option>
-            <option value="Kwik-E-Mart">Kwik-E-Mart</option>
-            <option value="Nuclear Power Plant">Nuclear Power Plant</option>
-            <option value="Town Square">Town Square</option>
-            <option value="Elementary School">Elementary School</option>
+            <option value="nowhere" selected disabled hidden>Select an Option</option>
+            <option value="krusty-burger">Krusty Burger</option>
+            <option value="moes-tavern">Moes Tavern</option>
+            <option value="town-hall">Town Hall</option>
+            <option value="burns-manor">Burns Manor</option>
+            <option value="simpsons-house">Simpsons House</option>
+            <option value="kwik-e-mart">Kwik-E-Mart</option>
+            <option value="nuclear-power-plant">Nuclear Power Plant</option>
+            <option value="town-square">Town Square</option>
+            <option value="elementary-school">Elementary School</option>
           </select>
         </section>
   
-        <section class ="weapons-container">
-          <label for="weapon">Weapon:<span><img src="/img/sword.png"></span></label>
+        <section class="weapons-container">
+          <label for="weapon">Weapon:<span><img src="/img/sword.png" alt="A sword representing the weapon category" ></span></label>
           <select name="weapon" id="weapon">
-            <option value="none" selected disabled hidden>Select an Option</option>
+            <option value="nothing" selected disabled hidden>Select an Option</option>
             <option value="rope">Rope</option>
             <option value="revolver">Revolver</option>
             <option value="candlestick">Candlestick</option>
             <option value="knife">Knife</option>
             <option value="wrench">Wrench</option>
-            <option value="baseball bat">Baseball Bat</option>
+            <option value="baseball-bat">Baseball Bat</option>
           </select>
         </section>
         <!-- <button id="submit-accuse">Submit</button> -->
       </header>
-        <section class ="button-infobar">
-          <div id = "info"><span>Roll the dice!</span></div>
+        <section class="button-infobar">
+          <div id= "info"><span>Roll the dice!</span></div>
           <button id="guess">Guess</button>
-          <button id="accuse" class ="active-btn">Accuse</button>
+          <button id="accuse" class="active-btn">Accuse</button>
         </section>
         <section class="container-room">
           <div id="game-hub">
-            <button id = "dice" class ="active-btn">Roll Dice</button>
-            <div id ="rolled"><span></span></div>
+            <button id= "dice" class="active-btn">Roll Dice</button>
+            <div id="rolled"><span></span></div>
             <div class="counter">Rounds: <span>0</span></div>
           </div>
           <button id="room-krusty-burger" class="room">Krusty Burger</button>
@@ -81,43 +81,43 @@
       </section>
 
       <section class="player-cards">
-        <div class ="card-wrapper">
+        <div class="card-wrapper">
           <h3>Barts Card</h3>
-          <ul id ="computer1" class ="cards computer">
-            <li class ="card">???</li>
+          <ul id="computer1" class="cards computer">
+            <li class="card">???</li>
           </ul>
         </div>
-        <div class ="card-wrapper">
+        <div class="card-wrapper">
           <h3>Your Cards</h3>
-          <ul id ="player" class ="cards">
-            <li class ="card">Card info</li>
+          <ul id="player" class="cards">
+            <li class="card">Card info</li>
           </ul>
         </div>
-        <div class ="card-wrapper">
+        <div class="card-wrapper">
           <h3>Lizas Cards</h3>
-          <ul id ="computer2" class ="cards computer">
-            <li class ="card">???</li>
+          <ul id="computer2" class="cards computer">
+            <li class="card">???</li>
           </ul>
         </div>
       </section>
     </main>
 
     <aside>
-      <section id ="result">
+      <section id="result" class="result">
         <div id="accuse-reveal">win or loose?</div>
         <div id="solution">Who, where, with what?</div>
         <div class="counter">You played a total of: <span>0</span> rounds</div>
-        <button id ="play-again">Play again?</button>
+        <button id="play-again">Play again?</button>
       </section>
 
-      <section id ="mobile">
+      <section id="mobile" class="mobile">
         <div>I'm sorry, this game is meant to be played on a computer screen.</div>
       </section>
-      <section id ="corner-buttons">
-        <button id ="high-score-toggle">Highscore</button>
-        <button id ="help-toggle">HELP!</button>
+      <section class="corner-buttons">
+        <button id="high-score-toggle">Highscore</button>
+        <button id="help-toggle">HELP!</button>
       </section>
-      <section id ="help">
+      <section id="help" class="corner-buttons-contents">
         <h3>Mr Burns has been killed!</h3>
         <div>Can you figure out the solution?</div>
         <div>How to play :</div>
@@ -128,7 +128,8 @@
               <li>3 of these cards are part of the solution to this crime.</li>
               <li>One <strong>suspect</strong>, one <strong>location</strong>, one <strong>weapon</strong>.</li>
               <li>The remaining 18 cards are evenly distributed among the players.</li>
-              <li>In this game you play with the AI Bart and Liza</li>
+              <li>These 18 cards is <strong>NOT</strong> part of the solution.</li>
+              <li>In this game you play with the AI <em>Bart</em> and <em>Liza</em>.</li>
            </ul>
          </li>
           <li>Roll Dice
@@ -158,7 +159,7 @@
         </ul>
       </section>
 
-      <section id ="high-score">
+      <section id="high-score" class="corner-buttons-contents">
         <table>
         <tr>
           <th>Name</th>
