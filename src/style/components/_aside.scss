@@ -16,17 +16,40 @@
     right: 120px;
   }
 
-  .result, .mobile {
+  .high-score {
+    background-color: #2f64d6;
+    box-shadow: rgba(0 0 10%) 0 2px 4px, rgba(0 0 30%) 0 7px 13px -3px, rgb(43 43 44) 0 -3px 0 inset;
+    position: fixed;
+    top: 10vh;
+    margin: auto;
+
+    table {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+
+      tr {
+        box-shadow: rgba(0  0 10%) 1px 3px 0, rgba(0 0 6%) 0 2px 0;
+
+        td {
+          padding: 1rem;
+        }
+      }
+
+    }
+  }
+
+  .result, .mobile, .intro {
     position: fixed;
     padding: 0.5rem;
-    top: 50%;
+    top: 45vh;
     text-align: center;
     z-index: 3;
     background-color: #2f64d6;
     box-shadow: rgba(0 0 10%) 0 2px 4px, rgba(0 0 30%) 0 7px 13px -3px, rgb(43 43 44) 0 -3px 0 inset;
   }  
 
-  .corner-buttons-contents {
+  .help {
     position: fixed;
     padding: 0.5rem;
     top: 50%;

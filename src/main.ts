@@ -13,9 +13,11 @@ const PlayerCardsdisplay = document.querySelector('#player');
 const ComputerCardsdisplay = document.querySelectorAll('.computer');
 const getRoomId = document.querySelectorAll('[class^=room]');
 const mainPage = document.querySelector('main');
+const nameInput = document.querySelector('.intro');
 const resultSection = document.querySelector('#result');
 const helpSection = document.querySelector('#help');
 const highScoreSection = document.querySelector('#high-score');
+const highScoreTable = document.querySelector('#high-score-table');
 const resultText = document.querySelector('#accuse-reveal');
 const smallScreen = document.querySelector('#mobile');
 const solutionDisplay = document.querySelector('#solution');
@@ -30,6 +32,7 @@ resultSection?.classList.toggle('hidden');
 helpSection?.classList.toggle('tot-hidden');
 highScoreSection?.classList.toggle('tot-hidden');
 smallScreen?.classList.toggle('tot-hidden');
+nameInput?.classList.toggle('tot-hidden');
 
 const accusedSuspect = <HTMLInputElement>document.querySelector('#suspects');
 const accusedWeapon = <HTMLInputElement>document.querySelector('#weapon');
@@ -129,16 +132,16 @@ const selectRandomStartingRoom = () => {
  */
 
 const renderCardMarkup = (arrayToRender: any[], elementToDisplay: Element | null | undefined) => {
-  let cartItemsToRender = '';
+  let cardItemsToRender = '';
   const element = elementToDisplay;
   // eslint-disable-next-line no-restricted-syntax
   for (const card of arrayToRender) {
     const cardElement = /* html */ `
       <li class ="card">${card.name as string}
       <img src = ${card.imgPath as string}><li>`;
-    cartItemsToRender += cardElement;
+    cardItemsToRender += cardElement;
     if (element !== null && element !== undefined) {
-      element.innerHTML = cartItemsToRender;
+      element.innerHTML = cardItemsToRender;
     }
   }
 };
@@ -149,7 +152,7 @@ const renderCardMarkup = (arrayToRender: any[], elementToDisplay: Element | null
 
 const guessCompare = (arrayName: any[]) => {
   if (info !== null) {
-    for (let i = 0; i < arrayName.length; i++) {
+    for (let i = arrayName.length - 1; i >= 0; i--) {
       if (accusedSuspect.value === arrayName[i].className
       || accusedWeapon.value === arrayName[i].className
       || accusedRoom.value === arrayName[i].className) {
@@ -158,16 +161,14 @@ const guessCompare = (arrayName: any[]) => {
 
         if (computer1RevealArray.length < 6) {
           computer1RevealArray.push(matchIndexTransfer);
-        } else {
-          computer2RevealArray.push(matchIndexTransfer);
-        }
-        arrayName.splice(i -= i, 1); // reduce "i" because splice messes with index iteration
-
-        if (computer1RevealArray.length < 6) {
           renderCardMarkup(computer1RevealArray, ComputerCardsdisplay[0]);
         } else {
+          computer2RevealArray.push(matchIndexTransfer);
           renderCardMarkup(computer2RevealArray, ComputerCardsdisplay[1]);
         }
+        console.log('test');
+        console.log(computer1RevealArray);
+        arrayName.splice(i, 1);
       }
     }
     info.textContent = `Your guess resulted in ${matchString}/3 matches!`;
@@ -250,7 +251,7 @@ function makeRoomActive(e: any) {
   getRoomId.forEach((roomSelected) => {
     if (roomSelected.getAttribute('id') === e.currentTarget.id && info !== null) {
       roomSelected.classList.add('active');
-      console.log(e);
+      // console.log(e);
       info.textContent = 'You may make a guess.';
     } else {
       roomSelected.classList.remove('active');
@@ -373,6 +374,27 @@ const refreshPage = () => {
   window.location.reload();
 };
 
+/**
+ *Generate HTML for highscore.
+ */
+
+const renderHighscore = () => {
+  let cardItemsToRender = '';
+  const element = highScoreTable;
+  // eslint-disable-next-line no-restricted-syntax
+  for (const card of data.highScoresArray) {
+    const cardElement = /* html */ `
+      <tr>
+      <td>${card.name}</td>
+      <td> ${card.rounds}</td>
+      </tr>`;
+    cardItemsToRender += cardElement;
+    if (element !== null && element !== undefined) {
+      element.innerHTML = cardItemsToRender;
+    }
+  }
+};
+
 // Add event listeners to buttons
 playAgainBtn?.addEventListener('click', refreshPage);
 diceButton?.addEventListener('click', generateRandomNumber);
@@ -386,6 +408,7 @@ pickPlayerCards(computer1CardsArray);
 pickPlayerCards(computer2CardsArray);
 selectRandomStartingRoom();
 renderCardMarkup(playerCardsArray, PlayerCardsdisplay);
+renderHighscore();
 
 // only for development
 // if (suspect !== null && weapon !== null && room !== null) {
