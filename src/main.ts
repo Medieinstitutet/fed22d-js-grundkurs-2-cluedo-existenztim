@@ -50,7 +50,6 @@ const computer2RevealArray: any[] = [];
 let randomDiceNumber = 0;
 let count = 0;
 let matchString = 0;
-
 /**
  *Draws a random card from each array and add to solution.
  */
@@ -58,20 +57,19 @@ let matchString = 0;
 const pickMysteryCards = () => {
   suspect = data.suspectsArray[Math.floor(Math.random() * data.suspectsArray.length)];
   const suspectIndex: number = data.suspectsArray.indexOf(suspect);
-  data.suspectsArray.splice(suspectIndex, 1);
+  data.suspectsArray.splice(suspectIndex, 1); // remove index so it can't be picked by players
 
   weapon = data.weaponsArray[Math.floor(Math.random() * data.weaponsArray.length)];
   const weaponIndex: number = data.weaponsArray.indexOf(weapon);
   data.weaponsArray.splice(weaponIndex, 1);
 
   room = data.roomsArray[Math.floor(Math.random() * data.roomsArray.length)];
-  const roomIndex: number = data.weaponsArray.indexOf(room);
+  const roomIndex: number = data.roomsArray.indexOf(room);
   data.roomsArray.splice(roomIndex, 1);
-
+  gameCards = data.suspectsArray.concat(data.weaponsArray, data.roomsArray); // Combine remaining cards into one array
   return { suspect, weapon, room };
 };
-
-gameCards = data.suspectsArray.concat(data.weaponsArray, data.roomsArray); // Combine remaining cards into one array
+pickMysteryCards();
 
 /**
  *Hand out 6 cards to the players.
@@ -156,24 +154,15 @@ const guessCompare = (arrayName: any[]) => {
       || accusedWeapon.value === arrayName[i].className
       || accusedRoom.value === arrayName[i].className) {
         matchString += 1;
-        const matchIndex = i;
-        const matchIndexTest = arrayName[i];
+        const matchIndexTransfer = arrayName[i];
 
         if (computer1RevealArray.length < 6) {
-          computer1RevealArray.push(matchIndexTest);
+          computer1RevealArray.push(matchIndexTransfer);
         } else {
-          computer2RevealArray.push(matchIndexTest);
+          computer2RevealArray.push(matchIndexTransfer);
         }
+        arrayName.splice(i -= i, 1); // reduce "i" because splice messes with index iteration
 
-        arrayName.splice(matchIndex, 1);
-        i = 0; // fixes re-index after splice
-        // console.log(`array length! ${arrayName.length}`);
-        // console.log('array 1');
-        // console.log(computer1RevealArray);
-        // console.log(computer1CardsArray);
-        // console.log('array 2');
-        // console.log(computer2RevealArray);
-        // console.log(computer2CardsArray);
         if (computer1RevealArray.length < 6) {
           renderCardMarkup(computer1RevealArray, ComputerCardsdisplay[0]);
         } else {
@@ -392,7 +381,6 @@ highScoreBtn?.addEventListener('click', highScoreToggle);
 accuseBtn?.addEventListener('click', accuseCompare);
 
 // Run initial functions
-pickMysteryCards();
 pickPlayerCards(playerCardsArray);
 pickPlayerCards(computer1CardsArray);
 pickPlayerCards(computer2CardsArray);
