@@ -9,8 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Cluedo - Simpsons Version</title>
-    <script type="module" crossorigin src="/fed22d-js-grundkurs-2-cluedo-existenztim/assets/index.db8d92bd.js"></script>
-    <link rel="stylesheet" href="/fed22d-js-grundkurs-2-cluedo-existenztim/assets/index.dc506a65.css">
+    <script type="module" crossorigin src="/fed22d-js-grundkurs-2-cluedo-existenztim/assets/index.9712b98c.js"></script>
+    <link rel="stylesheet" href="/fed22d-js-grundkurs-2-cluedo-existenztim/assets/index.5cf66ff9.css">
   </head>
   <body>
     <main>
@@ -105,6 +105,10 @@
     </main>
 
     <aside>
+      <section id="intro" class="intro">
+        <label for="nickname">Your name</label>
+        <input type="text" id="nickname" name="nickname">
+      </section>
       <section id="result" class="result">
         <div id="accuse-reveal">win or loose?</div>
         <div id="solution">Who, where, with what?</div>
@@ -119,7 +123,7 @@
         <button id="high-score-toggle">Highscore</button>
         <button id="help-toggle">HELP!</button>
       </section>
-      <section id="help" class="corner-buttons-contents">
+      <section id="help" class="help">
         <h3>Mr Burns has been killed!</h3>
         <div>Can you figure out the solution?</div>
         <div>How to play :</div>
@@ -161,8 +165,9 @@
         </ul>
       </section>
 
-      <section id="high-score" class="corner-buttons-contents">
-        <table>
+      <section id="high-score" class="high-score">
+        <h2>Top 10 Highscore!</h2>
+        <table id="high-score-table">
         <tr>
           <th>Name</th>
           <th>Rounds</th>
