@@ -1,25 +1,59 @@
+//animations
+
 @keyframes intro {
-    0% {
-      transform: translateY(-100%);
-    }
-    
-    100% {
-      transform: translateY(0);
-    }
-  
+  0% {
+    transform: translateY(-100%);
   }
   
-  main {
-    animation: 1s ease-out 0s 1 intro;
+  100% {
+    transform: translateY(0);
+  }
+
+}
+
+@keyframes login-in {
+  0% {
+    transform: translateX(-100%);
   }
   
-  @keyframes gelatine { 
-    0%, 100% { transform: scale(1, 1); }
-    25% { transform: scale(0.9, 1.1); }
-    50% { transform: scale(1.1, 0.9); }
-    75% { transform: scale(0.95, 1.05); }
+  100% {
+    transform: translateX(0);
+  }
+
+}
+
+@keyframes login-out {
+  0% {
+    transform: translateX(0);
   }
   
-  h1 {
-    animation: 1s ease-out 1s 1 gelatine;
-  }
+  100% {
+    transform: translateX(300%);
+    visibility: hidden;
+  } 
+}
+
+@keyframes gelatine { 
+  0%, 100% { transform: scale(1, 1); }
+  25% { transform: scale(0.9, 1.1); }
+  50% { transform: scale(1.1, 0.9); }
+  75% { transform: scale(0.95, 1.05); }
+}
+
+//targets 
+main {
+  animation: 1s ease-out 0s 1 intro;
+}
+
+.intro {
+  animation: 1s ease-in 0s 1 login-in;
+}
+
+.intro-out {
+  animation: 1s ease-out 0s 1 login-out;
+  animation-fill-mode: forwards;
+}
+
+h1 {
+  animation: 1s ease-out 1s 1 gelatine;
+}
