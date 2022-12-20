@@ -14,6 +14,7 @@ const ComputerCardsdisplay = document.querySelectorAll('.computer');
 const getRoomId = document.querySelectorAll('[class^=room]');
 const mainPage = document.querySelector('main');
 const nameInput = document.querySelector('.intro');
+const nameInputValue = <HTMLInputElement>document.querySelector('#nickname');
 const resultSection = document.querySelector('#result');
 const helpSection = document.querySelector('#help');
 const highScoreSection = document.querySelector('#high-score');
@@ -21,7 +22,9 @@ const highScoreTable = document.querySelector('#high-score-table');
 const resultText = document.querySelector('#accuse-reveal');
 const smallScreen = document.querySelector('#mobile');
 const solutionDisplay = document.querySelector('#solution');
+let userName = 'Homer'; // placeholder
 
+const playBtn = <HTMLButtonElement>document.querySelector('#play');
 const guessBtn = <HTMLButtonElement>document.querySelector('#guess');
 const highScoreBtn = <HTMLButtonElement>document.querySelector('#high-score-toggle');
 const accuseBtn = <HTMLButtonElement>document.querySelector('#accuse');
@@ -32,7 +35,9 @@ resultSection?.classList.toggle('hidden');
 helpSection?.classList.toggle('tot-hidden');
 highScoreSection?.classList.toggle('tot-hidden');
 smallScreen?.classList.toggle('tot-hidden');
-nameInput?.classList.toggle('tot-hidden');
+mainPage?.classList.toggle('tot-hidden');
+highScoreBtn.classList.add('tot-hidden');
+helpBtn.classList.add('tot-hidden');
 
 const accusedSuspect = <HTMLInputElement>document.querySelector('#suspects');
 const accusedWeapon = <HTMLInputElement>document.querySelector('#weapon');
@@ -53,6 +58,25 @@ const computer2RevealArray: any[] = [];
 let randomDiceNumber = 0;
 let count = 0;
 let matchString = 0;
+
+/**
+ *Start Game.
+ */
+
+const startGame = () => {
+  console.log(nameInputValue);
+  if (nameInputValue !== undefined && nameInputValue.value.length !== 0) {
+    mainPage?.classList.toggle('tot-hidden');
+    nameInput?.classList.toggle('tot-hidden');
+    highScoreBtn.classList.toggle('tot-hidden');
+    helpBtn.classList.toggle('tot-hidden');
+    userName = nameInputValue.value;
+    localStorage.setItem('myName', `${userName}`); // save to local storage
+  } else {
+    nameInputValue.value = 'IsThatYouHomer?';
+  }
+};
+
 /**
  *Draws a random card from each array and add to solution.
  */
@@ -96,6 +120,7 @@ const selectRandomStartingRoom = () => {
   switch (startingRoom) {
     case 0:
       getRoomId[0].classList.add('active');
+      console.log(getRoomId[0]);
       break;
     case 1:
       getRoomId[1].classList.add('active');
@@ -166,8 +191,6 @@ const guessCompare = (arrayName: any[]) => {
           computer2RevealArray.push(matchIndexTransfer);
           renderCardMarkup(computer2RevealArray, ComputerCardsdisplay[1]);
         }
-        console.log('test');
-        console.log(computer1RevealArray);
         arrayName.splice(i, 1);
       }
     }
@@ -182,10 +205,8 @@ const guessCompare = (arrayName: any[]) => {
 const guessCompareInit = () => {
   matchString = 0;
   if (computer1CardsArray.length !== 0) { // must guess right on barts cards first
-    console.log('array 1 running');
     guessCompare(computer1CardsArray);
   } else {
-    console.log('array 2 running');
     guessCompare(computer2CardsArray);
   }
   guessBtn?.removeEventListener('click', guessCompareInit);
@@ -295,7 +316,6 @@ const checkNumber = (random: number) => {
 
 const generateRandomNumber = () => {
   randomDiceNumber = Math.floor(Math.random() * 6) + 1; // +1 so 0 cant be picked, math.floor so 7 cant be picked
-
   if (randomDiceNumber > 3 && rolls !== null && info !== null) {
     rolls.textContent = `You rolled a ${randomDiceNumber}!`;
     info.textContent = 'Woho! You may move to another location!';
@@ -370,6 +390,10 @@ const accuseCompare = () => {
   // checkHighscores();
 };
 
+/**
+ *Replay the game.
+ */
+
 const refreshPage = () => {
   window.location.reload();
 };
@@ -381,6 +405,7 @@ const refreshPage = () => {
 const renderHighscore = () => {
   let cardItemsToRender = '';
   const element = highScoreTable;
+  data.highScoresArray.sort((a, b) => ((a.rounds > b.rounds) ? 1 : -1)); // lowest to highest
   // eslint-disable-next-line no-restricted-syntax
   for (const card of data.highScoresArray) {
     const cardElement = /* html */ `
@@ -396,6 +421,7 @@ const renderHighscore = () => {
 };
 
 // Add event listeners to buttons
+playBtn?.addEventListener('click', startGame);
 playAgainBtn?.addEventListener('click', refreshPage);
 diceButton?.addEventListener('click', generateRandomNumber);
 helpBtn?.addEventListener('click', helpToggle);
