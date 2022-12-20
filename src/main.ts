@@ -5,6 +5,7 @@ import './style/style.scss';
 // Data contains all the arrays needed for the game
 import data from './script/storage';
 
+// const declaration
 const diceButton = document.querySelector('#dice');
 const counts = document.querySelectorAll('.counter span');
 const rolls = document.querySelector('#rolled span');
@@ -22,7 +23,6 @@ const highScoreTable = document.querySelector('#high-score-table');
 const resultText = document.querySelector('#accuse-reveal');
 const smallScreen = document.querySelector('#mobile');
 const solutionDisplay = document.querySelector('#solution');
-let userName = 'Homer'; // placeholder
 
 const playBtn = <HTMLButtonElement>document.querySelector('#play');
 const guessBtn = <HTMLButtonElement>document.querySelector('#guess');
@@ -30,6 +30,16 @@ const highScoreBtn = <HTMLButtonElement>document.querySelector('#high-score-togg
 const accuseBtn = <HTMLButtonElement>document.querySelector('#accuse');
 const helpBtn = <HTMLButtonElement>document.querySelector('#help-toggle');
 const playAgainBtn = <HTMLButtonElement>document.querySelector('#play-again');
+
+const playerCardsArray: any[] = [];
+const computer1CardsArray: any[] = [];
+const computer2CardsArray: any[] = [];
+const computer1RevealArray: any[] = [];
+const computer2RevealArray: any[] = [];
+
+const accusedSuspect = <HTMLInputElement>document.querySelector('#suspects');
+const accusedWeapon = <HTMLInputElement>document.querySelector('#weapon');
+const accusedRoom = <HTMLInputElement>document.querySelector('#locations');
 
 resultSection?.classList.toggle('hidden');
 helpSection?.classList.toggle('tot-hidden');
@@ -39,10 +49,8 @@ mainPage?.classList.toggle('tot-hidden');
 highScoreBtn.classList.add('tot-hidden');
 helpBtn.classList.add('tot-hidden');
 
-const accusedSuspect = <HTMLInputElement>document.querySelector('#suspects');
-const accusedWeapon = <HTMLInputElement>document.querySelector('#weapon');
-const accusedRoom = <HTMLInputElement>document.querySelector('#locations');
-
+// let declaration
+let userName = 'Homer'; // placeholder
 let guess = false;
 let startingRoom = null;
 let suspect: { name: string; className: string; imgPath: string; } | null = null;
@@ -50,11 +58,6 @@ let weapon: { name: string; className: string; imgPath: string; } | null = null;
 let room: { name: string; className: string; imgPath: string; } | null = null;
 let playerCards = null;
 let gameCards: any[] = [];
-const playerCardsArray: any[] = [];
-const computer1CardsArray: any[] = [];
-const computer2CardsArray: any[] = [];
-const computer1RevealArray: any[] = [];
-const computer2RevealArray: any[] = [];
 let randomDiceNumber = 0;
 let count = 0;
 let matchString = 0;
@@ -64,14 +67,12 @@ let matchString = 0;
  */
 
 const startGame = () => {
-  console.log(nameInputValue);
   if (nameInputValue !== undefined && nameInputValue.value.length !== 0) {
     mainPage?.classList.toggle('tot-hidden');
-    nameInput?.classList.toggle('tot-hidden');
+    nameInput?.classList.toggle('intro-out');
     highScoreBtn.classList.toggle('tot-hidden');
     helpBtn.classList.toggle('tot-hidden');
     userName = nameInputValue.value;
-    localStorage.setItem('myName', `${userName}`); // save to local storage
   } else {
     nameInputValue.value = 'IsThatYouHomer?';
   }
@@ -120,7 +121,6 @@ const selectRandomStartingRoom = () => {
   switch (startingRoom) {
     case 0:
       getRoomId[0].classList.add('active');
-      console.log(getRoomId[0]);
       break;
     case 1:
       getRoomId[1].classList.add('active');
@@ -248,7 +248,6 @@ const helpToggle = () => {
  */
 
 const highScoreToggle = () => {
-  console.log('test');
   if (highScoreBtn !== null && highScoreSection !== null && mainPage !== null) {
     highScoreSection.classList.toggle('tot-hidden');
     helpBtn.classList.toggle('tot-hidden');
@@ -327,77 +326,6 @@ const generateRandomNumber = () => {
   checkNumber(randomDiceNumber);
 };
 
-console.log(playerCardsArray);
-console.log(computer1CardsArray);
-console.log(computer2CardsArray);
-
-/**
- *Initial highscore.
- */
-
-// const checkHighscores = () => {
-//   const userName = 'tim';
-//   localStorage.setItem('myName', `${userName}`);
-//   localStorage.setItem('rounds', `${count}`);
-//   const currentRounds = localStorage.getItem('rounds');
-//   if (currentRounds !== null) {
-//     const currentRoundsConverted = parseInt(currentRounds, 10);
-//     const newItem = {
-//       name: localStorage.getItem('myName'),
-//       rounds: `${currentRoundsConverted}`,
-//     };
-// if (newItem.name !== null) {
-//   data.highScoresArray.push(newItem);
-//   console.log(data.highScoresArray);
-// }
-//   }
-// };
-
-/**
- *Accuse Suspect and compare solution to accusation.
- */
-
-const accuseCompare = () => {
-  if (suspect !== null && weapon !== null && room !== null
-    && resultText !== null && solutionDisplay !== null
-    && helpSection !== null) {
-    const suspectValueString = accusedSuspect.value.replaceAll('-', ' ');
-    const roomValueString = accusedRoom.value.replaceAll('-', ' ');
-    const weaponValueString = accusedWeapon.value.replaceAll('-', ' ');
-
-    solutionDisplay.innerHTML = `Your accused ${suspectValueString} for killing Mr Burns at 
-      ${roomValueString} with a ${weaponValueString}.<br><br>`;
-    if (
-      (accusedSuspect.value === suspect.className)
-    && (accusedWeapon.value === weapon.className)
-    && (accusedRoom.value === room.className)
-    ) {
-      resultText.innerHTML = 'You win!';
-      solutionDisplay.innerHTML += `Chief Wiggum will take over from here, ${suspect.name} will
-      be taken into custody.`;
-    } else {
-      resultText.innerHTML = 'You loose!';
-      solutionDisplay.innerHTML += ` The truth is that ${suspect.name} killed Mr Burns at ${room.name} 
-      with a ${weapon.name}!`;
-    }
-
-    highScoreBtn.classList.add('tot-hidden');
-    helpBtn.classList.add('tot-hidden');
-    helpSection.classList.add('tot-hidden');
-    mainPage?.classList.toggle('tot-hidden');
-    resultSection?.classList.toggle('hidden');
-  }
-  // checkHighscores();
-};
-
-/**
- *Replay the game.
- */
-
-const refreshPage = () => {
-  window.location.reload();
-};
-
 /**
  *Generate HTML for highscore.
  */
@@ -420,6 +348,65 @@ const renderHighscore = () => {
   }
 };
 
+/**
+ *Initial highscore.
+ */
+
+const checkHighscores = () => {
+  localStorage.setItem('highScorePlayers', JSON.stringify(data.highScoresArray));
+  console.log(localStorage.getItem('highScorePlayers'));
+  // Retrive HighscoresArray OR empty array (parse requires a string, not null)
+  const storedHighscores = JSON.parse(localStorage.getItem('highScorePlayers') || '[]');
+  console.log(storedHighscores);
+  renderHighscore();
+  // highScoreSection?.classList.toggle('tot-hidden');
+};
+
+/**
+ *Accuse Suspect and compare solution to accusation.
+ */
+
+const accuseCompare = () => {
+  if (suspect !== null && weapon !== null && room !== null
+    && resultText !== null && solutionDisplay !== null
+    && helpSection !== null) {
+    const suspectValueString = accusedSuspect.value.replaceAll('-', ' ');
+    const roomValueString = accusedRoom.value.replaceAll('-', ' ');
+    const weaponValueString = accusedWeapon.value.replaceAll('-', ' ');
+
+    solutionDisplay.innerHTML = `Your accused ${suspectValueString} for killing Mr Burns at 
+      ${roomValueString} with a ${weaponValueString}.<br><br>`;
+    if (
+      (accusedSuspect.value === suspect.className)
+    && (accusedWeapon.value === weapon.className)
+    && (accusedRoom.value === room.className)
+    ) {
+      resultText.innerHTML = `You win ${userName}!`;
+      solutionDisplay.innerHTML += `Chief Wiggum will take over from here, ${suspect.name} will
+      be taken into custody.`;
+    } else {
+      resultText.innerHTML = `You loose ${userName}!`;
+      solutionDisplay.innerHTML += ` The truth is that ${suspect.name} killed Mr Burns at ${room.name} 
+      with a ${weapon.name}!`;
+    }
+
+    highScoreBtn.classList.add('tot-hidden');
+    helpBtn.classList.add('tot-hidden');
+    helpSection.classList.add('tot-hidden');
+    mainPage?.classList.toggle('tot-hidden');
+    resultSection?.classList.toggle('hidden');
+  }
+  checkHighscores();
+};
+
+/**
+ *Replay the game.
+ */
+
+const refreshPage = () => {
+  window.location.reload();
+};
+
 // Add event listeners to buttons
 playBtn?.addEventListener('click', startGame);
 playAgainBtn?.addEventListener('click', refreshPage);
@@ -440,3 +427,7 @@ renderHighscore();
 // if (suspect !== null && weapon !== null && room !== null) {
 //   console.log('Solutuion ->', suspect.name, weapon.name, room.name);
 // }
+
+// console.log(playerCardsArray);
+// console.log(computer1CardsArray);
+// console.log(computer2CardsArray);
