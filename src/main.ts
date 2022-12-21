@@ -331,9 +331,12 @@ const generateRandomNumber = () => {
  */
 
 const renderHighscore = () => {
+  data.highScoresArray.sort((a, b) => ((a.rounds > b.rounds) ? 1 : -1)); // lowest to highest
+  if (data.highScoresArray.length > 10) {
+    data.highScoresArray.splice(10, 1); // only top 10
+  }
   let cardItemsToRender = '';
   const element = highScoreTable;
-  data.highScoresArray.sort((a, b) => ((a.rounds > b.rounds) ? 1 : -1)); // lowest to highest
   // eslint-disable-next-line no-restricted-syntax
   for (const card of data.highScoresArray) {
     const cardElement = /* html */ `
@@ -353,11 +356,9 @@ const renderHighscore = () => {
  */
 
 const checkHighscores = () => {
-  localStorage.setItem('highScorePlayers', JSON.stringify(data.highScoresArray));
-  console.log(localStorage.getItem('highScorePlayers'));
+  console.log(data.highScoresArray); // 9
   // Retrive HighscoresArray OR empty array (parse requires a string, not null)
-  const storedHighscores = JSON.parse(localStorage.getItem('highScorePlayers') || '[]');
-  console.log(storedHighscores);
+  data.highScoresArray = JSON.parse(localStorage.getItem('highScorePlayers') || '[]');
   renderHighscore();
   // highScoreSection?.classList.toggle('tot-hidden');
 };
@@ -384,6 +385,12 @@ const accuseCompare = () => {
       resultText.innerHTML = `You win ${userName}!`;
       solutionDisplay.innerHTML += `Chief Wiggum will take over from here, ${suspect.name} will
       be taken into custody.`;
+      const newHighscore = {
+        name: userName,
+        rounds: count,
+      };
+      data.highScoresArray.push(newHighscore);
+      localStorage.setItem('highScorePlayers', JSON.stringify(data.highScoresArray));
     } else {
       resultText.innerHTML = `You loose ${userName}!`;
       solutionDisplay.innerHTML += ` The truth is that ${suspect.name} killed Mr Burns at ${room.name} 
@@ -421,7 +428,7 @@ pickPlayerCards(computer1CardsArray);
 pickPlayerCards(computer2CardsArray);
 selectRandomStartingRoom();
 renderCardMarkup(playerCardsArray, PlayerCardsdisplay);
-renderHighscore();
+checkHighscores();
 
 // only for development
 // if (suspect !== null && weapon !== null && room !== null) {
