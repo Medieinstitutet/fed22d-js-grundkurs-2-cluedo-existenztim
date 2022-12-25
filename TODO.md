@@ -30,4 +30,5 @@
 ### 15
     - [x] Visa hur många drag spelaren har gjort.
 ### 16   
-    - [] Frivilligt: skapa ett highscore.
+    - [x] skapa ett highscore som redan har en färdigbyggd lista (top 10)
+    men med hjälp av localstorage kan man "slå" ut de fiktiva karaktärer som redan finns med genom att ha gissat rätt på lägre antal omgångar.
