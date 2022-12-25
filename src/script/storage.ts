@@ -213,6 +213,7 @@ const roomsArray = [
 ];
 
 const highScoresArray = [
+// only 9 spots filled, so the first correct solution will always fit into highscore no matter rounds.
   highScore1,
   highScore2,
   highScore3,
