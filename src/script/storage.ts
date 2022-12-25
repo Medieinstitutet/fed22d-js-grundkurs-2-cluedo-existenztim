@@ -6,74 +6,86 @@
 const flanders = {
   name: 'Ned Flanders',
   className: 'ned-flanders',
-  imgPath: 'img/person.png',
+  imgPath: 'img/person.webp',
+  alt: 'Category icon represented as a suspicious figure',
 };
 
 const bob = {
   name: 'Sideshow Bob',
   className: 'sideshow-bob',
-  imgPath: 'img/person.png',
+  imgPath: 'img/person.webp',
+  alt: 'Category icon represented as a suspicious figure',
 };
 
 const edna = {
   name: 'Edna Krabappel',
   className: 'edna-krabappel',
-  imgPath: 'img/person.png',
+  imgPath: 'img/person.webp',
+  alt: 'Category icon represented as a suspicious figure',
 };
 
 const krusty = {
   name: 'Krusty The Clown',
   className: 'krusty-the-clown',
-  imgPath: 'img/person.png',
+  imgPath: 'img/person.webp',
+  alt: 'Category icon represented as a suspicious figure',
 };
 
 const agnes = {
   name: 'Agnes Skinner',
   className: 'agnes-skinner',
-  imgPath: 'img/person.png',
+  imgPath: 'img/person.webp',
+  alt: 'Category icon represented as a suspicious figure',
 };
 
 const lovejoy = {
   name: 'Helen Lovejoy',
   className: 'helen-lovejoy',
-  imgPath: 'img/person.png',
+  imgPath: 'img/person.webp',
+  alt: 'Category icon represented as a suspicious figure',
 };
 
 // Weapons
 const rope = {
   name: 'rope',
   className: 'rope',
-  imgPath: 'img/sword.png',
+  imgPath: 'img/sword.webp',
+  alt: 'Category icon represented by a sword/spear',
 };
 
 const revolver = {
   name: 'revolver',
   className: 'revolver',
-  imgPath: 'img/sword.png',
+  imgPath: 'img/sword.webp',
+  alt: 'Category icon represented by a sword/spear',
 };
 
 const candlestick = {
   name: 'candlestick',
   className: 'candlestick',
-  imgPath: 'img/sword.png',
+  imgPath: 'img/sword.webp',
+  alt: 'Category icon represented by a sword/spear',
 };
 
 const knife = {
   name: 'knife',
   className: 'knife',
-  imgPath: 'img/sword.png',
+  imgPath: 'img/sword.webp',
+  alt: 'Category icon represented by a sword/spear',
 };
 
 const wrench = {
   name: 'wrench',
   className: 'wrench',
-  imgPath: 'img/sword.png',
+  imgPath: 'img/sword.webp',
+  alt: 'Category icon represented by a sword/spear',
 };
 
 const baseballBat = {
   name: 'baseball bat',
   className: 'baseball-bat',
-  imgPath: 'img/sword.png',
+  imgPath: 'img/sword.webp',
+  alt: 'Category icon represented by a sword/spear',
 };
 
 // Rooms
@@ -84,47 +96,56 @@ const baseballBat = {
 const krustyBurger = {
   name: 'Krusty Burger',
   className: 'krusty-burger',
-  imgPath: 'img/map.png',
+  imgPath: 'img/map.webp',
+  alt: 'Category icon represented by a map',
 };
 const moesTavern = {
   name: 'Moes Tavern',
   className: 'moes-tavern',
-  imgPath: 'img/map.png',
+  imgPath: 'img/map.webp',
+  alt: 'Category icon represented by a map',
 };
 const townHall = {
   name: 'Town Hall',
   className: 'town-hall',
-  imgPath: 'img/map.png',
+  imgPath: 'img/map.webp',
+  alt: 'Category icon represented by a map',
 };
 const burnsManor = {
   name: 'Burns Manor',
   className: 'burns-manor',
-  imgPath: 'img/map.png',
+  imgPath: 'img/map.webp',
+  alt: 'Category icon represented by a map',
 };
 const simpsonsHouse = {
   name: 'Simpsons House',
   className: 'simpsons-house',
-  imgPath: 'img/map.png',
+  imgPath: 'img/map.webp',
+  alt: 'Category icon represented by a map',
 };
 const kwikEmart = {
   name: 'Kwik-E-Mart',
   className: 'kwik-e-mart',
-  imgPath: 'img/map.png',
+  imgPath: 'img/map.webp',
+  alt: 'Category icon represented by a map',
 };
 const nuclearPowerPlant = {
   name: 'Nuclear Power Plant',
   className: 'nuclear-power-plant',
-  imgPath: 'img/map.png',
+  imgPath: 'img/map.webp',
+  alt: 'Category icon represented by a map',
 };
 const townSquare = {
   name: 'Town Square',
   className: 'town-square',
-  imgPath: 'img/map.png',
+  imgPath: 'img/map.webp',
+  alt: 'Category icon represented by a map',
 };
 const elementarySchool = {
   name: 'Elementary School',
   className: 'elementary-school',
-  imgPath: 'img/map.png',
+  imgPath: 'img/map.webp',
+  alt: 'Category icon represented by a map',
 };
 
 // highscore people by default

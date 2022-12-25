@@ -55,9 +55,9 @@ let userName = 'Homer'; // placeholder
 let guess = false;
 let startingRoom = null;
 let highScoreEndingScene = false;
-let suspect: { name: string; className: string; imgPath: string; } | null = null;
-let weapon: { name: string; className: string; imgPath: string; } | null = null;
-let room: { name: string; className: string; imgPath: string; } | null = null;
+let suspect: { name: string; className: string; imgPath: string; alt: string; } | null = null;
+let weapon: { name: string; className: string; imgPath: string; alt: string; } | null = null;
+let room: { name: string; className: string; imgPath: string; alt: string; } | null = null;
 let playerCards = null;
 let gameCards: any[] = [];
 let randomDiceNumber = 0;
@@ -165,7 +165,7 @@ const renderCardMarkup = (arrayToRender: any[], elementToDisplay: Element | null
   for (const card of arrayToRender) {
     const cardElement = /* html */ `
       <li class ="card">${card.name as string}
-      <img src = ${card.imgPath as string} alt ="Category Icon"><li>`;
+      <img src = ${card.imgPath as string} alt = ${card.alt as string}><li>`;
     cardItemsToRender += cardElement;
     if (element !== null && element !== undefined) {
       element.innerHTML = cardItemsToRender;
@@ -315,8 +315,6 @@ const checkNumber = (random: number) => {
       counts[i].textContent = String(count);
     }
   }
-
-  console.log(count);
 };
 
 /**
@@ -347,11 +345,13 @@ const renderHighscore = () => {
     data.highScoresArray.splice(10, 1); // only top 10
   }
   let cardItemsToRender = /* html */`
+
   <tr>
     <th>Name</th>
     <th>Rounds</th>
   </tr>
   `;
+
   const element = highScoreTable;
   // eslint-disable-next-line no-restricted-syntax
   for (const card of data.highScoresArray) {

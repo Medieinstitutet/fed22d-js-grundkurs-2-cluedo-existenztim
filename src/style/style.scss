@@ -25,7 +25,7 @@ $yellow: #FFD90F;
   -moz-osx-font-smoothing: grayscale;
   text-size-adjust: 100%;
   text-shadow: 1px 1px 2px $black;
-  background-image: url("/img/simpsonsbg.png");
+  background-image: url("/img/simpsonsbg.webp");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -165,7 +165,9 @@ body {
     display: block;
   }
   
-  main, .result, .corner-buttons, .corner-buttons-contents {
+  main, .result, .corner-buttons, 
+  .corner-buttons-contents, .high-score,
+  .intro {
     display: none;
   }
 }
