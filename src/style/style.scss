@@ -79,7 +79,7 @@ body {
       max-width: 1000px;
       margin: auto;
       height: 40vh;
-      max-height: 400px;
+      min-height: 400px;
       /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
       grid-template-areas:
         "moes-tavern town-hall burns-manor"
@@ -150,6 +150,7 @@ body {
 
         .room.active {
           position: relative;
+          animation: 0.5s ease-in-out 0.1s 1 gelatine;
 
           &::before {
             content: url("/img/icons8-homer-simpson.svg");
@@ -175,5 +176,14 @@ body {
   .corner-buttons-contents, .high-score,
   .intro {
     display: none;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+      animation: none;
+      transition: none;
+      transform: none;
   }
 }
