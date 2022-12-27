@@ -93,6 +93,7 @@ const baseballBat = {
 //   name: 'Game Hub',
 //   className: 'game-hub',
 // };
+
 const krustyBurger = {
   name: 'Krusty Burger',
   className: 'krusty-burger',
@@ -152,22 +153,22 @@ const elementarySchool = {
 
 const highScore1 = {
   name: 'Apu',
-  rounds: 121,
+  rounds: 91,
 };
 
 const highScore2 = {
   name: 'Comic Guy',
-  rounds: 78,
+  rounds: 48,
 };
 
 const highScore3 = {
   name: 'Barney',
-  rounds: 153,
+  rounds: 123,
 };
 
 const highScore4 = {
   name: 'Willie',
-  rounds: 86,
+  rounds: 56,
 };
 
 const highScore5 = {
@@ -177,31 +178,25 @@ const highScore5 = {
 
 const highScore6 = {
   name: 'Lenny',
-  rounds: 134,
+  rounds: 104,
 };
 
 const highScore7 = {
   name: 'Quimby',
-  rounds: 69,
+  rounds: 39,
 };
 
 const highScore8 = {
   name: 'Fat Tony',
-  rounds: 99,
+  rounds: 69,
 };
 
 const highScore9 = {
   name: 'Smithers',
-  rounds: 105,
+  rounds: 75,
 };
-// const computer1 = {
-//   guess: 0, //the likelyhood of AI to accuse goes up by number of guesses.
-// }
 
-// const computer2 = {
-//   guess: 0, //the likelyhood of AI to accuse goes up by number of guesses.
-// }
-
+// declaring arrays
 const suspectsArray = [
   flanders,
   bob,

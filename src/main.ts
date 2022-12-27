@@ -18,7 +18,6 @@ const nameInput = document.querySelector('.intro');
 const resultSection = document.querySelector('#result');
 const helpSection = document.querySelector('#help');
 const highScoreSection = document.querySelector('#high-score');
-
 const resultText = document.querySelector('#accuse-reveal');
 const smallScreen = document.querySelector('#mobile');
 const solutionDisplay = document.querySelector('#solution');
@@ -31,11 +30,18 @@ const accuseBtn = <HTMLButtonElement>document.querySelector('#accuse');
 const helpBtn = <HTMLButtonElement>document.querySelector('#help-toggle');
 const playAgainBtn = <HTMLButtonElement>document.querySelector('#play-again');
 
-const playerCardsArray: any[] = [];
-const computer1CardsArray: any[] = [];
-const computer2CardsArray: any[] = [];
-const computer1RevealArray: any[] = [];
-const computer2RevealArray: any[] = [];
+interface StandardArray {
+  name: string;
+  className: string;
+  imgPath: string;
+  alt: string;
+}
+
+const playerCardsArray: StandardArray[] = [];
+const computer1CardsArray: StandardArray[] = [];
+const computer2CardsArray:StandardArray[] = [];
+const computer1RevealArray: StandardArray[] = [];
+const computer2RevealArray: StandardArray[] = [];
 
 const accusedSuspect = <HTMLInputElement>document.querySelector('#suspects');
 const accusedWeapon = <HTMLInputElement>document.querySelector('#weapon');
@@ -55,11 +61,11 @@ let userName = 'Homer'; // placeholder
 let guess = false;
 let startingRoom = null;
 let highScoreEndingScene = false;
-let suspect: { name: string; className: string; imgPath: string; alt: string; } | null = null;
-let weapon: { name: string; className: string; imgPath: string; alt: string; } | null = null;
-let room: { name: string; className: string; imgPath: string; alt: string; } | null = null;
+let suspect: StandardArray | null = null;
+let weapon: StandardArray | null = null;
+let room: StandardArray | null = null;
 let playerCards = null;
-let gameCards: any[] = [];
+let gameCards: unknown[] = [];
 let newHighScoresArray: any[] = []; // localstorage highscore
 let renderHighscoresArray: any[] = []; // combination of hard coded highscore/localstorage
 let randomDiceNumber = 0;
@@ -179,7 +185,7 @@ const renderCardMarkup = (arrayToRender: any[], elementToDisplay: Element | null
  *Compare guess with AI cards and reveal if it's a match.
  */
 
-const guessCompare = (arrayName: any[]) => {
+const guessCompare = (arrayName: StandardArray[]) => {
   if (info !== null) {
     for (let i = arrayName.length - 1; i >= 0; i--) {
       if (accusedSuspect.value === arrayName[i].className
@@ -277,7 +283,7 @@ const highScoreToggle = () => {
 /**
  *Move player to new room
  */
-//  && roomSelected.classList.contains('active') === false
+
 function makeRoomActive(e: any) {
   guessBtn?.addEventListener('click', guessCompareInit);
   getRoomId.forEach((roomSelected) => {
@@ -403,7 +409,7 @@ const accuseCompare = () => {
     resultSection?.classList.toggle('hidden');
 
     solutionDisplay.innerHTML = `Your accused ${suspectValueString} for killing Mr Burns at 
-      ${roomValueString} with a ${weaponValueString}.<br><br>`;
+    ${roomValueString} with a ${weaponValueString}.<br><br>`;
     // correct accusation
     if (
       (accusedSuspect.value === suspect.className)
@@ -418,6 +424,7 @@ const accuseCompare = () => {
         name: userName,
         rounds: count,
       };
+
       newHighScoresArray.push(newHighscore);
       localStorage.setItem('highScorePlayers', JSON.stringify(newHighScoresArray));
       checkHighscores();
@@ -430,6 +437,7 @@ const accuseCompare = () => {
     }
   }
 };
+
 /**
  *Replay the game.
  */
