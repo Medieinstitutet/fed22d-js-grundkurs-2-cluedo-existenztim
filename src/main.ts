@@ -60,6 +60,8 @@ let weapon: { name: string; className: string; imgPath: string; alt: string; } |
 let room: { name: string; className: string; imgPath: string; alt: string; } | null = null;
 let playerCards = null;
 let gameCards: any[] = [];
+let newHighScoresArray: any[] = []; // localstorage highscore
+let renderHighscoresArray: any[] = []; // combination of hard coded highscore/localstorage
 let randomDiceNumber = 0;
 let count = 0;
 let matchString = 0;
@@ -185,7 +187,7 @@ const guessCompare = (arrayName: any[]) => {
       || accusedRoom.value === arrayName[i].className) {
         matchString += 1;
         const matchIndexTransfer = arrayName[i];
-
+        // chech witch array to alter if there is a match
         if (computer1RevealArray.length < 6) {
           computer1RevealArray.push(matchIndexTransfer);
           renderCardMarkup(computer1RevealArray, ComputerCardsdisplay[0]);
@@ -275,22 +277,24 @@ const highScoreToggle = () => {
 /**
  *Move player to new room
  */
-
+//  && roomSelected.classList.contains('active') === false
 function makeRoomActive(e: any) {
   guessBtn?.addEventListener('click', guessCompareInit);
   getRoomId.forEach((roomSelected) => {
-    if (roomSelected.getAttribute('id') === e.currentTarget.id && info !== null) {
+    if (roomSelected.getAttribute('id') === e.currentTarget.id && roomSelected.classList.contains('active')
+    && info !== null) {
+      info.textContent = 'You have to select a new location.';
+    } else if (roomSelected.getAttribute('id') === e.currentTarget.id && info !== null) {
       roomSelected.classList.add('active');
-      // console.log(e);
       info.textContent = 'You may make a guess.';
+      randomDiceNumber = 0; // So you can only move once per round.
+      makeGuess();
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      checkNumber(randomDiceNumber);
     } else {
       roomSelected.classList.remove('active');
     }
   });
-  randomDiceNumber = 0; // So you can only move once per round.
-  makeGuess();
-  // eslint-disable-next-line @typescript-eslint/no-use-before-define
-  checkNumber(randomDiceNumber);
 }
 
 /**
@@ -340,9 +344,9 @@ const generateRandomNumber = () => {
 
 const renderHighscore = () => {
   const highScoreTable = document.querySelector('#high-score-table');
-  data.highScoresArray.sort((a, b) => ((a.rounds > b.rounds) ? 1 : -1)); // lowest to highest
-  if (data.highScoresArray.length > 10) {
-    data.highScoresArray.splice(10, 1); // only top 10
+  renderHighscoresArray.sort((a, b) => ((a.rounds > b.rounds) ? 1 : -1)); // lowest to highest
+  if (renderHighscoresArray.length > 10) {
+    renderHighscoresArray.splice(10, 1); // only top 10
   }
   let cardItemsToRender = /* html */`
 
@@ -354,11 +358,11 @@ const renderHighscore = () => {
 
   const element = highScoreTable;
   // eslint-disable-next-line no-restricted-syntax
-  for (const card of data.highScoresArray) {
+  for (const card of renderHighscoresArray) {
     const cardElement = /* html */ `
       <tr>
-      <td>${card.name}</td>
-      <td> ${card.rounds}</td>
+      <td>${card.name as string}</td>
+      <td> ${card.rounds as string}</td>
       </tr>`;
     cardItemsToRender += cardElement;
     if (element !== null && element !== undefined) {
@@ -373,7 +377,8 @@ const renderHighscore = () => {
 
 const checkHighscores = () => {
   // Retrive HighscoresArray OR empty array (parse requires a string, not null)
-  data.highScoresArray = JSON.parse(localStorage.getItem('highScorePlayers') || '[]');
+  newHighScoresArray = JSON.parse(localStorage.getItem('highScorePlayers') || '[]');
+  renderHighscoresArray = data.highScoresArray.concat(newHighScoresArray);
   renderHighscore();
 };
 
@@ -408,12 +413,15 @@ const accuseCompare = () => {
       resultText.innerHTML = `You win ${userName}!<br><br>`;
       solutionDisplay.innerHTML += `Chief Wiggum will take over from here, ${suspect.name} will
       be taken into custody.<br><br>`;
+
       const newHighscore = {
         name: userName,
         rounds: count,
       };
-      data.highScoresArray.push(newHighscore);
-      localStorage.setItem('highScorePlayers', JSON.stringify(data.highScoresArray));
+      newHighScoresArray.push(newHighscore);
+      localStorage.setItem('highScorePlayers', JSON.stringify(newHighScoresArray));
+      checkHighscores();
+
       // wrong accusation
     } else {
       resultText.innerHTML = `You loose ${userName}!<br><br>`;
@@ -421,9 +429,7 @@ const accuseCompare = () => {
       with a ${weapon.name}!<br><br> Unfortunately only correct solutions reaches the highscore.<br><br>`;
     }
   }
-  checkHighscores();
 };
-
 /**
  *Replay the game.
  */
@@ -449,11 +455,16 @@ selectRandomStartingRoom();
 renderCardMarkup(playerCardsArray, PlayerCardsdisplay);
 checkHighscores();
 
-// only for development
+/**
+ *Only for development
+ */
+
+// uncomment to reveal solution
 // if (suspect !== null && weapon !== null && room !== null) {
 //   console.log('Solutuion ->', suspect.name, weapon.name, room.name);
 // }
 
+// uncomment to reveal AI cards
 // console.log(playerCardsArray);
 // console.log(computer1CardsArray);
 // console.log(computer2CardsArray);
