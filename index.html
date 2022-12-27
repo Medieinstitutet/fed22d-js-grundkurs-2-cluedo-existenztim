@@ -1,202 +1,206 @@
 <!DOCTYPE html>
-<html lang="en"> 
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Cluedo - Simpsons Version!" />
-    <meta property="og:title" content="Cluedo - Simpsons Version!" />
-    <meta property="og:type" content="webpage" />
-    <meta property="og:url" content="" />
-    <meta property="og:image" content="" />
-    <link rel="icon" type="image/ico" href="/fed22d-js-grundkurs-2-cluedo-existenztim/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-    rel="preload"
-    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-    as="style"
-    onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <!--To speed up page parsing-->
-    <title>Cluedo - Simpsons Version</title>
-    <script type="module" crossorigin src="/fed22d-js-grundkurs-2-cluedo-existenztim/assets/index.7865c0fa.js"></script>
-    <link rel="stylesheet" href="/fed22d-js-grundkurs-2-cluedo-existenztim/assets/index.91fdf9a6.css">
-  </head>
-  <body>
-    <main>
-      <h1>Cluedo - Simpsons Version</h1>
-      <header id="guess-accuse-options">
+<html lang="en">
 
-        <!-- <h3>What's your solution?</h3> -->
-        <section class="suspect-container">
-          <label for="suspects">Suspect:<span><img src="/fed22d-js-grundkurs-2-cluedo-existenztim/img/person.webp" alt="A burgler representing the suspect category"></span></label>
-          <select name="suspects" id="suspects">
-            <option value="none" selected disabled hidden>Select an Option</option>
-            <option value="ned-flanders">Ned Flanders</option>
-            <option value="sideshow-bob">Sideshow Bob</option>
-            <option value="edna-krabappel">Edna Krabappel</option>
-            <option value="krusty-the-clown">Krusty The Clown</option>
-            <option value="agnes-skinner">Agnes Skinner</option>
-            <option value="helen-lovejoy">Helen Lovejoy</option>
-          </select>
-        </section>
-        <section class="locations-container">
-          <label for="locations">Location:<span><img src="/fed22d-js-grundkurs-2-cluedo-existenztim/img/map.webp" alt="A map representing the location category"></span></label>
-          <select name="locations" id="locations">
-            <option value="nowhere" selected disabled hidden>Select an Option</option>
-            <option value="krusty-burger">Krusty Burger</option>
-            <option value="moes-tavern">Moes Tavern</option>
-            <option value="town-hall">Town Hall</option>
-            <option value="burns-manor">Burns Manor</option>
-            <option value="simpsons-house">Simpsons House</option>
-            <option value="kwik-e-mart">Kwik-E-Mart</option>
-            <option value="nuclear-power-plant">Nuclear Power Plant</option>
-            <option value="town-square">Town Square</option>
-            <option value="elementary-school">Elementary School</option>
-          </select>
-        </section>
-  
-        <section class="weapons-container">
-          <label for="weapon">Weapon:<span><img src="/fed22d-js-grundkurs-2-cluedo-existenztim/img/sword.webp" alt="A sword representing the weapon category" ></span></label>
-          <select name="weapon" id="weapon">
-            <option value="nothing" selected disabled hidden>Select an Option</option>
-            <option value="rope">Rope</option>
-            <option value="revolver">Revolver</option>
-            <option value="candlestick">Candlestick</option>
-            <option value="knife">Knife</option>
-            <option value="wrench">Wrench</option>
-            <option value="baseball-bat">Baseball Bat</option>
-          </select>
-        </section>
-        <!-- <button id="submit-accuse">Submit</button> -->
-      </header>
-        <section class="button-infobar">
-          <div id="info"><span>Roll the dice!</span></div>
-          <button id="guess">Guess</button>
-          <button id="accuse" class="active-btn">Accuse</button>
-        </section>
-        <section class="container-room">
-          <div id="game-hub">
-            <button id="dice" class="active-btn">Roll Dice</button>
-            <div id="rolled"><span></span></div>
-            <div class="counter">Rounds: <span>0</span></div>
-          </div>
-          <button id="room-krusty-burger" class="room">Krusty Burger</button>
-          <button id="room-moes-tavern" class="room">Moe's Tavern</button>
-          <button id="room-town-hall" class="room">Town Hall</button>
-          <button id="room-burns-manor" class="room">Burns Manor</button>
-          <button id="room-simpsons-house" class="room">Simpsons House</button>
-          <button id="room-kwik-e-mart" class="room">Kwik-E-Mart</button>
-          <button id="room-nuclear-power-plant" class="room">Nuclear Power Plant</button>
-          <button id="room-town-square" class="room">Town Square</button>
-          <button id="room-elementary-school" class="room">Elementary School</button>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cluedo - Simpsons Version!" />
+  <meta property="og:title" content="Cluedo - Simpsons Version!" />
+  <meta property="og:type" content="webpage" />
+  <meta property="og:url" content="" />
+  <meta property="og:image" content="" />
+  <link rel="icon" type="image/ico" href="/fed22d-js-grundkurs-2-cluedo-existenztim/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" as="style"
+    onload="this.onload=null;this.rel='stylesheet'" />
+  <!--To speed up page parsing-->
+  <title>Cluedo - Simpsons Version</title>
+  <script type="module" crossorigin src="/fed22d-js-grundkurs-2-cluedo-existenztim/assets/index.203b8aeb.js"></script>
+  <link rel="stylesheet" href="/fed22d-js-grundkurs-2-cluedo-existenztim/assets/index.12c76fb2.css">
+</head>
+
+<body>
+  <main>
+    <h1>Cluedo - Simpsons Version</h1>
+    <header id="guess-accuse-options">
+
+      <!-- <h3>What's your solution?</h3> -->
+      <section class="suspect-container">
+        <label for="suspects">Suspect:<span><img src="/fed22d-js-grundkurs-2-cluedo-existenztim/img/person.webp"
+              alt="A burgler representing the suspect category"></span></label>
+        <select name="suspects" id="suspects">
+          <option value="none" selected disabled hidden>Select an Option</option>
+          <option value="ned-flanders">Ned Flanders</option>
+          <option value="sideshow-bob">Sideshow Bob</option>
+          <option value="edna-krabappel">Edna Krabappel</option>
+          <option value="krusty-the-clown">Krusty The Clown</option>
+          <option value="agnes-skinner">Agnes Skinner</option>
+          <option value="helen-lovejoy">Helen Lovejoy</option>
+        </select>
       </section>
 
-      <section class="player-cards">
-        <div class="card-wrapper">
-          <h3>Barts Card</h3>
-          <ul id="computer1" class="cards computer">
-            <li class="card">???</li>
-          </ul>
-        </div>
-        <div class="card-wrapper">
-          <h3>Your Cards</h3>
-          <ul id="player" class="cards">
-            <li class="card">Card info</li>
-          </ul>
-        </div>
-        <div class="card-wrapper">
-          <h3>Lizas Cards</h3>
-          <ul id="computer2" class="cards computer">
-            <li class="card">???</li>
-          </ul>
-        </div>
-      </section>
-    </main>
-
-    <aside>
-      <section class="intro">
-        <h2>Cluedo - Simpsons Version</h2>
-        <label for="nickname">Your name</label>
-        <input type="text" id="nickname" name="nickname" value="" placeholder="Your name" maxlength="12">
-        <button id="play">Play</button>
+      <section class="locations-container">
+        <label for="locations">Location:<span><img src="/fed22d-js-grundkurs-2-cluedo-existenztim/img/map.webp"
+              alt="A map representing the location category"></span></label>
+        <select name="locations" id="locations">
+          <option value="nowhere" selected disabled hidden>Select an Option</option>
+          <option value="krusty-burger">Krusty Burger</option>
+          <option value="moes-tavern">Moes Tavern</option>
+          <option value="town-hall">Town Hall</option>
+          <option value="burns-manor">Burns Manor</option>
+          <option value="simpsons-house">Simpsons House</option>
+          <option value="kwik-e-mart">Kwik-E-Mart</option>
+          <option value="nuclear-power-plant">Nuclear Power Plant</option>
+          <option value="town-square">Town Square</option>
+          <option value="elementary-school">Elementary School</option>
+        </select>
       </section>
 
-      <section id="result" class="result">
-        <div id="accuse-reveal">win or loose?</div>
-        <div id="solution">Who, where, with what?</div>
-        <div class="counter">You played a total of: <span>0</span> rounds.</div>
-        <button id="result-high-score-toggle">Watch highscore</button>
-        <button id="play-again">Play again?</button>
+      <section class="weapons-container">
+        <label for="weapon">Weapon:<span><img src="/fed22d-js-grundkurs-2-cluedo-existenztim/img/sword.webp"
+              alt="A sword representing the weapon category"></span></label>
+        <select name="weapon" id="weapon">
+          <option value="nothing" selected disabled hidden>Select an Option</option>
+          <option value="rope">Rope</option>
+          <option value="revolver">Revolver</option>
+          <option value="candlestick">Candlestick</option>
+          <option value="knife">Knife</option>
+          <option value="wrench">Wrench</option>
+          <option value="baseball-bat">Baseball Bat</option>
+        </select>
       </section>
+    </header>
 
-      <section id="mobile" class="mobile">
-        <div>I'm sorry, this game is meant to be played on a computer screen.</div>
-      </section>
+    <section class="button-infobar">
+      <div id="info"><span>Roll the dice!</span></div>
+      <button id="guess">Guess</button>
+      <button id="accuse" class="active-btn">Accuse</button>
+    </section>
 
-      <section class="corner-buttons">
-        <button id="high-score-toggle">Highscore</button>
-        <button id="help-toggle">HELP!</button>
-      </section>
-      
-      <section id="help" class="help">
-        <h3>Mr Burns has been killed!</h3>
-        <div>Can you figure out the solution?</div>
-        <div>How to play :</div>
-        <ul>
-          <li>Cards
-            <ul>
-              <li>There is a total of 21 cards.</li>
-              <li>3 of these cards are part of the solution to this crime.</li>
-              <li>One <strong>suspect</strong>, one <strong>location</strong>, one <strong>weapon</strong>.</li>
-              <li>The remaining 18 cards are evenly distributed among the players.</li>
-              <li>These 18 cards is <strong>NOT</strong> part of the solution.</li>
-              <li>In this game you play with the AI <em>Bart</em> and <em>Liza</em>.</li>
-           </ul>
-         </li>
-          <li>Roll Dice
-            <ul>
-              <li>Rolls over 3 -> Move to another room.</li>
-              <li>You may now guess your oponents cards based on what you filled in<br> 
-                in the drop down fields.</li>
-              <li>Rolls below 3 -> You are stuck.</li>
-              <li>Simply end the turn by rolling the dice again.</li>
-            </ul>
-          </li>
-          <li>Guess
-            <ul>
-              <li>You always have to guess the cards of your opponent to your left.</li>
-              <li>Once all their cards are revealed you can continue to guess your next<br> 
-                opponents cards (clockwise).</li>
-              <li>You can only guess once per turn.</li>
-            </ul>
-          </li>
-          <li>Accuse
-            <ul>
-              <li>Accuse is your final solution, and uses the same drop down field as Guess.</li>
-              <li>An accusation will end the game and reveal the truth.</li>
-              <li>You can always make an accusation, no matter what you roll.</li>
-            </ul>
-          </li>
+    <section class="container-room">
+      <div id="game-hub">
+        <button id="dice" class="active-btn">Roll Dice</button>
+        <div id="rolled"><span></span></div>
+        <div class="counter">Rounds: <span>0</span></div>
+      </div>
+      <button id="room-krusty-burger" class="room">Krusty Burger</button>
+      <button id="room-moes-tavern" class="room">Moe's Tavern</button>
+      <button id="room-town-hall" class="room">Town Hall</button>
+      <button id="room-burns-manor" class="room">Burns Manor</button>
+      <button id="room-simpsons-house" class="room">Simpsons House</button>
+      <button id="room-kwik-e-mart" class="room">Kwik-E-Mart</button>
+      <button id="room-nuclear-power-plant" class="room">Nuclear Power Plant</button>
+      <button id="room-town-square" class="room">Town Square</button>
+      <button id="room-elementary-school" class="room">Elementary School</button>
+    </section>
+
+    <section class="player-cards">
+      <div class="card-wrapper">
+        <h3>Barts Card</h3>
+        <ul id="computer1" class="cards computer">
+          <li class="card">???</li>
         </ul>
-      </section>
+      </div>
+      <div class="card-wrapper">
+        <h3>Your Cards</h3>
+        <ul id="player" class="cards">
+          <li class="card">Card info</li>
+        </ul>
+      </div>
+      <div class="card-wrapper">
+        <h3>Lizas Cards</h3>
+        <ul id="computer2" class="cards computer">
+          <li class="card">???</li>
+        </ul>
+      </div>
+    </section>
+  </main>
 
-      <section id="high-score" class="high-score">
-        <h2>Top 10 Highscore!</h2>
-        <table id="high-score-table">
+  <aside>
+    <section class="intro">
+      <h2>Cluedo - Simpsons Version</h2>
+      <label for="nickname">Your name</label>
+      <input type="text" id="nickname" name="nickname" value="" placeholder="Your name" maxlength="12">
+      <button id="play">Play</button>
+    </section>
+
+    <section id="result" class="result">
+      <div id="accuse-reveal">win or loose?</div>
+      <div id="solution">Who, where, with what?</div>
+      <div class="counter">You played a total of: <span>0</span> rounds.</div>
+      <button id="result-high-score-toggle">Watch highscore</button>
+      <button id="play-again">Play again?</button>
+    </section>
+
+    <section id="mobile" class="mobile">
+      <div>I'm sorry, this game is meant to be played on a computer screen.</div>
+    </section>
+
+    <section class="corner-buttons">
+      <button id="high-score-toggle">Highscore</button>
+      <button id="help-toggle">HELP!</button>
+    </section>
+
+    <section id="help" class="help">
+      <h3>Mr Burns has been killed!</h3>
+      <div>Can you figure out the solution?</div>
+      <div>How to play :</div>
+      <ul>
+        <li>Cards
+          <ul>
+            <li>There is a total of 21 cards.</li>
+            <li>3 of these cards are part of the solution to this crime.</li>
+            <li>One <strong>suspect</strong>, one <strong>location</strong>, one <strong>weapon</strong>.</li>
+            <li>The remaining 18 cards are evenly distributed among the players.</li>
+            <li>These 18 cards is <strong>NOT</strong> part of the solution.</li>
+            <li>In this game you play with the AI <em>Bart</em> and <em>Liza</em>.</li>
+          </ul>
+        </li>
+        <li>Roll Dice
+          <ul>
+            <li>Rolls over 3 -> Move to another room.</li>
+            <li>You may now guess your oponents cards based on what you filled in<br>
+              in the drop down fields.</li>
+            <li>Rolls below 3 -> You are stuck.</li>
+            <li>Simply end the turn by rolling the dice again.</li>
+          </ul>
+        </li>
+        <li>Guess
+          <ul>
+            <li>You always have to guess the cards of your opponent to your left.</li>
+            <li>Once all their cards are revealed you can continue to guess your next<br>
+              opponents cards (clockwise).</li>
+            <li>You can only guess once per turn.</li>
+          </ul>
+        </li>
+        <li>Accuse
+          <ul>
+            <li>Accuse is your final solution, and uses the same drop down field as Guess.</li>
+            <li>An accusation will end the game and reveal the truth.</li>
+            <li>You can always make an accusation, no matter what you roll.</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section id="high-score" class="high-score">
+      <h2>Top 10 Highscore!</h2> <!--add caption-->
+      <table id="high-score-table">
         <tr>
           <th>Name</th>
           <th>Rounds</th>
         </tr>
       </table>
-      </section>
-    </aside>
+    </section>
+  </aside>
 
-    <!-- TODO
+  <!-- TODO
     - Validera HTML (kopiera den renderade HTML-koden): https://validator.w3.org/#validate_by_input
     - Kontrollera tillgänglighet: https://www.a11yproject.com/checklist/ & Chrome Lighthouse/Firefox Accessibility Tools
     - Validera genererade CSS: https://jigsaw.w3.org/css-validator/#validate_by_input
     -->
-    
-  </body>
+  
+</body>
+
 </html>
