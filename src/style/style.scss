@@ -21,8 +21,8 @@ $yellow: #FFD90F;
   background-color: $black;
   font-synthesis: none;
   text-rendering: optimizelegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  // -webkit-font-smoothing: antialiased;
+  // -moz-osx-font-smoothing: grayscale;
   text-size-adjust: 100%;
   text-shadow: 1px 1px 2px $black;
   background-image: url("/img/simpsonsbg.webp");
@@ -47,6 +47,12 @@ body {
     margin: auto 100px;
     text-align: center;
     height: 100vh;
+    animation: 1s ease-out 0s 1 intro;
+    animation-fill-mode: forwards;
+
+    h1 {
+      animation: 1s ease-out 1s 1 gelatine;
+    }
 
     button.active-btn {
       background-color: green;

@@ -1,4 +1,6 @@
-//animations
+/*************************************************************************** 
+ *Keyframe animations
+ ***************************************************************************/
 
 @keyframes intro {
   0% {
@@ -40,11 +42,12 @@
   75% { transform: scale(0.95, 1.05); }
 }
 
-//targets 
-main {
-  animation: 1s ease-out 0s 1 intro;
+@keyframes fadein {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
 }
 
+//targets 
 .intro {
   animation: 1s ease-in 0s 1 login-in;
 }
@@ -52,8 +55,4 @@ main {
 .intro-out {
   animation: 1s ease-out 0s 1 login-out;
   animation-fill-mode: forwards;
-}
-
-h1 {
-  animation: 1s ease-out 1s 1 gelatine;
 }

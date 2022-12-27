@@ -4,23 +4,14 @@
  aside {
   display: flex;
   justify-content: center;
-
-  .corner-buttons button {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-  }
-
-  .corner-buttons button:nth-child(1) {
-    right: 120px;
-  }
   
   .high-score {
     background-color: #2f64d6;
     box-shadow: rgba(0 0 10%) 0 2px 4px, rgba(0 0 30%) 0 7px 13px -3px, rgb(43 43 44) 0 -3px 0 inset;
     position: fixed;
     top: 10vh;
+    animation: 0.5s ease-in-out 0.1s 1 fadein;
+    animation-fill-mode: both;
     // margin: auto;
 
     table {
@@ -52,6 +43,21 @@
 
   .result {
     top: 30vh;
+
+    button {
+      cursor: pointer;
+    }
+  }
+
+  .corner-buttons button {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+
+  .corner-buttons button:nth-child(1) {
+    right: 120px;
   }
 
   .help {
@@ -65,6 +71,8 @@
     overflow-y: scroll;
     background-color: #2f64d6;
     box-shadow: rgba(0 0 10%) 0 2px 4px, rgba(0 0 30%) 0 7px 13px -3px, rgb(43 43 44) 0 -3px 0 inset;
+    animation: 0.5s ease-in-out 0.1s 1 fadein;
+    animation-fill-mode: both;
 
     div, h3 {
       text-align: center;
