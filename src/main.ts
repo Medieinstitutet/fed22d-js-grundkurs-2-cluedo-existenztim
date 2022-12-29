@@ -48,14 +48,6 @@ const accusedWeapon = <HTMLInputElement>document.querySelector('#weapon');
 const accusedRoom = <HTMLInputElement>document.querySelector('#locations');
 const nameInputValue = <HTMLInputElement>document.querySelector('#nickname');
 
-resultSection?.classList.toggle('hidden');
-helpSection?.classList.toggle('tot-hidden');
-highScoreSection?.classList.toggle('tot-hidden');
-smallScreen?.classList.toggle('tot-hidden');
-mainPage?.classList.toggle('tot-hidden');
-highScoreBtn.classList.add('tot-hidden');
-helpBtn.classList.add('tot-hidden');
-
 // let declaration
 let userName = 'Homer'; // placeholder
 let guess = false;
@@ -71,6 +63,15 @@ let renderHighscoresArray: any[] = []; // combination of hard coded highscore/lo
 let randomDiceNumber = 0;
 let count = 0;
 let matchString = 0;
+
+// initial display
+resultSection?.classList.toggle('hidden');
+helpSection?.classList.toggle('tot-hidden');
+highScoreSection?.classList.toggle('tot-hidden');
+smallScreen?.classList.toggle('tot-hidden');
+mainPage?.classList.toggle('tot-hidden');
+highScoreBtn.classList.add('tot-hidden');
+helpBtn.classList.add('tot-hidden');
 
 /**
  *Start Game.

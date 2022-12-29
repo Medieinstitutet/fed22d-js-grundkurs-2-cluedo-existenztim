@@ -10,4 +10,12 @@ that's merged togheter with a pre-defined highscore with Simpsons characters.
 
 ## Tech Stack
 
-Vite, typescript, sass
+![](https://img.shields.io/badge/-typescript-f7df1e?style=flat&logo=typescript&logoColor=black) ![](https://img.shields.io/badge/-Prettier-F7B93E?style=flat&logo=prettier&logoColor=black) ![](https://img.shields.io/badge/-ESLint-4B32C3?style=flat&logo=eslint&logoColor=white) ![](https://img.shields.io/badge/-HTML5-E34F26?style=flat&logo=html5&logoColor=white) ![](https://img.shields.io/badge/-Sass-CC6699?style=flat&logo=sass&logoColor=white) ![]
+
+## Demo
+
+[Live Demo](https://medieinstitutet.github.io/fed22d-js-grundkurs-2-cluedo-existenztim/)
+
+## Authors
+
+- [@existenztim](https://github.com/existenztim)
