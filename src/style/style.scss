@@ -1,64 +1,195 @@
 @use "utils/a11y"; // Om det inte funkar, byt @use mot @import
 @use "vendor/reset";
+@use "components/cards";
+@use "components/guess";
+@use "components/aside";
+@use "components/animations";
+
+$black: #242424;
+$grey: #747481;
+$white: #f7f4f2;
+$blue: #2f64d6;
+$yellow: #FFD90F;
 
 :root {
-  // TODO: Går bra att radera kod även här!
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Press Start 2P", Avenir, Helvetica, Arial, sans-serif;
   font-size: rem(16px);
   line-height: 24px;
   font-weight: 400;
   color-scheme: light dark;
-  color: rgb(255 255 255 / 87%);
-  background-color: #242424;
+  color: $yellow;
+  background-color: $black;
   font-synthesis: none;
   text-rendering: optimizelegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  // -webkit-font-smoothing: antialiased;
+  // -moz-osx-font-smoothing: grayscale;
   text-size-adjust: 100%;
+  text-shadow: 1px 1px 2px $black;
+  background-image: url("/img/simpsonsbg.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
-// TODO: Radera mig! Jag är bara ett exempel.
-main {
-  padding: 20px;
+.hidden {
+  visibility: hidden;
+  height: 0;
+  width: 0;
 }
 
-.app {
-  margin-block: 20px;
-  display: flex;
-  gap: 20px;
-  justify-content: space-around;
+.tot-hidden {
+  display: none;
+}
 
-  .card {
-    $card-size: 250px;
+body {
+  //  cursor: url('/public/img/cursorSimp.png'),auto;
 
-    width: 0.6413 * $card-size;
-    height: $card-size;
-    cursor: pointer;
-    background: #102a3f;
-    border-radius: 8px;
-    display: flex;
-    font-weight: bold;
-    align-items: center;
-    justify-content: space-around;
+  main {
+    padding: 20px;
+    margin: auto 100px;
     text-align: center;
-    box-shadow: 5px 5px 5px rgb(0 0 0 / 20%);
+    height: 100vh;
+    animation: 1s ease-out 0s 1 intro;
+    animation-fill-mode: forwards;
 
-    .front {
-      font-size: rem(50px);
+    h1 {
+      animation: 1s ease-out 1s 1 gelatine;
     }
 
-    .back {
-      display: none;
+    button.active-btn {
+      background-color: green;
+
     }
 
-    &.visible {
-      .front {
-        display: none;
-      }
-
-      .back {
-        display: block;
-      }
+    select {
+      background-color: $blue;
+      box-shadow: rgba(0 0 10%) 0 2px 4px, rgba(0 0 30%) 0 7px 13px -3px, rgb(43 43 44) 0 -3px 0 inset;
     }
+
+    button {
+      cursor: pointer;
+      padding: 0.5rem;
+      margin: 0.5rem;
+      border-radius: 5%;
+    }
+
+    .container-room {  display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 0.5fr 0.5fr 1fr;
+      gap: 0 0;
+      grid-auto-flow: row;
+      max-width: 1000px;
+      margin: auto;
+      height: 40vh;
+      min-height: 350px;
+      /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
+      grid-template-areas:
+        "moes-tavern town-hall burns-manor"
+        "krusty-burger game-hub simpsons-house"
+        "krusty-burger game-hub kwik-e-mart"
+        "elementary-school town-square nuclear-power-plant";
+
+        button[class*='room']{
+          border: 1px solid black;
+          background-color: $blue;
+          color: $white;
+          text-shadow: 2px 2px 1px $black;
+          border-radius: 0;
+          box-shadow: rgba(0 0 10%) 0 2px 4px, rgba(0 0 30%) 0 7px 13px -3px, rgb(43 43 44) 0 -3px 0 inset;
+        }
+
+        button[class*='room']:hover{
+          background-color: $yellow;
+        }
+
+        #game-hub { 
+          grid-area: game-hub; 
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+        
+        button:nth-child(2) { 
+          grid-area: krusty-burger; 
+        }
+        
+        button:nth-child(3) { 
+          grid-area: moes-tavern; 
+          border-top-left-radius: 10%;
+        }
+
+        button:nth-child(4) { 
+          grid-area: town-hall; 
+        }
+        
+        button:nth-child(5) { 
+          grid-area: burns-manor; 
+          border-top-right-radius: 10%;
+        }
+        
+        button:nth-child(6) { 
+          grid-area: simpsons-house; 
+        } 
+        
+        button:nth-child(7) { 
+          grid-area: kwik-e-mart; 
+        } 
+        
+        button:nth-child(8) { 
+          grid-area: nuclear-power-plant; 
+          border-bottom-right-radius: 10%;
+        }
+
+        button:nth-child(9) { 
+          grid-area: town-square; 
+        }
+        
+        button:nth-child(10) { 
+          grid-area: elementary-school; 
+          border-bottom-left-radius: 10%;
+        }
+
+        .room.active {
+          position: relative;
+          animation: 0.5s ease-in-out 0.1s 1 gelatine;
+
+          &::before {
+            content: url("/img/icons8-homer-simpson.svg");
+            display: flex;
+            font-size: 2rem;
+            z-index: 1;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
+        }
+    }
+  }
+}
+
+/*************************************************************************** 
+ *Media Queries
+ ***************************************************************************/
+
+@media screen and (max-width: 950px) {
+  .mobile {
+    display: block;
+  }
+  
+  main, .result, .corner-buttons, 
+  .corner-buttons-contents, .high-score,
+  .intro {
+    display: none;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+      animation: none;
+      transition: none;
+      transform: none;
   }
 }

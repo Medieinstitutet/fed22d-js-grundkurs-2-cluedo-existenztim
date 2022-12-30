@@ -1,0 +1,58 @@
+ /*************************************************************************** 
+ *Card section
+ ***************************************************************************/
+ .player-cards {
+    display: flex;
+    flex-flow: wrap;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+
+    button {
+      background-color: none;
+    }
+
+    .card-wrapper {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      margin: 1rem 2rem 0;
+
+      ul {
+        margin: 0;
+        padding: 0;
+      }
+
+      .cards {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: #2f64d6;
+        list-style-type: none;
+        border-radius: 5%;
+        width: 200px;
+        height: 260px;
+        box-shadow: rgb(19 19 19) 0 19px 38px, rgb(32 32 32) 0 15px 12px;
+        // overflow-y:scroll;
+
+        .card {
+          display: flex;
+          align-items: center;
+          justify-content: space-evenly;
+          // border-bottom: 1px solid black;
+          width: 100%;
+          font-size: 16px;
+          font-size: 12px;
+          height: 70px;
+          cursor: zoom-in;
+          animation: 0.5s ease-in-out 0.1s 1 fadein;
+          animation-fill-mode: both;
+          
+          &:hover {
+            font-size: 16px;
+          }
+        }
+        
+      }
+    }
+  }

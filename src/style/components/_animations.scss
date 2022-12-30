@@ -1,0 +1,58 @@
+/*************************************************************************** 
+ *Keyframe animations
+ ***************************************************************************/
+
+@keyframes intro {
+  0% {
+    transform: translateY(-100%);
+  }
+  
+  100% {
+    transform: translateY(0);
+  }
+
+}
+
+@keyframes login-in {
+  0% {
+    transform: translateX(-100%);
+  }
+  
+  100% {
+    transform: translateX(0);
+  }
+
+}
+
+@keyframes login-out {
+  0% {
+    transform: translateX(0);
+  }
+  
+  100% {
+    transform: translateX(300%);
+    visibility: hidden;
+  } 
+}
+
+@keyframes gelatine { 
+  0%, 100% { transform: scale(1, 1); }
+  25% { transform: scale(0.9, 1.1); }
+  50% { transform: scale(1.1, 0.9); }
+  75% { transform: scale(0.95, 1.05); }
+}
+
+@keyframes fadein {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+//targets 
+.intro {
+  animation: 1s ease-in 0s 1 login-in;
+}
+
+.intro-out {
+  animation: 1s ease-out 0s 1 login-out;
+  animation-fill-mode: forwards;
+}
