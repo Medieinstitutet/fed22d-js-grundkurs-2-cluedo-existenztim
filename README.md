@@ -19,3 +19,9 @@ that's merged togheter with a pre-defined highscore with Simpsons characters.
 ## Authors
 
 - [@existenztim](https://github.com/existenztim)
+
+## Screenshots
+
+![App Screenshot](https://github.com/existenztim/Cluedo-with-localstorage-highscore/tree/main/public/tests/register.png) 
+![App Screenshot](https://github.com/existenztim/Cluedo-with-localstorage-highscore/tree/main/public/tests/board.png)
+![App Screenshot](https://medieinstitutet.github.io/fed22d-js-grundkurs-2-lunch-roulette-alexwallden/tests/highscore.png) 
