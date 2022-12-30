@@ -22,6 +22,6 @@ that's merged togheter with a pre-defined highscore with Simpsons characters.
 
 ## Screenshots
 
-![App Screenshot](https://github.com/Medieinstitutet/fed22d-js-grundkurs-2-cluedo-existenztim/tree/main/public/tests/register.png) 
-![App Screenshot](https://github.com/Medieinstitutet/fed22d-js-grundkurs-2-cluedo-existenztim/tree/main/public/tests/board.png)
-![App Screenshot](https://github.com/Medieinstitutet/fed22d-js-grundkurs-2-cluedo-existenztim/tree/main/public/tests/highscore.png)
+![App Screenshot](https://github.com/Medieinstitutet/fed22d-js-grundkurs-2-cluedo-existenztim/blob/main/public/img/tests/register.png) 
+![App Screenshot](https://github.com/Medieinstitutet/fed22d-js-grundkurs-2-cluedo-existenztim/blob/main/public/img/tests/tests/board.png)
+![App Screenshot](https://github.com/Medieinstitutet/fed22d-js-grundkurs-2-cluedo-existenztim/blob/main/public/img/tests/highscore.png)
